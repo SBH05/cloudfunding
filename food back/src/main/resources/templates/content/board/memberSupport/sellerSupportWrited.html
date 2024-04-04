@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <th:block th:replace="/fragments/sellersidebar.html"></th:block>
+    <title>userSupportComp</title>
+    <link rel="stylesheet" href="/css/support/supportComp.css">
+
+
+<div class="middle_box">
+
+    <div class="middle">
+        <!-- 가운데 컨텐츠 -->
+        <div class="first">
+
+            <span>고객센터</span>
+        </div>
+
+
+        <div class="box">
+            <span class="box1">작성번호 : 1</span>
+            <span class="box1">작성자:김민*</span>
+            <span class="box2">작성일자: 23/ 11 / 30 </span>
+        </div>
+
+        <form action="" method="post">
+            <div class="wirte_title">제목 </div>
+            <div class="member_name">회원명</div>
+            <div class="title_detail">비밀번호 찾기</div>
+            <div class="member_detail">ohgiraffers</div>
+            <div class="bar"></div>
+
+            <div class="quest1">
+                <div class="detail" >
+                    비말번호 찾기
+                </div>
+            </div>
+
+            <div class="quest2">
+                <div class="detail" >
+                    아이디......
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+</th:block>
+
+</html>

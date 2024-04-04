@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.main.model.dao.MainMapper">
+
+    <resultMap id="projectFileResult" type="com.ohgiraffers.semiproject.project.product.model.dto.ProjectFileDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="originalFileName" column="ORIGINAL_FILE_NAME"/>
+        <result property="changedFileName" column="CHANGED_FILE_NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+    </resultMap>
+
+    <resultMap id="projectResultMap" type="com.ohgiraffers.semiproject.main.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectCategory" column="PROJECT_CATEGORY"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="projectPlan" column="PROJECT_PLAN"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="projectSummary" column="PROJECT_SUMMARY"/>
+        <result property="policyAgreement" column="POLICY_AGREEMENT"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="submissionDate" column="SUBMISSION_DATE"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <result property="sellerInfo" column="SELLER_INFO"/>
+        <result property="changedFileName" column="CHANGED_FILE_NAME"/>
+    </resultMap>
+
+
+    <select id="findAllProject" resultMap="projectResultMap">
+        select
+        A.PROJECT_TITLE,
+        A.PROJECT_CODE,
+        C.CHANGED_FILE_NAME
+        <if test="nation2 == 'like'">
+           , count(D.PROJECT_CODE) as count
+        </if>
+
+        from
+        tbl_project A
+        left join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+        left join tbl_project_file C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        <if test="nation2 != 'like'">
+
+
+            left join samjo.tbl_project_option tpo on A.PROJECT_CODE = tpo.PROJECT_CODE
+            left join samjo.tbl_project_tag tpt on A.PROJECT_CODE = tpt.PROJECT_CODE
+            left join samjo.tbl_project_category tpc on A.PROJECT_CATEGORY = tpc.CATEGORY_CODE
+        </if>
+        left join tbl_like_project D ON (A.PROJECT_CODE = D.PROJECT_CODE)
+
+
+        where B.APPROVAL_STATUS = 'Y'
+        and C.FILE_TYPE='Representative_image'
+        <if test="searchValue != null and !searchValue.equals('')">
+            <if test="nation3 == 'all'">
+                AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                or tpt.TAG_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'name'">
+                AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'tag'">
+                AND tpt.TAG_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+        </if>
+        <if test="nation1 == 'drink'">
+            AND tpc.CATEGORY_NAME='음료'
+        </if>
+        <if test="nation1 == 'alcohol'">
+            AND tpc.CATEGORY_NAME='주류'
+        </if>
+        <if test="nation1 == 'bake'">
+            AND tpc.CATEGORY_NAME='베이커리'
+        </if>
+        <if test="nation1 == 'oversea'">
+            AND tpc.CATEGORY_NAME='해외음식'
+        </if>
+        <if test="nation1 == 'vegetable'">
+            AND tpc.CATEGORY_NAME='채소'
+        </if>
+        <if test="nation1 == 'seafood'">
+            AND tpc.CATEGORY_NAME='해산물'
+        </if>
+        <if test="nation1 == 'fruit'">
+            AND tpc.CATEGORY_NAME='과일'
+        </if>
+        <if test="nation1 == 'frozen'">
+            AND tpc.CATEGORY_NAME='냉동식품'
+        </if>
+        <if test="nation1 == 'sauce'">
+            AND tpc.CATEGORY_NAME='소스'
+        </if>
+        <if test="nation1 == 'dessert'">
+            AND tpc.CATEGORY_NAME='디저트'
+        </if>
+
+        <if test="nation2 == 'all' or nation1==null or nation1.equals('')">
+            group by
+            A.PROJECT_TITLE
+            ORDER BY
+            A.PROJECT_TITLE
+            ASC
+        </if>
+        <if test="nation2 == 'priceAsc'">
+            group by A.PROJECT_TITLE
+            ORDER BY
+            tpo.PRICE asc
+        </if>
+        <if test="nation2 == 'priceDesc'">
+            group by A.PROJECT_TITLE
+            ORDER BY
+            tpo.PRICE desc
+        </if>
+        <if test="nation2 == 'like'">
+            group by A.PROJECT_TITLE
+            order by count desc
+        </if>
+        <if test="nation2 == 'recent'">
+            group by
+            A.PROJECT_TITLE
+            ORDER BY
+            A.SUBMISSION_DATE
+            desc
+        </if>
+
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+    <select id="firstNewProject" resultMap="projectResultMap">
+        select A.PROJECT_TITLE,
+               A.PROJECT_CODE,
+               C.CHANGED_FILE_NAME
+        from tbl_project A
+                 join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                 join tbl_project_file C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        where A.PROJECT_TYPE = '신규펀딩'
+          and C.FILE_TYPE = 'Representative_image'
+          and B.APPROVAL_STATUS = 'Y'
+        order by A.SUBMISSION_DATE
+                ASC limit 4;
+    </select>
+
+    <select id="secondNewProject" resultMap="projectResultMap">
+        select A.PROJECT_TITLE,
+               A.PROJECT_CODE,
+               C.CHANGED_FILE_NAME
+        from tbl_project A
+                 join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                 join tbl_project_file C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        where A.PROJECT_TYPE = '신규펀딩'
+          and C.FILE_TYPE = 'Representative_image'
+          and B.APPROVAL_STATUS = 'Y'
+        order by A.SUBMISSION_DATE
+                ASC limit 4,4;
+    </select>
+
+    <select id="firstReProject" resultMap="projectResultMap">
+        select A.PROJECT_TITLE,
+               A.PROJECT_CODE,
+               C.CHANGED_FILE_NAME
+        from tbl_project A
+                 join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                 join tbl_project_file C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        where A.PROJECT_TYPE = '리펀딩'
+          and C.FILE_TYPE = 'Representative_image'
+          and B.APPROVAL_STATUS = 'Y'
+        order by A.SUBMISSION_DATE
+                ASC limit 4;
+    </select>
+
+    <select id="secondReProject" resultMap="projectResultMap">
+        select A.PROJECT_TITLE,
+               A.PROJECT_CODE,
+               C.CHANGED_FILE_NAME
+        from tbl_project A
+                 join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                 join tbl_project_file C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        where A.PROJECT_TYPE = '리펀딩'
+          and C.FILE_TYPE = 'Representative_image'
+          and B.APPROVAL_STATUS = 'Y'
+        order by A.SUBMISSION_DATE
+                ASC limit 4,4;
+    </select>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        select
+        COUNT(*)
+        from
+        tbl_project A
+        join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+        join tbl_project_file C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        left join samjo.tbl_project_tag tpt on A.PROJECT_CODE = tpt.PROJECT_CODE
+        left join samjo.tbl_project_category tpc on A.PROJECT_CATEGORY = tpc.CATEGORY_CODE
+
+
+        where
+        C.FILE_TYPE = 'Representative_image'
+        and B.APPROVAL_STATUS = 'Y'
+        <if test="searchValue != null and !searchValue.equals('')">
+            <if test="nation3 == 'all'">
+                AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                or tpt.TAG_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'name'">
+                AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'tag'">
+                AND tpt.TAG_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+        </if>
+        <if test="nation1 == 'drink'">
+            AND tpc.CATEGORY_NAME='음료'
+        </if>
+        <if test="nation1 == 'alcohol'">
+            AND tpc.CATEGORY_NAME='주류'
+        </if>
+        <if test="nation1 == 'bake'">
+            AND tpc.CATEGORY_NAME='베이커리'
+        </if>
+        <if test="nation1 == 'oversea'">
+            AND tpc.CATEGORY_NAME='해외음식'
+        </if>
+        <if test="nation1 == 'vegetable'">
+            AND tpc.CATEGORY_NAME='채소'
+        </if>
+        <if test="nation1 == 'seafood'">
+            AND tpc.CATEGORY_NAME='해산물'
+        </if>
+        <if test="nation1 == 'fruit'">
+            AND tpc.CATEGORY_NAME='과일'
+        </if>
+        <if test="nation1 == 'frozen'">
+            AND tpc.CATEGORY_NAME='냉동식품'
+        </if>
+        <if test="nation1 == 'sauce'">
+            AND tpc.CATEGORY_NAME='소스'
+        </if>
+        <if test="nation1 == 'dessert'">
+            AND tpc.CATEGORY_NAME='디저트'
+        </if>
+
+
+    </select>
+
+
+</mapper>

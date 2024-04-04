@@ -1,0 +1,23 @@
+/* 푸터 텍스트 */
+@media screen and (max-width: 1000px) {
+    .footer-up {
+        display: none;
+    }
+
+    .footer-down {
+        display: none;
+    }
+}
+
+/* 푸터 로고 */
+@media screen and (max-width: 1000px) {
+    .footer-logo {
+        margin-left: auto;
+        margin-right: auto;
+        transition: margin-left 0.5s ease;
+    }
+
+    .footer {
+        text-align: center; /* 중앙 정렬 */
+    }
+}

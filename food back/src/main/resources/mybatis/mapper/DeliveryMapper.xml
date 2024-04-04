@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.delivery.model.dao.DeliveryMapper">
+
+
+    <resultMap type="com.ohgiraffers.semiproject.member.model.dto.MemberDTO" id="memberResultMap">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userPwd" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+        <result property="emailCode" column="EMAIL_CODE"/>
+    </resultMap>
+
+    <resultMap id="DeliveryDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.DeliveryDTO" >
+        <id property="deliveryCode" column="DELIVERY_CODE"/>
+        <result property="deliveryDate" column="DELIVERY_DATE"/>
+        <result property="deliveryStatus" column="DELIVERY_STATUS"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="deliveryRequest" column="DELIVERY_REQUEST"/>
+        <result property="purchaseConfirm" column="PURCHASE_CONFIRM"/>
+        <result property="purchaseConfirmDate" column="PURCHASE_CONFIRM_DATE"/>
+    </resultMap>
+
+    <resultMap id="CartDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.CartDTO">
+        <id property="cartCode" column="CART_CODE"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+        <result property="optionCode" column="OPTION_CODE"/>
+        <result property="usageStatus" column="USAGE_STATUS"/>
+        <result property="cartCount" column="CART_COUNTS"/>
+    </resultMap>
+    
+    <resultMap id="PaymentDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.PaymentDTO">
+        <id property="paymentCode" column="PAYMENT_CODE"/>
+        <result property="totalAmount" column="TOTAL_AMOUNT"/>
+        <result property="paymentMethod" column="PAYMENT_METHOD"/>
+        <result property="paymentDateTime" column="PAYMENT_DATE_TIME"/>
+        <result property="deliveryCode" column="DELIVERY_CODE"/>
+        <result property="paymentStatus" column="PAYMENT_STATUS"/>
+    </resultMap>
+    
+    <resultMap id="PaymentHistoryDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.PaymentHistoryDTO">
+        <id property="paymentCode" column="PAYMENT_CODE"/>
+        <result property="cartCode" column="CART_CODE"/>
+    </resultMap>
+    
+    <resultMap id="ProjectDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectCategoryCode" column="PROJECT_CATEGORY"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="planCode" column="PROJECT_PLAN"/>
+        <result property="sellerInfo" column="SELLER_INFO"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="summary" column="PROJECT_SUMMARY"/>
+        <result property="policyAgreement" column="POLICY_AGREEMENT"/>
+        <result property="sellerType" column="SELLER_TYPE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="submissionDate" column="SUBMISSION_DATE"/>
+    </resultMap>
+
+    
+    <resultMap id="ReturnHistoryDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.ReturnHistoryDTO">
+        <id property="paymentCode" column="PAYMENT_CODE"/>
+        <result property="applicationDate" column="APPLICATION_DATE"/>
+        <result property="returnReason" column="RETURN_REASON"/>
+        <result property="processingStatus" column="PROCESSING_STATUS"/>
+        <result property="completionDate" column="COMPLETION_DATE"/>
+    </resultMap>
+    <resultMap id="ProjectOptionDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.ProjectOptionDTO">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="optionType" column="OPTION_TYPE"/>
+        <result property="price" column="PRICE"/>
+        <result property="configure" column="CONFIGURE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+    </resultMap>
+    <resultMap id="ProjectFileDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.ProjectFileDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="originalFileName" column="ORIGINAL_FILE_NAME"/>
+        <result property="changedFileName" column="CHANGED_FILE_NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+    </resultMap>
+
+    <resultMap id="BusinessMakeDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.BusinessMakeDTO">
+        <id property="sellCode" column="SELL_CODE"/>
+        <result property="busiName" column="BUSI_NAME"/>
+        <result property="indu" column="INDU"/>
+        <result property="estaDate" column="ESTA_DATE"/>
+        <result property="home" column="HOME"/>
+        <result property="loca" column="LOCA"/>
+        <result property="busiPhone" column="BUSI_PHONE"/>
+        <result property="busiLicenseNumber" column="BUSI_LICENSE_NUMBER"/>
+        <result property="busiEmail" column="BUSI_EMAIL"/>
+    </resultMap>
+    
+    <resultMap id="TotalDeliveryDTO" type="com.ohgiraffers.semiproject.delivery.model.dto.TotalDeliveryDTO">
+        <association property="cartDTO" resultMap="CartDTO"/>
+        <association property="deliveryDTO" resultMap="DeliveryDTO"/>
+        <association property="paymentDTO" resultMap="PaymentDTO"/>
+        <association property="paymentHistoryDTO" resultMap="PaymentHistoryDTO"/>
+        <association property="projectDTO" resultMap="ProjectDTO"/>
+        <association property="returnHistoryDTO" resultMap="ReturnHistoryDTO"/>
+        <collection property="projectFileDTO" resultMap="ProjectFileDTO"/>
+    </resultMap>
+
+
+
+    <resultMap id="TotalDeliveryDTO1" type="com.ohgiraffers.semiproject.delivery.model.dto.TotalDeliveryDTO2">
+        <association property="cartDTO" resultMap="CartDTO"/>
+        <association property="memberDTO" resultMap="memberResultMap"/>
+        <association property="deliveryDTO" resultMap="DeliveryDTO"/>
+        <association property="paymentDTO" resultMap="PaymentDTO"/>
+        <association property="paymentHistoryDTO" resultMap="PaymentHistoryDTO"/>
+        <association property="projectDTO" resultMap="ProjectDTO"/>
+        <association property="returnHistoryDTO" resultMap="ReturnHistoryDTO"/>
+        <association property="projectOptionDTO" resultMap="ProjectOptionDTO"/>
+        <association property="businessMakeDTO" resultMap="BusinessMakeDTO"/>
+        <collection property="projectFileDTO" resultMap="ProjectFileDTO"/>
+    </resultMap>
+
+    <select id="searchUserCodeByUserId" resultMap="memberResultMap">
+        SELECT USER_CODE
+        FROM tbl_user
+        WHERE USER_ID = #{userId};
+    </select>
+
+    <select id="searchDeliveryStatus" resultMap="TotalDeliveryDTO">
+        SELECT
+            PM.PAYMENT_DATE_TIME,
+            D.DELIVERY_STATUS,
+            P.PROJECT_TITLE,
+            PF.CHANGED_FILE_NAME,
+            RH.PROCESSING_STATUS,
+            D.PURCHASE_CONFIRM,
+            D.DELIVERY_CODE,
+            C.USER_CODE
+        FROM tbl_payment_history PH
+                 LEFT JOIN tbl_payment PM ON (PM.PAYMENT_CODE = PH.PAYMENT_CODE)
+                 LEFT JOIN tbl_delivery D ON (D.DELIVERY_CODE = PM.DELIVERY_CODE)
+                 LEFT JOIN tbl_cart C ON (C.CART_CODE = PH.CART_CODE)
+                 LEFT JOIN tbl_project P ON (P.PROJECT_CODE = C.PROJECT_CODE)
+                 LEFT JOIN tbl_project_file PF ON (PF.PROJECT_CODE = P.PROJECT_CODE)
+                 LEFT JOIN tbl_return_history RH ON (RH.PAYMENT_CODE = PM.PAYMENT_CODE)
+        WHERE PAYMENT_STATUS = 'Y' AND C.USER_CODE = #{userCode}
+          AND (D.PURCHASE_CONFIRM = 'N' OR (D.PURCHASE_CONFIRM = 'Y' AND D.PURCHASE_CONFIRM_DATE > CURRENT_DATE - INTERVAL 7 DAY));
+
+    </select>
+    <select id="searchDeliveryStatus1" resultMap="TotalDeliveryDTO1">
+        SELECT
+            PM.PAYMENT_DATE_TIME,
+            D.DELIVERY_STATUS,
+            P.PROJECT_TITLE,
+            PF.CHANGED_FILE_NAME,
+            RH.PROCESSING_STATUS,
+            D.PURCHASE_CONFIRM,
+            D.DELIVERY_CODE,
+            C.USER_CODE,
+            U.PHONE,
+            U.ADDRESS,
+            PM.TOTAL_AMOUNT,
+            PO.PRICE,
+            BM.BUSI_PHONE,
+            BM.BUSI_NAME,
+            U.USER_NAME,
+            C.CART_COUNTS
+
+        FROM tbl_payment_history PH
+                 LEFT JOIN tbl_payment PM ON (PM.PAYMENT_CODE = PH.PAYMENT_CODE)
+                 LEFT JOIN tbl_delivery D ON (D.DELIVERY_CODE = PM.DELIVERY_CODE)
+                 LEFT JOIN tbl_cart C ON (C.CART_CODE = PH.CART_CODE)
+                 LEFT JOIN tbl_project P ON (P.PROJECT_CODE = C.PROJECT_CODE)
+                 LEFT JOIN tbl_project_file PF ON (PF.PROJECT_CODE = P.PROJECT_CODE)
+                 LEFT JOIN tbl_return_history RH ON (RH.PAYMENT_CODE = PM.PAYMENT_CODE)
+                LEFT JOIN tbl_user U ON ( U.USER_CODE = C.USER_CODE)
+                LEFT JOIN tbl_project_option PO ON (PO.PROJECT_CODE = P.PROJECT_CODE)
+                LEFT JOIN tbl_business_make BM ON (BM.SELL_CODE = P.SELLER_INFO)
+
+        WHERE PAYMENT_STATUS = 'Y' AND C.USER_CODE = #{userCode}  AND D.DELIVERY_CODE = #{deliveryCode};
+
+    </select>
+</mapper>

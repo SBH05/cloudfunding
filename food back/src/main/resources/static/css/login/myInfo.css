@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins;
+}
+
+
+
+a:link, a:visited{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+
+/*  asdasdasd*/
+
+.container {
+    display: flex;
+    justify-content: space-evenly; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+    width: 1920px;
+
+
+    margin: 0 auto; /* 화면 가운데 정렬 */
+}
+
+.left {
+    flex-basis: 500px; /* 왼쪽 영역의 너비를 30%로 설정 */
+    flex-shrink: 0;
+
+    position: relative;
+    right: 110px;
+
+}
+
+.middle {
+    flex-basis: 900px; /* 가운데 영역의 너비를 50%로 설정 */
+    flex-shrink: 0;
+
+
+}
+
+.right {
+    flex-basis: 192px; /* 오른쪽 영역의 너비를 20%로 설정 */
+}
+
+.changeinfotitle{
+    font-size: 24px;
+    font-weight: 600;
+    padding: 40px 0;
+    position: relative;
+    left: 100px;
+}
+
+
+.profileimg1{
+    width: 200px;
+    position: relative;
+    left: 150px;
+    padding-bottom: 40px;
+}
+.profileimg{
+    position: relative;
+    left: 70px;
+    padding-bottom: 30px;
+}
+
+.myInfo1{
+    position: relative;
+    left: 100px;
+
+    padding-bottom: 30px;
+
+
+}

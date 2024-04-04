@@ -1,0 +1,179 @@
+* {
+    font-family: Poppins;
+}
+
+/* 신규 리펀딩 */
+.second-square-icon-container {
+    display: flex;
+    justify-content: center;
+}
+
+.second-square-icon-wrapper{
+    text-align: center;
+    width: 15vw;
+    height: 10vw;
+    padding: 1vw;
+    transition: all 0.3s ease;
+    object-fit: cover;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 15vh;
+    cursor: pointer;
+    position: relative;
+}
+
+.second-square-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 5%;
+}
+
+/* 이미지 상단 우측 찜(하트)*/
+.fa-heart:before {
+    font-size: 30px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.fa-heart:hover:before {
+    font-size: 30px;
+    color: red;
+}
+
+/* 타이틀 */
+.first-container-title {
+    margin-left: 19%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-box {
+    display: flex;
+    align-items: center;
+}
+
+.page-links {
+    display: flex;
+    margin: 0 10px;
+}
+
+.page-link, .prev, .next {
+    padding: 5px 10px;
+    background: rgb(240, 240, 240);
+    margin: 0 3px;
+    text-decoration: none;
+    color: #b9b9b9;
+    border-radius: 5px;
+    border: none;
+}
+
+.page-link:hover, .prev:hover, .next:hover {
+    background-color: #F37B1F;
+    color: #fff;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #F37B1F; /* 클릭된 상태의 배경 색상 */
+    color: #fff; /* 클릭된 상태의 텍스트 색상 */
+}
+
+.searchleft1{
+    margin: 0px 10px 0px 0px;
+}
+
+.searchleft2{
+    margin: 0px 10px 0px 0px;
+}
+
+.searchleft1 select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+}
+
+.searchleft2 select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+}
+
+.searchright select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+    margin-left: 5px;
+}
+
+.searchright input {
+    width: 200px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+}
+
+.searchleft button {
+    width: 100px;
+    height: 35px;
+    background-color: lightgrey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 150px;
+}
+
+.searchleft button:hover {
+    background-color: #F37B1F;
+}
+
+.searchright button {
+    width: 100px;
+    height: 35px;
+    background-color: lightgrey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.searchright button:hover {
+    background-color: #F37B1F;
+}
+
+.searchcontainer {
+    display: flex;
+    justify-content: center;
+}

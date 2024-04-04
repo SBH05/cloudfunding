@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <link rel="stylesheet" href="/css/deliver/deliverMain.css">
+    <th:block th:replace="/fragments/usersidebar.html"></th:block>
+    <title>userDeliverMainPage</title>
+
+
+
+
+         
+        <div class="middle_box">
+                <div class="middle">
+
+                        <div class="first">
+                            <span>배송현황</span>
+                        </div>
+
+                        <div>
+                            <img class="logo1" src="/images/01_logoimg/textLogoNone.png"  width="150px" height="150px" >
+                        </div>
+
+
+                        <div class="searchQnA"></div>
+                        <div class="searchright">
+                            <form action="search" method="post">
+                                <button class="iconlogo" type="submit" style="width: 20px; height: 20px; border: none; background: url('/images/04_etc/magnifying glass.png') center center / cover no-repeat; padding: 0;"></button>
+
+                                <input type="text" name="search" required>
+
+                                <select name="nation2"  >
+                                    <option value="search"selected>검색설정</option>
+                                    <option value="ch">상품명</option>
+                                    <option value="jp" >결제일</option>
+                                    <option value="jp" >취소/반송</option>
+                                    <option value="etc">구매확정</option>
+                                </select>
+                            </form>
+                        </div>
+
+
+                    <div>
+
+                        <table>
+
+                            <tr>
+                                <th>번호</th>
+                                <th>상품명</th>
+                                <th>결제일</th>
+                                <th>반품하기</th>
+                                <th>구매확정</th>
+                                <th>배송</th>
+                            </tr>
+
+
+
+                                <form action="" method="post">
+                            <tr th:each="delivery, stat : ${ totalDeliveryDTO }">
+
+                                <td th:text="${stat.index + 1}">1</td>
+                                <td>
+                                    <img class="food" th:src="@{|/thumbPath/${delivery.projectFileDTO[0].changedFileName}|}">
+                                    <a class="black-link"
+                                       th:href="@{/deliver/userdetail(projectCode=${delivery.projectDTO.getProjectCode} ,deliveryCode=${delivery.deliveryDTO.getDeliveryCode}, projectTitle=${delivery.projectDTO.getProjectTitle},changedFileName=${delivery.projectFileDTO[0].getChangedFileName()})}"
+                                       th:text="${delivery.projectDTO.projectTitle}">
+                                    </a>
+                                </td>
+                                <td th:text="${#dates.format(delivery.getPaymentDTO().getPaymentDateTime(), 'yyyy / MM / dd')}">2023 / 11 / 20</td>
+
+
+
+                                <td><p><button class="ing2" type="button" th:if="${delivery.getReturnHistoryDTO().getProcessingStatus() == 'Y'}" th:text="반품완료">반품하기</button></p></td>
+                                <td><p><button class="ing2" type="button" th:if="${delivery.getReturnHistoryDTO().getProcessingStatus() == 'N'}" th:text="처리중">반품하기</button></p></td>
+                                <td><span class="close" th:if="${delivery.getDeliveryDTO().getPurchaseConfirm() == 'N'}" th:text="구매확정하기" >구매확정완료</span></td>
+                                <td><span class="close" th:if="${delivery.getDeliveryDTO().getPurchaseConfirm() == 'Y'}" th:text="구매확정완료" >구매확정</span></td>
+                                <td><p class="close" th:if="${delivery.getDeliveryDTO().getDeliveryStatus() == 'N'}" th:text="배송중">배송완료</p></td>
+                                <td><p class="close" th:if="${delivery.getDeliveryDTO().getDeliveryStatus() == 'Y'}" th:text="배송완료">배송완료</p></td>
+
+                            </tr>
+                                </form>
+
+
+
+
+
+                        </table>
+
+                        <div class="pagination">
+                            <div class="pagination-box">
+                                <a th:href="@{#}" class="prev">＜</a>
+                                <div class="page-links">
+                                    <a th:href="@{#}" class="page-link">1</a>
+                                    <a th:href="@{#}" class="page-link">2</a>
+                                    <a th:href="@{#}" class="page-link">3</a>
+
+                                </div>
+                                <a th:href="@{#}" class="next">＞</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+<!---->
+</th:block>
+</html>

@@ -1,0 +1,202 @@
+#header{
+    width: 100%;
+    background-color: aquamarine;
+    height: 100px;
+}
+
+.middle {
+    margin-left: 0%;
+
+    margin-top: 4%;
+    position: relative;
+    left: 600px;
+    
+    flex-basis: 900px; 
+    /* 가운데 영역의 너비를 50%로 설정 */
+    flex-shrink: 0;
+    
+        /* 음영 효과 설정 */
+    /* box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.1); */
+
+    
+}
+
+.checkbox{
+    border: 1px solid;
+    border-radius: 4px;
+    width: 90%;
+    margin: auto;
+
+}
+
+/*
+/* 라벨 전체 속성 지정
+.chk_box { 
+    display: block; 
+    position: relative; 
+    padding-left: 25px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* 기본 체크박스 숨기기 */
+/*
+.chk_box input[type="checkbox"] { display: none; }
+
+/* 선택되지 않은 체크박스 스타일 꾸미기 */
+/*
+.on { 
+    width: 17px; 
+    height: 17px; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    margin-top: 7px;
+    border-radius: 3px;
+    border: 1px solid;
+}
+
+/* 선택된 체크박스 스타일 꾸미기 */
+/*
+.chk_box input[type="checkbox"]:checked + .on { 
+    background: orange; 
+}
+.on:after { 
+    content: ""; 
+    position: absolute; 
+    display: none; 
+}
+.chk_box input[type="checkbox"]:checked + .on:after { 
+    display: block;
+}
+.on:after { 
+    width: 5px; 
+    height: 8px; 
+    border: solid white;
+
+    /*사각형에서 두 변 테두리를 없애서 V자 만들기*/
+    /*
+    border-width: 0 2px 2px 0; 
+    
+    /*45도 회전*/
+    /*
+    -webkit-transform: rotate(45deg); 
+
+    position: absolute; 
+    /*위치지정*/
+    /*
+    left: 5px; 
+    top: 1px; 
+}
+*/
+
+.refundBox{
+    border: 1px solid;
+
+}
+
+.refundBox2{
+    font-size: 14px;
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    background-color: #F9CAA4;
+    text-align: center;
+    
+    
+}
+
+
+#save{
+float: right;
+}
+
+#btn{
+    width: 300px;
+    height: 30px;
+    border-radius: 3px none;
+}
+
+
+ul{
+    list-style-type: disc;
+}
+
+.refundDefault{
+
+}
+
+
+
+.agree{
+    display: flex;
+    margin: 20px;
+    
+}
+#scroll{
+    overflow: auto;
+    width: 90%;
+    height: 50px;
+    font-size: 14px;
+    border: 1px solid;
+    padding:1%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#text{
+    padding-left: 10px;
+    font-size: 14px;
+    
+}
+#text2{
+    font-size: 14px;
+    padding-left: 25px;
+    
+}
+
+
+hr{
+    border: 0;
+}
+
+.box{
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+.middle-a {
+    display: block;
+    height: 100%;
+    width: 90%;
+    margin: auto;
+
+
+}
+.logo1 {
+    width: 140px; /* 원하는 너비로 설정하세요. */
+    height: auto; /* 높이는 자동으로 조정됩니다. */
+    margin-top: 20px;
+}
+.container {
+    display: flex;
+    justify-content: space-between; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+    width: 100%;
+    height: 1600px;
+    
+    margin: 0 auto; /* 화면 가운데 정렬 */
+}
+
+#sideBar{
+    height: 1200px;
+    width: 100px;
+    background-color: aquamarine;
+}
+
+body{
+    margin:0px;
+}

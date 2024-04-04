@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공지사항 세부사항</title>
+
+<link rel="stylesheet" href="/css/manager/board/noticeWrited.css">
+
+
+
+<div class="container">
+
+<th:block th:replace="/fragments/managersidebar.html"></th:block>
+
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span><a class="black-link" th:href="@{/board/noticeMain}">공지사항</a></span>
+                <span><strong>></strong></span>
+                <span th:text="|${notice.creationNumber}번째 글|"></span>
+            </div>
+
+            <div class="CRUDcontainer">
+            <a href="#"><img class="logo1" src="/images/01_logoimg/textLogoNone.png" alt=""></a>
+
+
+                <span id="delete"
+              th:onclick="'location.href=\'/board/noticeDelete?no='+ @{${notice.creationNumber}} + '\''"
+
+                >
+					삭제
+				</span>
+                <span id="update"
+              th:onclick="'location.href=\'/board/noticeUpdate?no='+ @{${notice.creationNumber}} + '\''"
+                >
+					수정
+				</span>
+            </div>
+            
+
+            <div class="box">
+                <span class="box1" th:text="|작성번호 : ${notice.creationNumber}|"></span>
+                <!-- <span class="box1">작성자:김민*</span> -->
+                <span class="box2" th:text="|작성일자 : ${notice.creationDate}|"></span>
+                <!-- <span class="box3">처리완료</span> -->
+            </div>
+            
+            <div>
+                <form action="">
+                    <div class="title">
+                        <span id="details" >제목</span>
+                        <span id="details2" th:text="${notice.title}"></span>
+                    </div>
+                    <div class="detail">
+                        <div id="details">내용</div>
+
+						<div id="details2" th:text="${notice.content}"></div>
+
+                    </div>
+                    <div class="submitbtn"><button type="submit">글쓰기</button></div>
+                </form>
+            </div>
+
+        
+            
+        
+
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+    </div>
+
+
+</th:block>
+</html>

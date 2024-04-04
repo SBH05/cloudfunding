@@ -1,0 +1,417 @@
+		
+		
+		
+		/* body - 배경화면 */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #fff;
+			background-size: cover;
+			/* 창 화면에 100%로 배경 이미지 크기 조절 */
+			background-repeat: no-repeat;
+			/* 배경 이미지 반복 없음 */
+		}
+
+		/* header */
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px 0;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: relative;
+		}
+
+		/* logo - margin  */
+		.logo-image {
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		/* 네비게이션 메뉴 부모 요소 */
+		nav {
+			text-align: center;
+			min-width: 60px;
+			min-height: 20px;
+		}
+
+		/* 네비게이션 메뉴 목록 */
+		nav ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+		}
+
+		/* 작은 화면에서 메뉴 항목 숨김 */
+		@media screen and (max-width: 760px) {
+			nav ul {
+				display: none;
+			}
+		}
+
+		/* 네비게이션 메뉴 항목 스타일 */
+		nav ul li {
+			margin: 0 15px;
+			min-width: 60px;
+			min-height: 20px;
+			display: flex;
+			align-items: center;
+			flex-shrink: 0;
+			/* 가로고정 */
+			flex-grow: 0;
+			/* 세로 고정 */
+		}
+
+
+		/* 네비게이션 메뉴 하이퍼링크 스타일 */
+		nav ul li a {
+			color: #fff;
+			text-decoration: none;
+			padding: 10px;
+			display: block;
+			height: 100%;
+			box-sizing: border-box;
+			/* 정확한 패딩값을 주기 위함 */
+		}
+
+		/* 검색어 - 부모  */
+		.search-box {
+			background-color: #eee;
+			padding: 3px;
+			border-radius: 5px;
+			display: flex;
+			align-items: center;
+			width: 200px;
+			margin-right: auto;
+		}
+
+		/* 검색어 - 자식 (입력 필드) */
+		.search-box input {
+			padding: 5px;
+			width: 100%;
+			/* 수정: 입력 필드를 100%로 설정하여 부모에 맞춤 */
+			border: none;
+			border-radius: 5px;
+			margin-right: 5px;
+		}
+
+		/* 검색 버튼 스타일 */
+		.search-button {
+			background: none;
+			border: none;
+			cursor: pointer;
+		}
+
+		/* 아이콘 스타일 (Font Awesome) */
+		.search-button i {
+			font-size: 18px;
+			color: #555;
+		}
+
+		/* 프로젝트 시작하기  */
+		.project-button {
+			background-color: #f90;
+			color: #fff;
+			padding: 10px 15px;
+			border-radius: 5px;
+			margin-right: 40px;
+			margin-left: auto;
+			display: flex;
+		}
+
+
+
+		/* 미디어 쿼리: 화면이 작아질 때 */
+		@media screen and (max-width: 600px) {
+			.project-button {
+				display: none;
+			}
+		}
+
+		/* 프로젝트 버튼 디자인 */
+		.project-button a {
+			background-color: #f90;
+			color: #fff;
+			text-decoration: none;
+			text-align: center;
+		}
+
+		/* 슬라이딩 메뉴  */
+		.menu {
+			background-color: #333;
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			/* margin-left: auto; */
+		}
+
+		/* 더보기 토글 메뉴  */
+		.menu-item {
+			display: flex;
+			align-items: center;
+			margin-right: auto;
+			margin-left: 22px;
+			min-width: 60px;
+			min-height: 20px;
+		}
+
+		/* 미디어 쿼리: 화면이 작아질 때 */
+		@media screen and (max-width: 1200px) {
+			.menu-item {
+				display: none;
+				/* 화면이 작아지면 숨김 */
+			}
+		}
+
+		.menu-content {
+			display: none;
+			position: absolute;
+			background-color: #333;
+			color: #fff;
+			z-index: 1;
+			padding: 50px;
+			left: 0;
+			right: 0;
+			top: 100%;
+			width: 100%;
+		}
+
+
+		.menu-content ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+		}
+
+		.menu-content ul li {
+			margin: 10px;
+		}
+
+		.menu-content a {
+			text-decoration: none;
+			color: #fff;
+		}
+
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
+
+		/* 사이드바 */
+
+				/* 마이페이지 */
+				.title {
+					list-style-type: none;
+					padding: 23px;
+					font-size: 30px;
+				}
+
+
+
+		.sideBar {
+		    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+		    background-color: rgba(255, 255, 255, 1);
+		    width: 280px;
+		    flex: 0 0 auto;
+		    height: 1000px;
+		}
+
+		.sideBar-menu {
+		    width: 234px;
+		    height: 100%;
+		    position: absolute;
+		    margin-top: 70px;
+		    margin-left: 30px;
+		}
+
+		.sideBar-menu ul,
+		.sideBar-menu li {
+		    list-style-type: none;
+		    padding: 0;
+		    margin: 0;
+		    margin-left: 30px;
+		    margin-top: 10px;
+		}
+
+		.sideBar-menu a {
+		    text-decoration: none;
+		    color: #555;
+		}
+
+		.sideBar-toggle li {
+		    margin-left: 0px;
+		}
+
+		.sub li a {
+		    margin-left: 50px;
+		}
+
+		.sideBar-adver {
+		    width: 223.856201171875px;
+		    height: 134.313720703125px;
+		    position: absolute;
+		    margin-top: 30%;
+		}
+
+		.sideBar-adver-back {
+		    background-image: linear-gradient(0deg, rgba(249.38867390155792, 202.0311614871025, 163.5030072927475, 1) 0%, rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 1) 100%);
+		    width: 223.856201171875px;
+		    height: 134.313720703125px;
+		    left: 0px;
+		    border-top-left-radius: 20px;
+		    border-top-right-radius: 20px;
+		    border-bottom-left-radius: 20px;
+		    border-bottom-right-radius: 20px;
+		}
+
+		.sideBar-adver-text {
+		    color: rgba(255, 255, 255, 1);
+		    width: 182px;
+		    height: 38px;
+		    position: absolute;
+		    left: 21px;
+		    top: 23px;
+		    font-family: Poppins;
+		    text-align: center;
+		    font-size: 14px;
+		    letter-spacing: 1;
+		}
+
+		.sideBar-adver-button {
+		    width: 181.77122497558594px;
+		    height: 35.816993713378906px;
+		    position: absolute;
+		    left: 21px;
+		    top: 78.796875px;
+		}
+
+		.sideBar-adver-button-back {
+		    box-shadow: 2px 4px 4px rgba(79.0000256896019, 41.99999749660492, 234.00000125169754, 0.17000000178813934);
+		    background-color: rgba(255, 255, 255, 1);
+		    width: 181.77122497558594px;
+		    height: 35.816993713378906px;
+		    position: absolute;
+		    left: 0px;
+		    top: 0px;
+		    border-top-left-radius: 20px;
+		    border-top-right-radius: 20px;
+		    border-bottom-left-radius: 20px;
+		    border-bottom-right-radius: 20px;
+		}
+
+		.sideBar-adver-button-text {
+		    color: rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 1);
+		    width: 117px;
+		    height: 19px;
+		    position: absolute;
+		    left: 32px;
+		    top: 8.6484375px;
+		    font-family: Poppins;
+		    text-align: center;
+		    font-size: 14px;
+		    letter-spacing: 1;
+		} 
+
+		/* 푸터 */
+		.footer { 
+			width:100%;
+			height:198px;
+			position:absolute;
+		}
+
+		.footer-back { 
+			background-color:rgb(233, 233, 233);
+			width:100%;
+			height:230px;
+			position:absolute;
+			margin-left: 0;
+			top:0px;
+		}
+
+		.footer-left { 
+			transform: rotate(6.141813577836304e-22deg);
+			width:100%;
+			height:0px;
+			position:absolute;
+			left:0px;
+			top:0px;
+		}
+
+		.footer-group { 
+			height:163px;
+			position:absolute;
+			left:500px;
+		}
+
+		.footer-group-design { 
+			width:100;
+			height:163px;
+			position:absolute;
+			left:0px;
+			top:0px;
+		}
+
+		.footer-down { 
+			color:rgba(185.00000417232513, 185.00000417232513, 185.00000417232513, 1);
+			width:500px;
+			height:30px;
+			position:absolute;
+			left:100px;
+			top:130px;
+			font-family:Poppins;
+			text-align:left;
+			font-size:12px;
+			letter-spacing:-1;
+		}
+
+		.footer-up { 
+			width:100%;
+			height:30px;
+			position:absolute;
+			left:0px;
+			top:10px;
+
+		}
+		.footer-up-right { 
+			color:rgba(185.00000417232513, 185.00000417232513, 185.00000417232513, 1);
+			width:300px;
+			height:30px;
+			position:absolute;
+			left:400px;
+			top:50px;
+			font-family:Poppins;
+			text-align:left;
+			font-size:12px;
+			letter-spacing:-1;
+			margin-left: 30px;
+		}
+
+		.footer-up-left { 
+			color:rgba(185.00000417232513, 185.00000417232513, 185.00000417232513, 1);
+			width:300px;
+			height:30px;
+			position:absolute;
+			left:100px;
+			top:50px;
+			font-family:Poppins;
+			text-align:left;
+			font-size:12px;
+			letter-spacing:-1;
+		}
+
+		.footer-logo { 
+			width:150px;
+			height:150px;
+			position:absolute;
+			left:-100px;
+			top:40px;
+			background-image:url(/resources/images/01_logoimg/logoNone.png);
+			background-repeat:no-repeat;
+			background-size:cover;
+		}

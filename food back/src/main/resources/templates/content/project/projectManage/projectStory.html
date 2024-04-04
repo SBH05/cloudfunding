@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+
+    <!-- 폰트패밀리: Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <!-- 항상 변경 해야할 js 링크 -->
+    <script src="/js/projectMake-main/projectManage/projectStory.js"></script>
+
+    <link rel="stylesheet" href="/css/background-board/css.css">
+    <!-- 항상 변경 해야할 css 링크 -->
+    <link rel="stylesheet" href="/css/project/projectMake-main/projectManage-main/projectStory/css.css">
+
+
+
+
+
+    <th:block th:replace="/fragments/projectMakesidebar.html"></th:block>
+    <div class="back-side-container">
+
+
+        <section class="back-board-container">
+            <!-- 배경 시트 좌측 상단 텍스트 -->
+            <div class="greeting-text">스토리 작성</div>
+            <!-- 배경 시트 -->
+            <div class="back-board">
+                <!-- 로고 -->
+                <div class="board-logo img">
+                    <img src="/images/01_logoimg/textLogoNone.png">
+                </div>
+
+                <div class="category-text">소개영상, 사진 등록<span class="greeting-text-star"> *</span></div>
+                <div class="category-sub-text">프로젝트 상세페이지 최상단에 노출할 영상 또는 사진을 등록해 주세요. (영상 or 사진 중 택 1)</div><br><br>
+
+                <div class="introduce-container">
+                    <div class="introduce-image" onclick="openFileInput()">
+                        <p>소개 사진</p>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="introduce-text-container">
+                    <div class="introduce-text-title">소개 사진 등록 가이드</div>
+                    <br><br>
+                    <div class="introduce-text-list">
+                        <li>이미지 용량 제한</li>
+                        <p>GIF: 2MB 이하, 해상도 760x480픽셀 이상 ~ 1440x864 픽셀 이하</p>
+                        <p>JPG, JPEG, PNG, 10MB 이하, 해상도 760x480 픽셀 이상</p>
+                        <br>
+                        <li>최대 10장까지 등록 가능</li>
+                    </div>
+                </div>
+                <input type="file" id="file-input" accept="image/gif, image/jpeg, image/png"
+                    onchange="handleFileSelect(this)">
+                <div id="image-preview"></div>
+
+
+
+                <script>
+                    function openFileInput() {
+                        document.getElementById('file-input').click();
+                    }
+
+                    function handleFileSelect(input) {
+                        var files = input.files;
+                        var preview = document.getElementById('image-preview');
+
+                        // 이미지 파일 미리보기 추가
+                        for (var i = 0; i < files.length; i++) {
+                            var file = files[i];
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                var image = new Image();
+                                image.src = e.target.result;
+
+                                image.onload = function () {
+                                    if (
+                                        (file.type === 'image/gif' && file.size <= 2 * 1024 * 1024 && image.width >= 760 && image.width <= 1440 && image.height >= 480 && image.height <= 864) ||
+                                        ((file.type === 'image/jpeg' || file.type === 'image/png') && file.size <= 10 * 1024 * 1024 && image.width >= 760 && image.height >= 480)
+                                    ) {
+                                        // 조건 충족 시 이미지 미리보기 추가
+                                        var imgElement = document.createElement('img');
+                                        imgElement.src = e.target.result;
+                                        imgElement.style.maxWidth = '80px';
+                                        imgElement.style.maxHeight = '80px';
+
+                                        // 이미지를 클릭하면 삭제되도록 이벤트 추가
+                                        imgElement.addEventListener('click', function () {
+                                            deleteImage(this);
+                                        });
+
+                                        preview.appendChild(imgElement);
+                                    } else {
+                                        alert('이미지 형식 또는 크기가 제한에 맞지 않습니다.');
+                                    }
+                                };
+                            };
+
+                            reader.readAsDataURL(file);
+                        }
+                    }
+
+                    function deleteImage(imgElement) {
+                        // 클릭한 이미지를 삭제
+                        imgElement.parentNode.removeChild(imgElement);
+                    }
+                </script>
+
+                <br><br>
+
+                <div class="category-text">프로젝트 요약<span class="greeting-text-star"> *</span></div>
+                <div class="category-sub-text">소개 영상이나 사진과 함께 보이는 글이에요. 프로젝트를 쉽고 간결하게 소개해 주세요.(영상 or 사진 중 택 1)</div>
+                <br><br>
+
+                <div class="project-summary-container">
+                    <div class="project-summary-textBox">
+                        <textarea id="project-summary-text" name="project-summary-text" placeholder="내용 입력"
+                            oninput="updateCharacterCount()"></textarea>
+                    </div>
+                    <br>
+                    <p id="characterCount">100자 남음</p>
+                </div>
+
+                <br><br>
+
+                <div class="category-text">프로젝트 스토리<span class="greeting-text-star"> *</span></div>
+                <div class="project-stroy-container">
+                    <div class="project-stroy--sub-text">스토리는 이렇게 작성해 보세요</div>
+                    <li>이미지와 설명글 구성으로 스토리를 작성하면 내외부 포털 검색 결과에 상위 노출될 확률이 높아져요.</li>
+                    <li>이미지로만 구성된 스토리는 이미지 로딩 속도가 느려 구매자가 상세 페이지를 벗어날 확률이 높아져요.</li>
+                    <div class="project-stroy--sub-text">구매자에게 꼭 알려주세요</div>
+                    <li>이미지와 설명글 구성으로 스토리를 작성하면 내외부 포털 검색 결과에 상위 노출될 확률이 높아져요.</li>
+
+                    <br><br><br><br><br><br>
+
+                    <a class="project-start" href="/view/projectMake/projectManage.html">제출하기</a>
+                </div>
+
+
+            </div> <!-- back-board -->
+    </section>
+    </div> <!-- greeting-text -->
+
+
+
+</th:block>
+</html>

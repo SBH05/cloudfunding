@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"
+>
+<th:block  layout:fragment="content">
+    <!-- 폰트패밀리: Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" href="/css/background-board/css.css">
+    <!-- 항상 변경 해야할 css 링크 -->
+
+
+
+
+
+    <div class="back-side-container">
+        <th:block th:replace="/fragments/sellersidebar.html"></th:block>
+
+        <section class="back-board-container">
+            <!-- 배경 시트 좌측 상단 텍스트 -->
+            <div class="greeting-text">프로젝트 관리</div>
+            <!-- 배경 시트 -->
+            <div class="back-board">
+                <!-- 로고 -->
+                <div class="board-logo img">
+                    <img src="/images/01_logoimg/textLogoNone.png">
+                </div>
+
+
+
+                <div class="project-start">제출하기</div>
+
+
+            </div> <!-- back-board -->
+        </section>
+    </div> <!-- greeting-text -->
+
+
+</th:block>
+
+</html>

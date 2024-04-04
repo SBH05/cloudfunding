@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/css/project/projectAgree/projectAgree.css}">
+
+
+    <th:block th:replace="/fragments/projectMakesidebar.html"></th:block>
+
+    <div class="container">
+
+   <div class="middle">
+
+    <!-- 정책 -->
+    <div><H1>정책</H1></div>
+    <!-- 정책 아래 전체 박스 -->
+    <div class="middle-a">
+
+        <!-- 이미지 로고 -->
+    <div>
+        <img class="logo1"  src="/images/01_logoimg/textLogoNone.png">
+    </div>
+
+    <!-- 서비스 이용 동의 박스 -->
+    <div class="box">
+
+        <h3>서비스 이용 동의*</h3>
+        <p>아래 내용을 반드시 확인해 주세요</p>
+
+        <div class="checkbox">
+
+            <!-- 오렌지색 체크박스로 만드려고 했으나 시간 이슈로 포기
+            <div class="agree">
+                <label for="agree" class="chk_box">
+                    <input type="checkbox" id="agree" checked="checked" />
+                    <div class="on" id=""></div>
+                    <div id="text">
+                    회사에 제출하거나 프로젝트 페이지에 공지한 내용 등이 모두 사실임을 보증하며, 이에 반하는 사실이 발견된 경우 모든 책임을 부담하겠습니다(제10조).
+                    </div>
+                </label>
+            </div>
+            -->
+            <div class="agree">
+                <input type="checkbox" id="agreeBox1">
+                <label for="agreeBox1" id="text">
+                    회사에 제출하거나 프로젝트 페이지에 공지한 내용 등이 모두 사실임을 보증하며, 이에 반하는 사실이 발견된 경우 모든 책임을 부담하겠습니다(제10조).
+                </label>
+            </div>
+            <div class="agree">
+                <input type="checkbox" id="agreeBox2">
+                <label for="agreeBox2" id="text">
+                    동의한 약관 및 정책에 반하는 행위를 하는 경우 회사에 의해 프로젝트가 취소될 수 있고(제26조, 제35조), 이용 계약이 해제 또는 해지될 수 있음(제31조, 제40조)을 확인했습니다.
+                </label>
+            </div>
+            <div class="agree">
+                <input type="checkbox" id="agreeBox3">
+                <label for="agreeBox3" id="text">
+                    서포터 보호가 필요하다 인정되는 경우 리워드 배송 전 결제 취소가 이뤄질 수 있고(제28조), 환불 사유에 해당하는 경우 개별 또는 일괄로 환불이 이뤄질 수 있음(제30조, 제39조)을 확인했습니다.                    
+                </label>
+            </div>
+            <div class="agree">
+                <input type="checkbox" id="agreeBox4">
+                <label for="agreeBox4" id="text">
+                    귀책 사유로 인해 회사 또는 제3자에게 손해를 발생하게 한 경우에는 손해를 배상할 책임이 있고(제19조), 프로젝트를 공개한 후 취소하거나 취소되면 손해 배상과는 별도로 위약벌이 발생할 수 있음(제32조, 제41조)을 확인했습니다.                
+                </label>
+            </div>
+
+            <div id="scroll">
+                제1조 (목적) <hr>
+                본 판매자 이용약관(이하 "본 약관")은 클라우드 푸딩 주식회사(이하 "회사")가 운영 및 제공하는 인터넷 사이트 https://www.wadiz.kr (이하 "사이트")에 크라우드펀딩, 리펀딩 및 모의펀딩 프로젝트를 개설하여 펀딩금을 모집하거나 통신판매의 방식으로 상품을 판매하고자 하는 자(이하 "판매자")가 프로젝트의 개설 및 중개 등의 서비스를 이용함에 있어 회사와 메이커 간의 권리, 의무 및 제반절차를 확정하고 이를 이행함으로써 상호 발전을 도모하는 것을 그 목적으로 합니다.
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h3>환불 정책*</h3>
+        <div class="refundBox2">
+            프로젝트 유형에 따라 환불정책이 달라요. 프로젝트 정보에서 프로젝트 유형을 선택해 주세요.
+        </div>
+    </div>
+
+
+    <div class="box">
+        <h3>기본 환불 정책</h3>
+        <ul id="text2">
+            <li>아래의 경우 구매자가 환불 신청할 수 있어요. </li>
+            <li>프로젝트 종료 후 리워드가 발송되기 전까지 ‘참여 취소’ 환불</li>
+            <li>약속한 리워드 발송 예정일까지 리워드가 출발하지 않은 경우 ‘리워드 지연’ 환불</li>
+            <li>리워드 수령에 문제가 발생되는 경우 ‘오배송 및 리워드 하자’ 환불</li>
+            <li>환불 불가 유형 및 기타 환불 규정에 해당하지 않는 경우 ‘단순 변심’ 환불</li>
+            <li>리워드 배송 전 ‘참여 취소’로 환불된 건과 리워드 배송 완료 이후 ‘단순 변심’으로 환불 된 건은 최종 정산 내역 중개수수료에서 제외되어요.</li>
+            <li>리워드 배송 완료 이후의 환불 신청 건은 환불 신청서를 확인하고 승인할 수 있어요.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h3>환불 불가 유형</h3>
+        <ul id="text2">
+            <li>구매자의 단순변심으로 인한 반품/환불 요청이 리워드를 수령한 날로부터 7일이 지난 경우</li>
+            <li>구매자의 귀책 사유로 인하여 상품이 멸실·훼손된 경우 (구성품의 누락, 밀봉 상품의 포장을 훼손한 경우 등)</li>
+            <li>신선·냉동식품, 식물 등 시간이 지남에 따라 재판매가 곤란할 정도로 가치가 떨어지는 리워드인 경우
+            </li>
+            <li>기부·후원 목적으로 성공금을 모집 및 사용하는 펀딩 프로젝트인 경우</li>
+            <li>기타 법령 및 약관에 의해 리워드 반품이 제한되는 경우</li>
+        </ul>
+    </div>
+
+    <div class="refundBox2">
+        <strong>
+        프로젝트가 공개되면 판매자님들에게 환불 정책이 안내돼요.
+        <br>
+        판매자님께 관련 문의가 들어올 수 있으니 꼼꼼히 확인해 주세요.
+        </strong>
+    </div>
+
+    <div id="save" class="box">
+        <button id="btn" onclick='alert("저장되었습니다.")'>저장하기</button>
+
+    </div>
+
+    </div>
+  </div>
+
+<div class="right">
+       <!-- 우측 컨텐츠 -->
+   </div>
+       
+  
+</div>
+
+
+
+
+</th:block>
+</html>

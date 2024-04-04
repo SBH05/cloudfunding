@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <link rel="stylesheet" href="/css/deliver/deliverDetail.css">
+
+
+            <div class="middle_box" th:each="orderDetail : ${ totalDeliveryDTO2 }">
+                <div class="middle">
+                    <div class="first">
+                        <a class="black3-link" th:href="@{/deliver/usermain}" id="questionLink"> > </a>
+                        <span>주문 상세정보</span>
+                    </div>
+
+                    <div class="seller_info"><span th:text="${orderDetail.getBusinessMakeDTO().getBusiName()}">황황정육</span></div>
+                    <div class="ing_loca">
+<!--                        <div class="ing"><span class="black-link" th:text="${orderDetail[0].getBusinessMakeDTO().getBusiPhone()}"></span><a class="black-link" th:href="@{#}" th:text="${orderDetail[0].getBusinessMakeDTO().getBusiPhone()}">전화번호 보기</a></div>-->
+                    </div>
+                    <div class="ing_loca2">
+                        <div class="ing"><a class="black-link" th:href="@{#}">QnA</a></div>
+                    </div>
+
+                    <div class="deliver_info">
+                        <span>판매자에게 직접 연락하시면 빠른 확인이 가능합니다.</span><br>
+                        <span>구매확정 이후 상품의 이용방법, 반품 등에 대한 문의는 판매자에게 문의해 주세요.</span><br>
+<!--                        <a class="black2-link" th:href="@{#}" span style="color: orange;">판매자정보 확인하기 ></a>-->
+                    </div>
+
+                    <div class="bar"></div>
+
+                    <div class="order_infotitle">
+                        <span>주문정보</span>
+                    </div>
+
+                    <div class="order_infoIme">
+                        <img th:src="@{|/thumbPath/${orderDetail.projectFileDTO[0].changedFileName}|}" alt="로고" width="90">
+                    </div>
+                    <div class="order_info">
+                        <a class="black3-link" span href="#">풍미가 좋은 드라이에이징 삼겹살</a><br><br>
+                        <span>주문 수량: 1</span><br>
+                        <span style="font-size: 10px;">옵션: 프렌즈세트</span>
+                    </div>
+                    <div class="order_infopri">
+                        <span th:text="${orderDetail.getPaymentDTO().getTotalAmount()}">65,000 won</span>
+                    </div>
+
+                    <div class="bar2"></div>
+                    <div class="order_titleprice">
+                        <span>상품 전체 금액</span><br>
+                        <span>쿠폰 적용 금액</span><br>
+                        <span>배송비</span><br>
+                        <span>총 금액</span><br>
+                    </div>
+
+                    <div class="order_price">
+                        
+                        <span th:text="${orderDetail.getProjectOptionDTO().getPrice()} + ' ' + won">65,000 won</span><br>
+                        <span th:text="${orderDetail.getProjectOptionDTO().getPrice()-2000} + ' ' +won">63,000 won</span><br>
+                        <span>3,000 won</span><br>
+                        <span style="color: orange; " th:text="${orderDetail.getPaymentDTO().getTotalAmount()}+ ' ' + won">66,000 won</span><br><br>
+                    </div>
+                    <div class="bar3"></div>
+                    <div class="ing_loca3">
+                        <div class="ing"><a class="black-link" href="#">신고하기</a></div>
+                    </div>
+
+                    <div class="deliver_infobuyer">
+                        <div class="deliver_buyer_infotitle">
+                            <span>배송지 정보</span><br>
+                            <span>수령인</span><br>
+                            <span>연락처</span><br>
+                            <span>배송지</span><br>
+                        </div>
+
+                        <div class="deliver_buyer_infoinput">
+                            <span></span><br>
+                            <span th:text="${orderDetail.getMemberDTO().getUserName()}"></span><br>
+                            <span th:text="${orderDetail.getMemberDTO().getPhone()}">010-1234-5678</span><br>
+                            <p style="line-height: 30px;" th:text="${orderDetail.getMemberDTO().getAddress()}">서울특별시 종로구 인사동길 12 대인빌딩 7층</p>
+                        </div>                     
+                    </div>
+                    
+                    
+                    
+                </div>           
+            </div>
+
+
+</th:block>
+        
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+
+        <link rel="stylesheet" th:href="@{/css/login/myInfo.css}">
+
+
+
+
+    <div class="container">
+        <th:block th:replace="/fragments/usersidebar.html"></th:block>
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="changeinfotitle">내정보 관리</div>
+            <div class="ligoimg"><img src="/images/textlogonone_2.png" alt=""></div>
+
+
+
+            <!-- 회원정보 변경 폼-->
+            <div class="changeInfo">
+
+                <div class="profileimg">
+
+                    <div><img class="profileimg1" th:src="@{|/imagePath/${memberAndProfileDTO.getProfileImgDTO().getChangedproFileName()}|}" alt="">프로필 사진</div>
+                </div>
+
+                <div class="myInfo1">
+                    <div class="myInfo1" th:text="'이름 : ' + ${memberAndProfileDTO.getMemberDTO().getUserName()}">이름 : 이준희</div>
+                    <div class="myInfo1" th:text="'이메일 : ' + ${memberAndProfileDTO.getMemberDTO().getEmail()}">이메일 : lees8485@gameil.com </div>
+                    <div class="myInfo1" th:text="'우편번호 : ' + ${zipCode}">주소 : 서울시 성북구 길음로13길 39</div>
+                    <div class="myInfo1" th:text="'주소 : ' + ${address1}">주소 : 서울시 성북구 길음로13길 39</div>
+                    <div class="myInfo1" th:text="'상세주소 : ' + ${address2}">주소 : 서울시 성북구 길음로13길 39>상세주소 : 푸르지오3단지</div>
+                    <div class="myInfo1" th:text="'핸드폰번호 : ' + ${memberAndProfileDTO.getMemberDTO().getPhone()}">주소 : 서울시 성북구 길음로13길 39>상세주소 : 푸르지오3단지</div>
+                    <div class="myInfo1" th:text="'생년월일 : ' + ${memberAndProfileDTO.getMemberDTO().getDateBirth()}">주소 : 서울시 성북구 길음로13길 39>상세주소 : 푸르지오3단지</div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+    </div>
+
+</th:block>
+</html>
+
+
+

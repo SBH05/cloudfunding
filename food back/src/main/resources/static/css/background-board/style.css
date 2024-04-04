@@ -1,0 +1,54 @@
+/* 배경 보드 */
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 1700px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* 가운데 정렬을 위한 설정 */
+    align-items: center; /* 가운데 정렬을 위한 설정 */
+}
+
+/* 사이드바, 보드 양쪽 배치 */
+.back-side-container {
+    display: inline-flex;
+}
+
+.back-side-container>div {
+    flex: 1;
+    /* 첫 번째 아이템 */
+}
+
+.back-side-container>div:nth-child(2) {
+    flex: 2;
+    /* 두 번째 아이템 */
+}
+
+/* 보드 - 좌측상단 로고 */
+.board-logo img {
+    width: 120px;
+    height: auto;
+    margin: 5vh;
+}
+
+/* 좌측상단 텍스트 */
+.greeting-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 20vh;
+    margin-top: 10vh;
+}
+
+/* 좌측상단 별 */
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 폰트패밀리: Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+    <script src="/js/projectMake-main/projectManage/payChoice.js"></script>
+
+
+    <link rel="stylesheet" th:href="@{/css/background-board/css.css}">
+    <!-- 항상 변경 해야할 css 링크 -->
+    <link rel="stylesheet" th:href="@{/css/project/projectMake-main/projectManage-main/payChoice/css.css}">
+
+
+    <th:block th:replace="/fragments/projectMakesidebar.html"></th:block>
+
+        <section class="back-board-container">
+
+            <!-- 배경 시트 좌측 상단 텍스트 -->
+            <div class="greeting-text">요금제 선택</div>
+            <!-- 배경 시트 -->
+            <div class="back-board">
+                <!-- 로고 -->
+                <div class="board-logo img">
+                    <img src="/images/01_logoimg/textLogoNone.png">
+                </div>
+         
+                <div class=pay-container>
+                    <div class="pay-box1-back"></div>
+                    <div class="pay-box2-back"></div>
+                    <div class="pay-box3-back"></div>
+                    <div class="pay-box1-in-back"></div>
+                    <div class="pay-box2-in-back"></div>
+                    <div class="pay-box3-in-back"></div>
+                    <span  class="pay-box1-title">프로젝트 담당 디렉터의 맞춤 관리로 성과를 높이고 싶은 판매자님</span>
+                    <span  class="pay-box2-title">클라우드 푸딩 전체 서비스를 이용해 직접 성과를 높이고 싶은 판매자님</span>
+                    <span  class="pay-box3-title">클라우드 푸딩 필수 서비스를 이용해 직접 성과를 만들고 싶은 판매자님</span>
+                    <span  class="pay-box1-inside">프로그램 응원권 발급 (다음 프로젝트 신청시 신청비 3% 할인)<br>디스플레이 배너 광고<br>팝업 광고</span>
+                  <span  class="pay-box2-inside">프로그램 응원권 발급 (다음 프로젝트 신청시 신청비 3% 할인)<br>디스플레이 배너 광고</span>
+                  <span  class="pay-box3-inside">프로그램 응원권 발급 (다음 프로젝트 신청시 신청비 3% 할인)</span>
+                  <span  class="pay1-title">프리미엄 Premium</span>
+                  <span  class="pay2-title">프로 Pro</span>
+                  <span  class="pay3-title">베이직 Basic</span>
+                  <span  class="pay1-sub-title">수수료 15%</span>
+                  <span  class="pay2-sub-title">수수료 10%</span>
+                  <span  class="pay3-sub-title">수수료 5%</span>
+                  <span  class="pay1-vat">VAT 별도</span>
+                  <span  class="pay2-vat">VAT 별도</span>
+                  <span  class="pay3-vat">VAT 별도</span>
+                    <div class=pay1-choice onclick="selectPlan()">
+                        <span  class="pay1-choice-text" value="premium">요금제 선택</span>
+                    </div>
+                    <div class=pay2-choice onclick="selectPlan()">
+                        <span  class="pay2-choice-text" value="pro">요금제 선택</span>
+                    </div>
+                    <div class=pay3-choice onclick="selectPlan()">
+                        <span  class="pay3-choice-text" value="basic">요금제 선택</span>
+                    </div>
+                    <div class="pay-notice"></div>
+                        <span  class="pay-notice-text">요금제 선택 전 확인해 주세요. 수수료(VAT)는 별도입니다.</span>
+                  </div>
+
+                  <!-- 요금제 선택시 알림팝업 -->
+                  <script>
+                  function selectPlan() {
+                      alert("해당 요금제가 선택되었습니다.");
+                  }
+                  </script>
+
+                    <a class="project-start" th:href="@{/projectMake/projectManage}">제출하기</a>
+
+            </div> <!-- back-board -->
+        </div> <!-- greeting-text -->
+    </div>
+    </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+
+
+</th:block>
+</html>

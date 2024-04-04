@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <!-- 항상 변경 해야할 js 링크 -->
+    <script src="/js/projectMake-main/projectManage/basicInfo.js"></script>
+
+    <link rel="stylesheet" href="/css/background-board/css.css">
+    <!-- 항상 변경 해야할 css 링크 -->
+    <link rel="stylesheet" href="/css/project/projectMake-main/projectManage-main/basicInfo/css.css">
+
+    <th:block th:replace="/fragments/projectMakesidebar.html"></th:block>
+
+    <div class="back-side-container">
+
+
+        <form th:action="@{/projectMake/basicInfo}" id="search" method="post">
+            <input
+                    type="hidden"
+                    id="memberId"
+                    name="sellerCode"
+                    th:value="${ #authentication.getPrincipal().memberDTO.getUserCode() }">
+
+        <section class="back-board-container">
+            <!-- 배경 시트 좌측 상단 텍스트 -->
+            <div class="greeting-text">기본 정보</div>
+            <div class="greeting-sub-text">프로젝트와 가장 잘 어울리는 카테고리를 선택해 주세요. 프로젝트를 만들고 바꿀 수 있어요.</div><br><br>
+            <!-- 배경 시트 -->
+            <div class="back-board">
+                <!-- 로고 -->
+                <div class="board-logo img">
+                    <img src="/images/01_logoimg/textLogoNone.png">
+                </div>
+
+                <div class="category-text">프로젝트 제목<span class="greeting-text-star"> *</span></div>
+                <br><br>
+
+                <!-- 입력창에 입력이 발생할 때 남은 글자 수 계산 -->
+                <div class="putIn-title">
+                    <input type="text" id="putIn-title-text" name="title" placeholder="제목을 입력해 주세요."
+                        oninput="updateCharacterCount()"
+                    th:value="${project.title}"
+                    >
+                    <p id="characterCount">(?)자 남음</p>
+                </div>
+
+                <br><br>
+
+                <div class="category-text">대표 이미지<span class="greeting-text-star"> *</span></div>
+                <div class="category-sub-text">클라우드 푸딩 메인, 검색 결과 등 여러 곳에서 노출할 대표 이미지를 등록해 주세요.</div><br><br>
+                
+
+                <div class="first-image-container">
+                    <div class="first-image-box">
+                        <div class="first-image-title">대표 이미지 등록 가이드</div><br><br>
+                            <div class="first-image-sub-title">
+                                <li>10MB 이하의 JPG, JPEG, PNG 파일</li>
+                                <li>해상도 1200x675 픽셀 이상</li>
+                                <li>사진을 선택하면 이미지를 자르거나 회전할 수 있어요.</li>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <div class="category-text">프로젝트 종료일<span class="greeting-text-star"> *</span></div>
+                    <br>
+                        <div class="project-end-container">
+                            <input type="date" name="endDate" class="project-end-text" placeholder="예시: 2023/10/15" oninput="formatDateInput(this)" th:value="${project.endDate}">
+                        </div>
+
+                    <div class="category-text">검색용 태그(#)<span class="greeting-text-star"> *</span></div>
+                    <br>
+                        <div class="search-tag-container">
+                            <input name="tag" type="text" class="search-tag-text" placeholder="콤마로 구분해 최대 10개까지" id="tagInput" onkeyup="addTag(event)" th:value="${project.tag}">
+                            <br><br>
+                            <div class="search-tag-#text" id="outputTag"></div><br>
+                            <p id="tagLimitMessage"></p>
+                        </div>
+
+                        
+                        <script>
+                            var addedTags = 0;
+                        
+                            function addTag(event) {
+                                if (event.key === "Enter") {
+                                    event.preventDefault();
+                        
+                                    var tagInput = document.getElementById('tagInput');
+                                    var outputTag = document.getElementById('outputTag');
+                                    var tagLimitMessage = document.getElementById('tagLimitMessage');
+                        
+                                    // 입력값이 비어있지 않으면 태그를 추가
+                                    var trimmedValue = tagInput.value.replace(/\s/g, '');
+                                    if (trimmedValue !== '') {
+                                        var tags = tagInput.value.split(',');
+                                        var existingTags = new Set();
+                        
+                                        // 기존에 등록된 태그 수집
+                                        outputTag.childNodes.forEach(function (child) {
+                                            if (child.textContent) {
+                                                existingTags.add(child.textContent);
+                                            }
+                                        });
+                        
+                                        tags.forEach(function (tagText) {
+                                            tagText = tagText.trim();
+                                            if (tagText !== '' && !existingTags.has('#' + tagText + 'X') && addedTags < 10) {
+                                                var tag = document.createElement('div');
+                                                tag.className = 'search-tag';
+                                                tag.textContent = '#' + tagText;
+                        
+                                                // 추가된 태그에 삭제 버튼 추가
+                                                var deleteButton = document.createElement('span');
+                                                deleteButton.className = 'delete-tag';
+                                                deleteButton.textContent = 'X';
+                                                deleteButton.onclick = function () {
+                                                    deleteTag(tag);
+                                                };
+                        
+                                                tag.appendChild(deleteButton);
+                        
+                                                // 기존 태그 출력에 새로운 태그 추가
+                                                outputTag.appendChild(tag);
+                                                existingTags.add(tagText);
+                        
+                                                addedTags++;
+                                            }
+                                        });
+                        
+                                        // 입력창 초기화
+                                        tagInput.value = '';
+                        
+                                        // 태그 개수 제한 메시지 업데이트
+                                        updateTagLimitMessage(addedTags);
+                                    }
+                                }
+                            }
+                        
+                            function deleteTag(tagElement) {
+                                var tagText = tagElement.textContent.slice(1); // '#' 제거
+                                tagElement.parentNode.removeChild(tagElement);
+                        
+                                // 태그 삭제 후 카운트 조정
+                                addedTags--;
+                        
+                                // 태그 개수 제한 메시지 업데이트
+                                updateTagLimitMessage(addedTags);
+                            }
+                        
+                            function updateTagLimitMessage(addedTags) {
+                                var tagLimitMessage = document.getElementById('tagLimitMessage');
+                                var remainingTags = 10 - addedTags;
+                        
+                                if (remainingTags === 0) {
+                                    tagLimitMessage.textContent = '10개의 태그가 모두 등록되었습니다.';
+                                } else {
+                                    tagLimitMessage.textContent = remainingTags + '개의 태그가 더 추가 가능합니다.';
+                                }
+                            }
+                        </script>
+                        
+                        
+                        
+                    <br><br><br><br><br><br>
+                <button class="project-start">
+                    저장하기
+                    </button>
+
+
+            </div> <!-- back-board -->
+    </section>
+        </form>
+    </div> <!-- greeting-text -->
+
+
+
+
+</th:block>
+</html>

@@ -1,0 +1,346 @@
+/* 배경 보드 */
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 1400px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* 가운데 정렬을 위한 설정 */
+    align-items: center; /* 가운데 정렬을 위한 설정 */
+}
+
+.back-side-container {
+    display: inline-flex;
+}
+
+.back-side-container>div {
+    flex: 1;
+    /* 첫 번째 아이템 */
+}
+
+.back-side-container>div:nth-child(2) {
+    flex: 2;
+    /* 두 번째 아이템 */
+}
+
+.back-board-container {
+    position: relative;
+    left: 500px;
+}
+.greeting-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 20vh;
+    margin-top: 10vh;
+}
+
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}
+
+
+.board-logo img {
+    width: 120px;
+    height: auto;
+    margin: 5vh;
+}
+
+.category-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 10vh;
+}
+
+.category-sub-text {
+    font-size: 13px;
+    /* font-weight: regular; */
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 2vh;
+}
+
+/* 카테고리 선택 토글 */
+.toggle-button {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 10vh;
+}
+
+.menu-bar {
+    position: absolute;
+    background-color: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    transition: max-height 0.3s ease-out;
+    max-height: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+    border: #333;
+    background-color: #fff;
+    margin-left: 10vh;
+}
+
+.menu-bar a {
+    background-color: none;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-out;
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: 0;
+    width: 240px;
+}
+
+.menu-bar a:hover {
+    background-color: #b9b9b9;
+}
+
+.menu-bar.active {
+    max-height: 100%;
+}
+
+.active-item {
+    background-color: none;
+}
+
+/* 프로젝트 시작하기 */
+.project-start {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 10vh;
+}
+
+/* 프로젝트 참고 */
+.category-1 {
+    position: absolute;
+    margin-left: 10vh;
+}
+
+/* 프로젝트 참고 이미지 */
+.project-image img{
+    width: 750px;
+    margin-left: 10vh;
+    margin-bottom: 30px;
+}
+
+/* 프로젝트 참고 - 리스트 */
+.list-container {
+    display: flex;
+    height: auto;
+    margin-left: 10vh;
+    margin-bottom: 10vh;
+}
+
+.list-title {
+    font-size: 20px;
+    color:#F37D1D;
+    font-weight: bold;
+}
+
+.list-item {
+    width: 190px;
+    padding: 20px; /* 내용이 너무 붙어있지 않도록 간격을 추가 */
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 30px;
+}
+
+.list-content {
+    font-size: 13px;
+    color: #333;
+    height: auto;
+}
+
+.list-content li {
+    margin: 0;
+    padding: 5px 0;
+}
+
+/* 프로젝트 유형 */
+.type-container {
+    width: 752px;
+    height: 112px;
+    position: absolute;
+    margin-left: 10vh;
+}
+
+.type-container-or {
+    color: rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+    width: 52px;
+    height: 24px;
+    position: absolute;
+    left: 350px;
+    top: 44px;
+    font-family: Lato;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 0;
+}
+
+.folder-container1 {
+    width: 290px;
+    height: 112px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.folder1-up {
+    background-color: rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 0.3700000047683716);
+    width: 290px;
+    height: 51px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.folder1-down {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 1);
+    width: 290px;
+    height: 75px;
+    position: absolute;
+    left: 0px;
+    top: 37px;
+}
+
+.folder-container2 {
+    width: 290px;
+    height: 112px;
+    position: absolute;
+    left: 462px;
+    top: 0px;
+}
+
+.folder2-up {
+    background-color: rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 0.3700000047683716);
+    width: 290px;
+    height: 51px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.folder2-down {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 1);
+    width: 290px;
+    height: 75px;
+    position: absolute;
+    left: 0px;
+    top: 37px;
+}
+
+.folder1-title {
+    color: rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+    width: 28px;
+    height: 24px;
+    position: absolute;
+    left: 131px;
+    top: 12px;
+    font-family: Lato;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+
+.folder2-title {
+    color: rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+    width: 40px;
+    height: 24px;
+    position: absolute;
+    left: 587px;
+    top: 12px;
+    font-family: Lato;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+
+.folder1-box {
+    width: 272px;
+    height: 45px;
+    position: absolute;
+    left: 9px;
+    top: 52px;
+}
+
+.folder1-box-in {
+    color: rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+    width: 272px;
+    height: 45px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-family: Lato;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0;
+}
+
+.folder2-box {
+    width: 272px;
+    height: 45px;
+    position: absolute;
+    left: 471px;
+    top: 52px;
+}
+
+.folder2-box-in {
+    color: rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+    width: 272px;
+    height: 45px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-family: Lato;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-align: left;
+}

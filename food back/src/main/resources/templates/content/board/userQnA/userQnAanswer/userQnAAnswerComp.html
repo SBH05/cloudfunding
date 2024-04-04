@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <th:block th:replace="/fragments/usersidebar.html"></th:block>
+    <title>userQnA-AnswerComp</title>
+    <link rel="stylesheet" href="/css/QnA/QnASellerAnswer.css">
+
+
+
+    <div class="middle_box">
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first"><span>프로젝트 QnA</span></div>
+
+            <input type="hidden" id="creationNo" th:value="${no}">
+            <div class="box">
+                <span class="box1" th:text="|작성번호 : ${Close.creationNo}|"></span>
+                <span class="box1" th:text="|작성자 : ${Close.userId}|"></span>
+                <span class="box2" th:text="|작성일자 : ${Close.creation}|"></span>
+            </div>
+
+            <div>
+                <div class="wirte_title">제목 </div>
+                <div class="project_title"></div>
+                <div class="seller_name">판매자</div>
+                <div class="title_detail" th:text="${Close.title}"></div>
+                <div class="project_detail"></div>
+                <div class="seller_detail" th:text="${Close.seller}"></div>
+                <div class="bar"></div>
+
+                <div class="quest1">
+                    <div class="detail" th:text="${Close.content}">
+                    </div>
+                </div>
+
+                <div class="quest2">
+                    <div class="detail" th:text="${Close.answerContent}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

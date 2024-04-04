@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.board.model.dao.QnAMapper">
+
+
+    <resultMap id="PaymentHistoryResultMap" type="com.ohgiraffers.semiproject.order.model.dto.PaymentHistoryDTO">
+        <association property="payment" resultMap="PaymentResultMap"/>
+        <association property="cart" resultMap="CartResultMap"/>
+    </resultMap>
+
+    <resultMap id="PaymentResultMap" type="com.ohgiraffers.semiproject.order.model.dto.PaymentDTO">
+        <id property="code" column="PAYMENT_CODE"/>
+        <result property="amount" column="TOTAL_AMOUNT"/>
+        <result property="method" column="PAYMENT_METHOD"/>
+        <result property="time" column="PAYMENT_DATE_TIME"/>
+        <result property="status" column="PAYMENT_STATUS"/>
+        <association property="deliverCode" resultMap="DeliverResultMap"/>
+    </resultMap>
+
+
+
+    <resultMap id="DeliverResultMap" type="com.ohgiraffers.semiproject.order.model.dto.DeliverDTO">
+        <id property="code" column="DELIVERY_CODE"/>
+        <result property="day" column="DELIVERY_DATE"/>
+        <result property="status" column="DELIVERY_STATUS"/>
+        <result property="request" column="DELIVERY_REQUEST"/>
+        <association property="memberCode" resultMap="MemberMap"/>
+    </resultMap>
+
+
+    <resultMap id="MemberMap" type="com.ohgiraffers.semiproject.member.model.dto.MemberDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userPwd" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+
+
+
+    <resultMap id="ProjectResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectDTO">
+        <id property="code" column="PROJECT_CODE"/>
+        <result property="title" column="PROJECT_TITLE"/>
+        <result property="type" column="PROJECT_TYPE"/>
+        <result property="amount" column="TARGET_AMOUNT"/>
+        <result property="end" column="PROJECT_END_DATE"/>
+        <result property="summary" column="PROJECT_SUMMARY"/>
+        <result property="agree" column="POLICY_AGREEMENT"/>
+        <result property="sellerType" column="SELLER_TYPE"/>
+        <result property="status" column="ACHIEVEMENT_STATUS"/>
+        <result property="start" column="PROJECT_START_DATE"/>
+        <result property="progress" column="PROGRESS_STATUS"/>
+        <association property="plan" resultMap="PlanResultMap"/>
+        <association property="seller" resultMap="MemberMap"/>
+        <association property="category" resultMap="ProjectCategoryResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="PlanResultMap" type="com.ohgiraffers.semiproject.order.model.dto.PlanDTO">
+        <id property="code" column="PLAN_CODE"/>
+        <result property="name" column="PLAN_NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="detail" column="PLAN_DETAIL"/>
+    </resultMap>
+
+
+
+    <resultMap id="ProjectCategoryResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectCategoryDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+    </resultMap>
+
+
+    <resultMap id="ProjectOptionResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectOptionDTO">
+        <id property="code" column="OPTION_CODE"/>
+        <result property="name" column="OPTION_NAME"/>
+        <result property="type" column="OPTION_TYPE"/>
+        <result property="price" column="PRICE"/>
+        <result property="config" column="CONFIGURE"/>
+        <association property="projectCode" resultMap="ProjectResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="CartResultMap" type="com.ohgiraffers.semiproject.order.model.dto.CartDTO">
+        <id property="code" column="CART_CODE"/>
+        <result property="status" column="USAGE_STATUS"/>
+        <association property="memberCode" resultMap="MemberMap"/>
+        <association property="projectCode" resultMap="ProjectResultMap"/>
+        <association property="projectOptionCode" resultMap="ProjectOptionResultMap"/>
+    </resultMap>
+
+
+
+    <resultMap id="sellerProjectManage" type="com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageProjectDTO">
+        <id property="code" column="PROJECT_CODE"/>
+        <result property="memberCode" column="USER_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="start" column="PROJECT_START_DATE"/>
+        <result property="end" column="PROJECT_END_DATE"/>
+        <result property="amount" column="TARGET_AMOUNT"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="planCode" column="PLAN_CODE"/>
+        <result property="plan" column="PRICE"/>
+        <result property="businessCode" column="SELLER_INFO"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+    </resultMap>
+
+
+    <resultMap id="sellerUserResultMap" type="com.ohgiraffers.semiproject.sellerManage.model.dto.SellerUserMangeDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+        <result property="paymentCode" column="PAYMENT_CODE"/>
+        <result property="cartCode" column="CART_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="option" column="OPTION_TYPE"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="returnHistory" column="APPLICATION_DATE"/>
+        <result property="delivery" column="DELIVERY_DATE"/>
+        <result property="deliveryStatus" column="DELIVERY_STATUS"/>
+    </resultMap>
+
+    <resultMap id="sellerQnAmanageResultMap" type="com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageQnADTO">
+        <id property="creationNo" column="CREATION_NUMBER"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="creation" column="CREATION_DATE"/>
+        <result property="seller" column="SELLER_CODE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="answerNO" column="ANSWER_CODE"/>
+        <result property="answerContent" column="ANSWER_CONTENT"/>
+        <result property="answerDay" column="ANSWER_DATE"/>
+    </resultMap>
+
+
+
+
+
+
+    <select id="QnAMain" resultMap="sellerQnAmanageResultMap">
+        SELECT
+            A.CREATION_NUMBER,
+            A.CREATION_DATE,
+            A.TITLE,
+            A.CONTENT,
+            B.USER_CODE,
+            B.USER_ID,
+            C.ANSWER_CONTENT,
+            C.ANSWER_DATE
+        FROM tbl_qna_history A
+                 JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
+                 LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER;
+
+
+    </select>
+
+
+    <select id="QnAClose" resultMap="sellerQnAmanageResultMap">
+        SELECT
+            A.CREATION_NUMBER,
+            A.CREATION_DATE,
+            A.TITLE,
+            A.SELLER_CODE,
+            A.CONTENT,
+            B.USER_CODE,
+            B.USER_ID,
+            C.ANSWER_CONTENT,
+            C.ANSWER_DATE
+        FROM tbl_qna_history A
+                 JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
+                 LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER
+        WHERE A.CREATION_NUMBER = #{creationNo}
+
+    </select>
+
+    <insert id="QnARegist" parameterType="com.ohgiraffers.semiproject.board.model.dto.QnAhistoryDTO">
+        insert into tbl_qna_history
+        (CREATION_NUMBER,
+         USER_CODE,
+         TITLE,
+         CONTENT,
+         SELLER_CODE,
+         CREATION_DATE )
+        values (null,
+                #{code},
+                #{title},
+                #{content},
+                #{seller},
+                now())
+
+    </insert>
+
+
+    <select id="QnAprojectInfo" resultMap="sellerProjectManage">
+
+        SELECT
+            A.PROJECT_CODE,
+            A.PROJECT_TITLE,
+            A.SELLER_INFO
+
+        FROM tbl_project A
+                 JOIN tbl_user B ON (A.SELLER_INFO = B.USER_CODE)
+        WHERE B.USER_ID = #{userId}
+
+
+    </select>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,27 @@
+/* 헤더 메뉴 */
+@media screen and (max-width: 910px) {
+    nav ul {
+        display: none;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    nav.ul.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* 프로젝트 생성 */
+@media screen and (max-width: 1000px) {
+    .project-button {
+        display: none;
+    }
+}
+
+/* 더보기 토글 */
+@media screen and (max-width: 1200px) {
+    .menu-item {
+        display: none;
+    }
+}

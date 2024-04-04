@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 폰트패밀리: Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- 항상 변경 해야할 js 링크 -->
+    <script src="/js/projectMake-main/projectManage/projectInfo.js"></script>
+
+    <link rel="stylesheet" href="/resources/css/background-board/css.css">
+    <!-- 항상 변경 해야할 css 링크 -->
+    <link rel="stylesheet" href="/css/project/projectMake-main/projectManage-main/projectInfo/css.css">
+
+    <th:block th:replace="/fragments/projectMakesidebar.html"></th:block>
+
+    <form th:action="@{/projectMake/projectInfo}" id="yourForm" method="post">
+
+
+        <input
+                type="hidden"
+                id="memberId"
+                name="sellerCode"
+                th:value="${ #authentication.getPrincipal().memberDTO.getUserCode() }"
+        >
+
+        <div class="back-side-container">
+
+        <section class="back-board-container">
+            <!-- 배경 시트 좌측 상단 텍스트 -->
+            <div class="greeting-text">프로젝트 정보</div>
+            <!-- 배경 시트 -->
+            <div class="back-board">
+                <!-- 로고 -->
+                <div class="board-logo img">
+                    <img src="/resources/images/01_logoimg/textLogoNone.png">
+                </div>
+
+                <div class="category-text">카테고리<span class="greeting-text-star"> *</span></div>
+                <div class="category-sub-text">프로젝트와 가장 잘 어울리는 카테고리를 선택해 주세요. 프로젝트를 만들고 바꿀 수 있어요.</div><br><br>
+
+                <div class="radio-list">
+                    <label>
+                        <input type="radio" name="type" value="funding">
+                        <strong>펀딩</strong>&nbsp;첫 출시예요.<br><br>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="type" value="refunding">
+                        <strong>리펀딩</strong>&nbsp;클라우드푸딩에서 성공한 프로젝트를 다시 공개해요.<br><br>
+                    </label>
+                </div>
+
+                <script>
+                    function submitForm() {
+                        // 폼을 JavaScript로 제출
+                        document.getElementById('yourForm').submit();
+                    }
+                </script>
+
+                <div class="category-text">대표자 정보<span class="greeting-text-star"> *</span></div><br>
+                <div class="owner-container">
+                    <p>대표자 이메일</p>
+                    <div class="ownerInfo">
+                        <input type="text" id="email" name="busiEmail" placeholder="example@example.com" th:value="${business.busiEmail}">
+
+<!--                        <label for="site"></label>-->
+<!--                        <select id="site" name="site" onchange="updateEmailDomain()">-->
+<!--                            <option value="" disabled selected>주소를 선택하세요.</option>-->
+<!--                            <option value="site1">@gmail.com</option>-->
+<!--                            <option value="site2">@naver.com</option>-->
+<!--                            <option value="site3">@daum.net</option>-->
+<!--                            <option value="site3">@yahoo.com</option>-->
+<!--                        </select>-->
+<!--                        <p>대표자 본인인증</p>-->
+<!--                        <div type="owner-button" class="owner-button" onclick="certification()">본인 인증</div>-->
+<!--                        &lt;!&ndash; 본인 인증시 알림팝업 &ndash;&gt;-->
+<!--                        <script>-->
+<!--                            function certification() {-->
+<!--                                alert("메일이 발송되었습니다.");-->
+<!--                            }-->
+<!--                        </script>-->
+                    </div>
+                </div> <!-- owner-container -->
+
+                <br><br>
+                <div class="category-text">심사 서류<span class="greeting-text-star"> *</span></div><br>
+                <div class="paper-box-container">
+                    <div class="paper-box" onclick="openFileAttachmentPopup()">
+                        <i class="fas fa-paperclip"></i>
+                        <p id="attachmentMessage">사업자 등록증을 등록해 주세요.</p>
+                    </div>
+                    <div id="attachedFileName"></div>
+                </div>
+
+                <!-- 파일 첨부 팝업  -->
+                <div id="fileAttachmentPopup">
+                    <!-- 파일 첨부 팝업의 내용 -->
+                    <p>파일을 첨부하세요.</p>
+                    <input type="file" accept=".img, .imag, .pdf, .png, .doc, .docx" id="fileInput"> <!-- 입력 요소 -->
+                    <button onclick="completeFileAttachment()">저장</button>
+                </div>
+
+                <!-- 등록 완료 팝업을 위한 스타일과 스크립트를 추가합니다. -->
+                <div id="registrationCompletePopup">
+                    <p id="registrationCompleteMessage">등록이 완료되었습니다.</p>
+                    <p id="attachedFileName"></p> <!-- 첨부된 파일명을 나타내는 요소 -->
+                    <button onclick="closeRegistrationCompletePopup()">확인</button>
+                </div>
+
+                <script>
+                    function openFileAttachmentPopup() {
+                        document.getElementById('fileAttachmentPopup').style.display = 'block';
+                    }
+
+                    function completeFileAttachment() {
+
+                        var attachedFile = document.getElementById('fileInput').files[0];
+
+                        document.getElementById('attachmentMessage').innerText = '등록이 완료되었습니다.';
+                        document.getElementById('attachedFileName').innerText = '등록 파일명: ' + attachedFile.name;
+
+                        document.getElementById('fileAttachmentPopup').style.display = 'none';
+                        document.getElementById('registrationCompletePopup').style.display = 'block';
+                    }
+
+                    function closeRegistrationCompletePopup() {
+                        document.getElementById('registrationCompletePopup').style.display = 'none';
+                    }
+
+                    // 등록된 파일명을 표시
+                    var attachedFileNameContainer = document.getElementById('attachedFileNameContainer');
+                    attachedFileNameContainer.innerHTML = '첨부된 파일명: ' + (attachedFile ? attachedFile.name : '없음');
+                </script>
+
+                <div class="category-text">목표금액<span class="greeting-text-star"> *</span></div>
+                <div class="category-sub-text">최소 50만원 ~ 최대 1억원 사이에서 설정해 주세요.</div><br><br>
+                <div class="priceBox">
+                    <input type="text" id="price" name="targetAmount" placeholder="목표 금액을 입력해 주세요."
+                    th:value="${project.targetAmount}">
+                    <span id="currencyText">원</span>
+                </div>
+                <br>
+
+<!--                <div type="saveButton" class="saveButton" onclick="saveButton()">저장하기</div>-->
+                <script>
+                    function saveButton() {
+                        alert("목표금액이 저장되었습니다.");
+                    }
+                </script>
+
+                <br><br><br><br><br>
+                <button type="submit" class="project-start">저장하기</button>
+            </div>
+
+
+
+            <script th:inline="javascript">
+                document.addEventListener("DOMContentLoaded", function() {
+                    var businessType = /*[[${project.type}]]*/ ''; // model에서 project.type 값을 가져옵니다.
+
+                    // businessType 값에 따라 라디오 버튼의 상태를 설정합니다.
+                    if (businessType === 'funding') {
+                        document.querySelector('input[name="type"][value="funding"]').checked = true;
+                    } else if (businessType === 'refunding') {
+                        document.querySelector('input[name="type"][value="refunding"]').checked = true;
+                    }
+                });
+            </script>
+
+
+
+    </section>
+    </div> <!-- back-board -->
+    </form>
+    </div> <!-- greeting-text -->
+
+
+</th:block>
+
+</html>

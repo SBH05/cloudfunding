@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <th:block th:replace="/fragments/usersidebar.html"></th:block>
+
+    <link rel="stylesheet" href="/css/QnA/QnAuserWrite.css">
+
+
+
+    <div class="middle_box">
+        <form th:action="@{/QnA/userwrite}" method="post">
+            <div class="middle"><!-- 가운데 컨텐츠 -->
+                <div class="first"><span>프로젝트 QnA 작성</span></div>
+                <div class="box">
+                    <span class="box2" th:text="${#dates.format(#dates.createNow(), 'yyyy / MM / dd')}">작성일자: </span>
+                </div>
+                <div class="wirte_title">제목 </div>
+                <div class="project_title"></div>
+                <div class="seller_name">판매자</div>
+                <div class="title_detail"><input placeholder="제목을 입력해주세요" name="title" id="title"></div>
+                <div class="project_detail" th:text="${ProjectTitle}"></div>
+                <div class="seller_detail"><input placeholder="판매자를 입력해주세요" name="seller" id="seller"></div>
+                <div class="bar"></div>
+                <div class="quest">
+                    <div class="detail" ><textarea style = "background-color:transparent" placeholder="내용을 입력해 주세요." name="content" id="content"></textarea></div>
+                    <div class="submitbtn"><button type="submit">등록하기</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+</th:block>
+</html>

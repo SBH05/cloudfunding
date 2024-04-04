@@ -1,0 +1,285 @@
+* {
+	text-decoration: none;
+	font-family: Poppins;
+}
+
+/* 배경 보드 */
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 1900px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+
+.back-board-container{
+	position: relative;
+	left: 400px;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* 가운데 정렬을 위한 설정 */
+    align-items: center; /* 가운데 정렬을 위한 설정 */
+}
+
+/* 사이드바, 보드 양쪽 배치 */
+.back-side-container {
+    display: inline-flex;
+}
+
+.back-side-container>div {
+    flex: 1;
+    /* 첫 번째 아이템 */
+}
+
+.back-side-container>div:nth-child(2) {
+    flex: 2;
+    /* 두 번째 아이템 */
+}
+
+/* 제출하기 */
+.project-start {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: auto;
+	margin-right: 10vh;
+}
+
+/* 제출하기 - 팝업 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+	width: 800px;
+	height: 450px;
+}
+
+/* 제출하기 - 팝업 내용 */
+.pop-container { 
+	width:807px;
+	height:432px;
+	position:absolute;
+}
+
+.pop-background { 
+	background-color:rgba(255, 255, 255, 1);
+	width:712px;
+	height:200px;
+	position:absolute;
+	left:47px;
+	top:111px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+.pop-title { 
+	color:rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+	width:564px;
+	height:24px;
+	position:absolute;
+	left:47px;
+	top:29px;
+	font-family:Poppins;
+	text-align:left;
+	font-size:24px;
+	letter-spacing:0;
+}
+.pop-sub-title { 
+	color:rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+	width:182px;
+	height:36px;
+	position:absolute;
+	left:47px;
+	top:80px;
+	font-family:Poppins;
+	text-align:left;
+	font-size:16px;
+	letter-spacing:0.5;
+	line-height:px;
+}
+.pop-scroll { 
+	color:rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+	width:677px;
+	height:171px;
+	position:absolute;
+	left:65px;
+	top:140px;
+	font-family:Poppins;
+	text-align:left;
+	font-size:16px;
+	letter-spacing:0.5;
+	line-height:px;
+	overflow-y: scroll;
+    max-height: 200px;
+	border: 1px solid #b9b9b9;
+}
+
+.pop-button-box { 
+	width:700px;
+	height:34px;
+	position:absolute;
+	left:47px;
+	top:367px;
+	cursor: pointer;
+}
+.pop-button-box-in { 
+	background-color:rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 1);
+	width:715px;
+	height:34px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.pop-button { 
+	width:185.7391357421875px;
+	height:21.371429443359375px;
+	position:absolute;
+	left:263.130859375px;
+	top:7.7734375px;
+}
+
+.pop-button-text { 
+	color:rgba(255, 255, 255, 1);
+	width:185.7391357421875px;
+	height:21.371429443359375px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	font-family:Poppins;
+	text-align:center;
+	font-size:13px;
+	letter-spacing:0.5;
+	line-height:px;
+}
+
+/* 보드 - 좌측상단 로고 */
+.board-logo img {
+    width: 120px;
+    height: auto;
+    margin: 5vh;
+}
+
+/* 좌측상단 텍스트 */
+.greeting-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 20vh;
+    margin-top: 10vh;
+}
+
+/* 좌측상단 별 */
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.folder-box { 
+	width:807px;
+	height:146px;
+	position:absolute;
+	border:1px solid  #000;
+	border-radius: 10px;
+	margin-left: 10vh;
+}
+
+.folder-background { 
+	background-color:rgba(255, 255, 255, 1);
+	width:807px;
+	height:146px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	border: 1px #000;
+}
+
+.folder-left1 { 
+	color:rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 1);
+	width:80px;
+	height:18px;
+	position:absolute;
+	left:216px;
+	top:65px;
+	font-family:Poppins;
+	text-align:left;
+	font-size:12px;
+	letter-spacing:0;
+}
+.folder-left2 { 
+	color:rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+	width:122px;
+	height:24px;
+	position:absolute;
+	left:58px;
+	top:60px;
+	text-align:left;
+	font-size:20px;
+	letter-spacing:0;
+}
+
+.folder-right { 
+	color:rgba(88.00000235438347, 88.00000235438347, 88.00000235438347, 1);
+	width:90px;
+	height:auto;
+	position:absolute;
+	left:645px;
+	top:65px;
+	font-family:Poppins;
+	text-align:center;
+	font-size:16px;
+	letter-spacing:0.5;
+	margin: 0;
+	border: 1px solid #b9b9b9;
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px;
+	border-radius: 5px;
+}

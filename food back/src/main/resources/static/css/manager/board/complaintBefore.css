@@ -1,0 +1,492 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.searchleft1{
+    margin-right: 20px;
+}
+
+a:link, a:visited{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+
+.logo1 {
+    width: 140px; /* 원하는 너비로 설정하세요. */
+    height: auto; /* 높이는 자동으로 조정됩니다. */
+    margin-top: 40px;
+}
+#CRUDcontainer{
+    width: 200px;
+    display: flex;
+    /* vertical-align: center; */
+    align-items: baseline;
+    justify-content:right;
+}
+
+#image{
+    display: flex;
+    justify-content: space-between;
+}
+#delete{
+    margin-top: 90px;
+    border:solid;
+    border-radius: 6px;
+    border-width: 1px;
+    /* float:inline-end; */
+    /* width: 50px; */
+    /* vertical-align: center; */
+    /* text-align: center; */
+    /* height: 40px; */
+    /* background-color: #f90; */
+    padding-left : 5px;
+    padding-right: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-right: 20px;
+
+}
+#clear{
+    background-color: #f90;
+}
+
+.first{
+    font-size: 30px;
+    font-weight: 1000;
+    margin-top: 40px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+
+.pagination-box {
+    display: flex;
+    align-items: center;
+}
+
+.page-links {
+    display: flex;
+    margin: 0 10px;
+}
+
+.page-link, .prev, .next {
+    padding: 5px 10px;
+    background: rgb(240, 240, 240);
+    margin: 0 3px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 7px; /* 모서리를 둥글게 만듦 */
+}
+
+.page-link:hover, .prev:hover, .next:hover {
+    background-color: darkorange;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+    width: 100%;
+    height: 1020px;
+    
+    margin: 0 auto; /* 화면 가운데 정렬 */
+}
+
+.left {
+    flex-basis: 380px; /* 왼쪽 영역의 너비를 30%로 설정 */
+    flex-shrink: 0;
+            /* 음영 효과 설정 */
+    /* box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.1); */
+}
+.middle {
+    margin-left: 0%;
+
+    margin-top: 4%;
+
+    
+    flex-basis: 900px; 
+    /* 가운데 영역의 너비를 50%로 설정 */
+    flex-shrink: 0;
+    
+        /* 음영 효과 설정 */
+    /* box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.1); */
+}
+
+
+#link{
+    cursor: pointer;
+}
+.right {
+    width: 280px;}
+
+
+.box1{
+    width: 140px;
+    background-color: rgb(241, 241, 241);
+    color: gray;
+    border-radius: 10px;
+    padding: 7px;
+    margin: 15px;
+    text-align: center;
+}
+.box2{
+    width: 200px;
+    color: gray;
+    background-color:  rgb(241, 241, 241);
+    border-radius: 10px;
+    padding: 7px;
+    margin: 15px;
+    text-align: center;
+}
+.box3{
+    width: 100px;
+    color: rgb(241, 241, 241);
+    background-color: grey;
+    border-radius: 10px;
+    padding: 7px;
+    margin: 15px;
+    text-align: center;
+}
+
+
+
+.box{
+    display: flex;
+    justify-content: right;
+    
+}
+
+
+.title{
+    color: lightgray;
+    border-top: none; /* 헤더 셀의 상단 선 제거 */
+    border-bottom: 1px solid #ddd; /* 헤더 셀의 하단에만 회색 선 추가 */
+    padding: 15px 0;
+    position: relative;
+    padding-left: 140px;
+    
+}
+.title input{
+
+    width: 500px;
+    
+    padding: 4px;
+    
+}
+
+.detail{
+    color: lightgray;
+    border-top: none; /* 헤더 셀의 상단 선 제거 */
+    border-bottom: 1px solid #ddd; /* 헤더 셀의 하단에만 회색 선 추가 */
+    padding: 15px 0;
+    position: relative;
+    padding-left: 70px;
+
+    display: flex;
+    height: 200px;
+}
+#details{
+    margin-right: 30px;
+    width: 120px;
+
+
+}
+#details2{
+    height: 100%;
+    width : 80%;
+    color: #333;
+    
+
+}
+#writer{
+    
+    height: 20%;
+    margin-bottom: 1%;
+}
+
+#color{
+    color: gray;
+    
+}
+
+.detail label{
+
+    position: relative;
+    bottom: 157px;
+
+    
+}
+.detail textarea{
+    font-size: 15px;
+
+    width: 700px;
+}
+
+.answer{
+    color: lightgray;
+    border-top: none; /* 헤더 셀의 상단 선 제거 */
+    border-bottom: 1px solid #ddd; /* 헤더 셀의 하단에만 회색 선 추가 */
+    padding: 15px 0;
+    position: relative;
+    padding-left: 70px;
+}
+
+.answer label{
+
+    position: relative;
+    bottom: 157px;
+
+    
+}
+.answer textarea{
+    font-size: 15px;
+
+    width: 700px;
+}
+
+
+.submitbtn{
+    visibility: hidden;
+    display: flex;
+    justify-content: right;
+}
+
+.submitbtn button{
+    /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+    width: 110px;
+    padding: 7px 10px ;
+
+
+    /* 배경색을 주황색으로 설정합니다. */
+    background-color: orange;
+
+    /* 글자 색을 변경합니다. */
+    color: white;
+
+    /* 글자 크기를 크게 설정합니다. */
+    
+
+    /* 모서리를 둥글게 만듭니다. */
+    border-radius: 9px;
+
+    /* 테두리를 없앱니다. */
+    border: none;
+
+    /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+    text-align: center;
+
+    /* 버튼 안의 텍스트의 여백을 조정합니다. */
+    
+    margin: 15px;
+
+}
+
+.submitbtn button:hover{
+    background-color: darkorange;
+}
+
+.black-link{
+    color: black;
+}
+
+
+	/* body - 배경화면 */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        background-size: cover;
+        /* 창 화면에 100%로 배경 이미지 크기 조절 */
+        background-repeat: no-repeat;
+        /* 배경 이미지 반복 없음 */
+    }
+
+
+    /* logo - margin  */
+    .logo-image {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    /* 네비게이션 메뉴 부모 요소 */
+    nav {
+        text-align: center;
+        min-width: 60px;
+        min-height: 20px;
+    }
+
+    /* 네비게이션 메뉴 목록 */
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+    /* 작은 화면에서 메뉴 항목 숨김 */
+    @media screen and (max-width: 760px) {
+        nav ul {
+            display: none;
+        }
+    }
+
+    /* 네비게이션 메뉴 항목 스타일 */
+    nav ul li {
+        margin: 0 15px;
+        min-width: 60px;
+        min-height: 20px;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        /* 가로고정 */
+        flex-grow: 0;
+        /* 세로 고정 */
+    }
+
+
+    /* 네비게이션 메뉴 하이퍼링크 스타일 */
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+        height: 100%;
+        box-sizing: border-box;
+        /* 정확한 패딩값을 주기 위함 */
+    }
+
+    /* 검색어 - 부모  */
+    .search-box {
+        background-color: #eee;
+        padding: 3px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        width: 200px;
+        margin-right: auto;
+    }
+
+    /* 검색어 - 자식 (입력 필드) */
+    .search-box input {
+        padding: 5px;
+        width: 100%;
+        /* 수정: 입력 필드를 100%로 설정하여 부모에 맞춤 */
+        border: none;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    /* 검색 버튼 스타일 */
+    .search-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* 아이콘 스타일 (Font Awesome) */
+    .search-button i {
+        font-size: 18px;
+        color: #555;
+    }
+
+    /* 프로젝트 시작하기  */
+    .project-button {
+        background-color: #f90;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-right: 40px;
+        margin-left: auto;
+        display: flex;
+    }
+
+		/* 미디어 쿼리: 화면이 작아질 때 */
+		@media screen and (max-width: 1200px) {
+			.project-button {
+				display: none;
+			}
+		}
+
+    /* 프로젝트 버튼 디자인 */
+    .project-button a {
+        background-color: #f90;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    /* 슬라이딩 메뉴  */
+    .menu {
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        /* margin-left: auto; */
+    }
+
+    /* 더보기 토글 메뉴  */
+    .menu-item {
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+        margin-left: 22px;
+        min-width: 60px;
+        min-height: 20px;
+    }
+
+    /* 미디어 쿼리: 화면이 작아질 때 */
+    @media screen and (max-width: 1200px) {
+        .menu-item {
+            display: none;
+            /* 화면이 작아지면 숨김 */
+        }
+    }
+
+    .menu-content {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        color: #fff;
+        z-index: 1;
+        padding: 50px;
+        left: 0;
+        right: 0;
+        top: 100%;
+        width: 100%;
+    }
+
+
+    .menu-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+    }
+
+    .menu-content ul li {
+        margin: 10px;
+    }
+
+    .menu-content a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+

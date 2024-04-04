@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <th:block th:replace="/fragments/sellersidebar.html"></th:block>
+    <title>sellerQnA-AnswerRE</title>
+    <link rel="stylesheet" href="/css/QnA/QnAsellerRE.css">
+
+
+
+    <div class="middle_box">
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+
+                <span>프로젝트 QnA</span>
+            </div>
+
+            <div>
+                <a href="#"><img class="logo1" src="/resources/images/textlogonone_2.png" alt=""></a>
+            </div>
+
+            <div class="submitbtn1"><button type="submit">수정하기</button></div>
+            <div class="submitbtn2"><button type="submit">삭제하기</button></div>
+
+            <div class="box">
+                <span class="box1">작성번호 : 1</span>
+                <span class="box1">작성자: 김민*</span>
+                <span class="box2">작성일자: 23 / 11 / 20
+                    <!-- <script>
+                        date = new Date().toLocaleDateString();
+                        document.write(date);
+                    </script> -->
+                </span>
+            </div>
+
+            <form action="" method="post">
+                <div class="wirte_title">제목 </div>
+                <div class="project_title">프로젝트명</div>
+                <div class="seller_name">판매자</div>
+                <div class="title_detail">풍미가 좋은 드라이에이징 삼겹살</div>
+                <div class="project_detail">풍미가 좋은 드라이에이징 삼겹살</div>
+                <div class="seller_detail">황황도축시장</div>
+                <div class="bar"></div>
+
+                <div class="quest1">
+                    <div class="detail" >얼마나 보관할 수 있나요?? </div>
+                </div>
+
+                <div class="quest2"></div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+
+</th:block>
+</html>

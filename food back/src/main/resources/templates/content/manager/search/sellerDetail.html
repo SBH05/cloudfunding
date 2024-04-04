@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>판매자 회원 조회 세부정보</title>
+<link rel="stylesheet" href="/css/manager/search/sellerDetail.css">
+
+
+
+<div class="container">
+    <th:block th:replace="/fragments/managersidebar.html"></th:block>
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span><a class="black-link" th:href="@{/manager/search/sellerMain}">판매자 회원 조회</a></span>
+                <span><a class="black-link"> > </a></span>
+                <span><a class="black-link" href="./SPD.html">세부 정보</a></span>
+            
+            </div>
+
+            <div class="CRUDcontainer">
+        
+                <div>
+                    <a href="#"><img class="logo1" src="../../../resources/images/01_logoimg/textLogoNone.png" alt=""></a>            </div>
+
+                <div class="CRUD">
+
+                <div class="stop">
+                    <form action="search" method="post">
+                        <select name="nation2"  >
+                            <option value="search"selected>정지</option>
+                            <option value="stopWeek">일주일 정지</option>
+                            <option value="stopMonth">한달 정지</option>
+                            <option value="stopThreeMonth">3달 정지</option>
+                            
+                        </select>
+                    </form>
+                </div>
+
+                
+
+                    <div class="update">
+                    수정
+                    </div>
+
+                    <div class="delete">
+                    삭제
+                    </div>
+                </div>
+            </div>
+        
+            <!-- <div class="searchcontainer">
+                <div class="searchleft1">
+                    <form action="search" method="post">
+                        <select name="nation2"  >
+                            <option value="search"selected>정렬컬럼</option>
+                            <option value="ch">이름(기본)</option>
+                            <option value="etc">아이디</option>
+                            <option value="etc">비밀번호</option>
+                            <option value="etc">전화번호</option>
+                            <option value="etc">생년월일</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="searchleft2">
+                    <form action="search" method="post">
+                        <select name="nation2"  >
+                            <option value="search"selected>정렬방식</option>
+                            <option value="ch">오름차순(기본)</option>
+                            <option value="jp" >내림차순</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="searchright">
+                    <form action="search" method="post">
+                        <button class="iconlogo" type="submit" style="width: 20px; height: 20px; border: none; background: url('/resources/images/돋보기\ 아이콘.avif') center center / cover no-repeat; padding: 0;"></button>
+                        <input type="text" name="search" required>
+                        <select name="nation2"  >
+                            <option value="search"selected>검색설정</option>
+                            <option value="ch">활동</option>
+                            <option value="jp" >휴면</option>
+                            <option value="etc">기타</option>
+                        </select>
+                    </form>
+                </div>
+            </div> -->
+        
+        
+            <div class="main">
+                <table>
+                    
+                    <tr>
+                        
+                        <th>이름</th>
+                        <th>아이디</th>
+                        <th>비밀번호</th>
+                        <th>전화번호</th>
+                        <th>생년월일</th>
+                        <th>활동상태</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${userInfo.userName}"></td>
+                        <td th:text="${userInfo.userId}"></td>
+                        <td th:text="${userInfo.password}"></td>
+                        <td th:text="${userInfo.phone}"></td>
+                        <td th:text="${userInfo.dateBirth}"></td>
+                        <td th:text="${userInfo.activityStatus}"></td>
+                        <!--                        <td><span class="ing">활동</span></td>-->
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="searchDetail">
+                <strong><h4>세부정보</h4></strong>
+                <table>
+
+                    <tr>
+                        <th>이메일</th>
+                        <th>가입일자</th>
+                        <th>신고누적</th>
+                        <th>주소</th>
+                    </tr>
+
+                    <tr>
+                        <td th:text="${userInfo.email}"></td>
+                        <td th:text="${userInfo.registrationDate}"></td>
+                        <td th:text="${userInfo.reportCount}"></td>
+                        <td th:text="${userInfo.address}"></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="searchDetail1">
+                <strong><h4>회사정보</h4></strong>
+                <table>
+
+                    <tr>
+                    <th>상호/법인명</th>
+                    <th>업종</th>
+                    <th>기업형태</th>
+                    <th>설립일</th>
+                    <th>홈페이지 주소</th>
+                    <th>소재지</th>
+                    <th>대표 전화번호</th>
+                    <th>사업자 등록번호</th>
+                    </tr>
+
+                    <tr>
+                    <td>(주)감귤농장</td>
+                    <td>도소매</td>
+                    <td>개인기업</td>
+                    <td>2022.03.03</td>
+                    <td id="link" onclick="location.href='http://www.naver.com'">www.naver.com</td>
+                    <td>서울 성동구 행당동 00오피스텔 00동 00호</td>
+                    <td>010-1234-1234</td>
+                    <td>12344321123</td>
+                    </tr>
+
+                </table>
+            </div>
+            
+
+            <div class="buyList"> <strong><h4>판매내역</h4></strong>
+
+                <table>
+
+                    <tr>
+                    <th>순번</th>
+                    <th>프로젝트 명</th>
+                    <th>펀딩기간</th>
+                    <th>펀딩결과</th>
+                    </tr>
+
+                    <tr>
+                    <td>1</td>
+                    <td>설향 딸기</td>
+                    <td>2023.11.16 ~ 2023.12.13</td>
+                    <td ><span class="ing">성공</span></td>
+                    </tr>
+
+                </table>
+            </div>
+            <!-- <div class="pagination">
+                <div class="pagination-box">
+                    <a href="#" class="prev">＜</a>
+                    <div class="page-links">
+                        <a href="#" class="page-link">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        
+                    </div>
+                    <a href="#" class="next">＞</a>
+                </div>
+            </div> -->
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+    </div>
+
+
+</th:block>
+</html>

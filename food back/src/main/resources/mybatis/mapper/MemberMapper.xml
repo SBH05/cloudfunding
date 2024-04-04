@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.member.model.dao.MemberMapper">
+
+    <resultMap type="com.ohgiraffers.semiproject.member.model.dto.MemberDTO" id="memberResultMap">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userPwd" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+        <result property="emailCode" column="EMAIL_CODE"/>
+
+    </resultMap>
+    <resultMap id="AuthorityResultMap" type="com.ohgiraffers.semiproject.member.model.dto.AuthorityDTO">
+        <id property="authorityCode" column="AUTHORITY_CODE"/>
+        <result property="authorityName" column="AUTHORITY_NAME"/>
+        <result property="authorityDescription" column="AUTHORITY_DESCRIPTION"/>
+    </resultMap>
+
+    <resultMap id="MemberAndAuthorityResultMap" type="com.ohgiraffers.semiproject.member.model.dto.MemberAndAuthorityDTO">
+        <association property="memberDTO" resultMap="memberResultMap"/>
+        <association property="authorityDTO" resultMap="AuthorityResultMap"/>
+
+    </resultMap>
+    <resultMap id="MemberAndEmailResultMap" type="com.ohgiraffers.semiproject.member.model.dto.UserAndEmailDTO2">
+        <association property="memberDTO" resultMap="memberResultMap"/>
+        <association property="userAndEmailDTO" resultMap="UserAndEmailResultMap"/>
+
+    </resultMap>
+
+    <resultMap id="UserAndEmailResultMap" type="com.ohgiraffers.semiproject.member.model.dto.UserAndEmailDTO">
+        <id property="emailCode" column="EMAIL_CODE"/>
+        <result property="emailCerti" column="EMAIL_CERTIFICATION"/>
+    </resultMap>
+
+    <resultMap id="ProfileImgDTOResultMap" type="com.ohgiraffers.semiproject.member.model.dto.ProfileImgDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="originalFileName" column="ORIGINAL_FILE_NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="changedproFileName" column="CHANGEDPRO_FILE_NAME"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="userCode" column="USER_CODE"/>
+    </resultMap>
+
+    <resultMap id="MemberAndProfileResultMap" type="com.ohgiraffers.semiproject.member.model.dto.MemberAndProfileDTO">
+        <association property="memberDTO" resultMap="memberResultMap"/>
+        <association property="profileImgDTO" resultMap="ProfileImgDTOResultMap"/>
+    </resultMap>
+
+    <select id="myInfo" resultMap="MemberAndProfileResultMap">
+        SELECT A.EMAIL,
+               A.ADDRESS ,
+               A.USER_NAME ,
+               B.PATH,
+               B.CHANGEDPRO_FILE_NAME,
+               A.DATE_BIRTH,
+               A.PHONE
+
+        FROM tbl_user A
+        JOIN tbl_profile_image B ON ( A.USER_CODE = B.USER_CODE)
+        WHERE A.ACTIVITY_STATUS = '활동'
+          AND A.USER_ID = #{ userId }
+    </select>
+
+
+    <select id="searchLoginMember" resultMap="memberResultMap">
+        SELECT * FROM tbl_user WHERE USER_ID = #{ userId }
+    </select>
+
+
+    <insert id="sendEmail" >
+
+    INSERT INTO tbl_email(EMAIL_CERTIFICATION)
+    VALUES      (
+
+                #{ emailCerti }
+                )
+    <selectKey resultType="int" keyProperty="emailCode" keyColumn="EMAIL_CODE" order="AFTER">
+        SELECT LAST_INSERT_ID() AS EMAIL_CODE
+    </selectKey>
+    </insert>
+
+    <select id="checkMail"  resultMap="UserAndEmailResultMap">
+        SELECT * FROM tbl_email WHERE EMAIL_CERTIFICATION = #{emailCerti}
+    </select>
+
+
+
+
+    <select id="selectMemberById" resultType="string">
+        SELECT
+            A.USER_ID
+        FROM tbl_user A
+        WHERE A.ACTIVITY_STATUS = '활동'
+          AND A.USER_ID = #{ userId }
+    </select>
+
+    <select id="findByMemberId" resultMap="MemberAndAuthorityResultMap">
+        SELECT
+            A.USER_CODE
+             , A.USER_ID
+             , A.PASSWORD
+             , A.EMAIL
+             , A.REGISTRATION_DATE
+             , A.ADDRESS
+             , A.USER_NAME
+             , A.DATE_BIRTH
+             , A.PHONE
+             , A.ACTIVITY_STATUS
+             , A.REPORT_COUNT
+             , A.COUPON_STATUS
+            , C.AUTHORITY_NAME
+            , C.AUTHORITY_CODE
+            , C.AUTHORITY_DESCRIPTION
+
+
+        FROM tbl_user A
+        JOIN tbl_authority_list B ON (A.USER_CODE = B.USER_CODE)
+        JOIN tbl_authority C ON (B.AUTHORITY_CODE = C.AUTHORITY_CODE)
+        WHERE A.ACTIVITY_STATUS = '활동'
+          AND A.USER_ID = #{ userId }
+    </select>
+
+    <insert id="insertMember" parameterType="com.ohgiraffers.semiproject.member.model.dto.MemberDTO">
+        INSERT
+        INTO tbl_user       (   USER_CODE
+                              , USER_ID
+                              , PASSWORD
+                              , EMAIL
+                              , ADDRESS
+                              , USER_NAME
+                              , DATE_BIRTH
+                              , PHONE
+                              , ACTIVITY_STATUS
+                              , REPORT_COUNT
+                              , COUPON_STATUS
+                              ,EMAIL_CODE
+
+        )
+        VALUES  (
+                    null
+                , #{userId}
+                , #{userPwd}
+                , #{email}
+                , #{address}
+                , #{userName}
+                , #{dateBirth}
+                , #{phone}
+                , default
+                , default
+                , default
+                , #{emailCode}
+                )
+    </insert>
+
+    <select id="selectLastInsertUserCode">
+        SELECT last_insert_id() FROM tbl_user LIMIT 1;
+    </select>
+
+    <insert id="insertAuthor" >
+        INSERT INTO tbl_authority_list
+        VALUES (
+                #{userCode},
+                3
+                )
+
+    </insert>
+
+    <select id="findUserIdByEmailAndName" resultType="string">
+        SELECT USER_ID
+        FROM tbl_user
+        WHERE USER_NAME = #{userName} AND EMAIL = #{email}
+    </select>
+
+    <select id="findUserCode" resultMap="memberResultMap">
+        SELECT EMAIL_CODE
+        FROM tbl_user
+        WHERE USER_ID = #{userId} AND EMAIL = #{email}
+    </select>
+
+    <update id="saveAuthCode" parameterType="map">
+        UPDATE tbl_email
+        SET EMAIL_CERTIFICATION = #{authCode}
+        WHERE EMAIL_CODE = #{emailCode}
+    </update>
+
+
+    <select id="verifyAuthCode" resultType="java.lang.Boolean">
+        SELECT
+            CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+        FROM tbl_user A
+                 JOIN tbl_email E ON ( A.EMAIL_CODE = E.EMAIL_CODE )
+        WHERE A.USER_ID = #{userId} AND A.EMAIL = #{email} AND E.EMAIL_CERTIFICATION = #{authCode}
+    </select>
+
+    <update id="updatePassword" >
+        UPDATE tbl_user
+        SET PASSWORD = #{encodedPassword}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <select id="findByEmail" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_user
+        WHERE EMAIL = #{email}
+    </select>
+    <select id="findByEmail2" resultMap="memberResultMap">
+        SELECT EMAIL
+        FROM tbl_user
+        WHERE EMAIL = #{email}
+    </select>
+
+
+
+    <update id="update" >
+        UPDATE tbl_user
+        SET
+        PASSWORD = #{userPwd},
+        EMAIL = #{email},
+        PHONE = #{phone},
+        ADDRESS = #{address},
+        DATE_BIRTH = #{dateBirth}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <update id="updateProfileImage">
+        UPDATE tbl_profile_image
+        SET
+                ORIGINAL_FILE_NAME = #{originalFileName},
+                PATH = #{path},
+                CHANGEDPRO_FILE_NAME = #{changedproFileName},
+                DELETE_STATUS = #{deleteStatus},
+                CREATION_DATE = #{creationDate}
+
+        WHERE USER_CODE = #{userCode}
+    </update>
+    <insert id="insertProfile">
+        INSERT INTO tbl_profile_image
+        VALUES (
+                   null,
+                   'avatar-profile-icon_188544-4755.avif',
+                   'C:/uploadfile/profileimg',
+                   'avatar-profile-icon_188544-4755.avif',
+                   'N',
+                   now(),
+                   #{userCode}
+               )
+    </insert>
+
+    <update id="deleteMember">
+        UPDATE tbl_user
+            SET ACTIVITY_STATUS = '탈퇴'
+        WHERE USER_ID = #{userId}
+    </update>
+
+
+<select id="finProfile" resultMap="ProfileImgDTOResultMap">
+    SELECT CHANGEDPRO_FILE_NAME
+    FROM tbl_profile_image
+    WHERE USER_CODE = #{userCode}
+
+</select>
+
+
+
+</mapper>

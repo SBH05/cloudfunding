@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.manager.model.dao.SearchUserMapper">
+
+
+    <resultMap id="userResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.UserDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+    <resultMap id="businessResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.PrivateBusinessDTO">
+        <id property="businessCode" column="BUSINESS_CODE"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="industry" column="INDUSTRY"/>
+        <result property="establishmentDate" column="ESTABLISHMENT_DATE"/>
+        <result property="homepage" column="HOMEPAGE"/>
+        <result property="location" column="LOCATION"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="businessLicenseNumber" column="BUSINESS_LICENSE_NUMBER"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="businessEmail" column="BUSINESS_EMAIL"/>
+    </resultMap>
+
+    <resultMap id="cartResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.CartDTO">
+        <id property="cartCode" column="CART_CODE"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="optionCode" column="OPTION_CODE"/>
+        <result property="usageStatus" column="USAGE_STATUS"/>
+        <association property="projectCode" resultMap="projectResultMap"/>
+    </resultMap>
+
+    <resultMap id="userReportHistoryResultMap"
+               type="com.ohgiraffers.semiproject.manager.model.dto.UserReportHistoryDTO">
+        <id property="creationNumber" column="CREATION_NUMBER"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="reporter" column="REPORTER"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="reportedPerson" column="REPORTED_PERSON"/>
+    </resultMap>
+
+    <resultMap id="projectResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <association property="sellerInfo" resultMap="userResultMap"/>
+    </resultMap>
+
+    <resultMap id="paymentHistoryResultMap"
+               type="com.ohgiraffers.semiproject.manager.model.dto.PaymentHistoryDTO">
+        <result property="paymentCode" column="PAYMENT_CODE"/>
+        <association property="cartCode" resultMap="cartResultMap"/>
+    </resultMap>
+
+
+    <select id="findAllUser" resultMap="userResultMap">
+        SELECT
+        A.USER_CODE,
+        A.USER_ID,
+        A.PASSWORD,
+        A.EMAIL,
+        A.REGISTRATION_DATE,
+        A.ADDRESS,
+        A.USER_NAME,
+        A.DATE_BIRTH,
+        A.PHONE,
+        A.ACTIVITY_STATUS,
+        A.REPORT_COUNT,
+        A.COUPON_STATUS
+        FROM TBL_USER A
+        <if test="authority != 'all' and authority != 'complaint'">
+            JOIN tbl_authority_list B ON (A.USER_CODE = B.USER_CODE)
+        </if>
+        <where>
+            not A.ACTIVITY_STATUS = '삭제'
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'name'">
+                    AND A.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'id'">
+                    AND A.USER_ID LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'password'">
+                    AND A.PASSWORD LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'phone'">
+                    AND A.PHONE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'birth'">
+                    AND A.DATE_BIRTH LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'active'">
+                    AND A.ACTIVITY_STATUS LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'user'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                B.AUTHORITY_CODE = 1
+            </if>
+            <if test="authority == 'seller'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                B.AUTHORITY_CODE = 2
+            </if>
+            <if test="authority == 'complaint'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                A.REPORT_COUNT > 0
+            </if>
+        </where>
+        ORDER BY
+        <if test="nation1 == 'name' or nation1==null or nation1.equals('')">
+            A.USER_NAME
+        </if>
+        <if test="nation1 == 'id'">
+            A.USER_ID
+        </if>
+        <if test="nation1 == 'password'">
+            A.PASSWORD
+        </if>
+        <if test="nation1 == 'phone'">
+            A.PHONE
+        </if>
+        <if test="nation1 == 'birth'">
+            A.DATE_BIRTH
+        </if>
+        <if test="nation2 == 'asc' or nation2==null or nation2.equals('')">
+            ASC
+        </if>
+        <if test="nation2 == 'desc'">
+            DESC
+        </if>
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+    <select id="userBuy" parameterType="long" resultMap="cartResultMap">
+        select A.CART_CODE,
+               A.PROJECT_CODE,
+               A.OPTION_CODE,
+               B.PROJECT_TITLE,
+               B.SELLER_INFO,
+               C.USER_NAME,
+               B.PROJECT_END_DATE,
+               B.PROJECT_START_DATE,
+               B.ACHIEVEMENT_STATUS
+
+        from tbl_cart A
+                 join tbl_project B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                 join tbl_user C ON (B.SELLER_INFO = C.USER_CODE)
+        where A.USER_CODE = #{no}
+          and exists(select B.*
+                     from tbl_payment_history B
+                     where B.CART_CODE = A.CART_CODE)
+    </select>
+
+    <select id="userReport" parameterType="long" resultMap="userReportHistoryResultMap">
+        select TITLE,
+               CONTENT,
+               CREATION_DATE,
+               CREATION_NUMBER,
+               REPORTER
+        from TBL_USER_REPORT_HISTORY
+        where REPORTED_PERSON = #{no}
+    </select>
+
+    <select id="userFundingProject" parameterType="long" resultMap="projectResultMap">
+        select PROJECT_CODE,
+               PROJECT_TITLE,
+               PROJECT_END_DATE,
+               PROJECT_START_DATE,
+               ACHIEVEMENT_STATUS
+        from TBL_PROJECT
+        where SELLER_INFO = #{no}
+    </select>
+
+    <select id="findOneUser" parameterType="long" resultMap="userResultMap">
+        SELECT A.USER_CODE,
+               A.USER_ID,
+               A.PASSWORD,
+               A.EMAIL,
+               A.REGISTRATION_DATE,
+               A.ADDRESS,
+               A.USER_NAME,
+               A.DATE_BIRTH,
+               A.PHONE,
+               A.ACTIVITY_STATUS,
+               A.REPORT_COUNT,
+               A.COUPON_STATUS
+        FROM TBL_USER A
+        where A.USER_CODE = #{no}
+
+    </select>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(*)
+        FROM TBL_USER A
+        <if test="authority != 'all' and authority != 'complaint'">
+            JOIN tbl_authority_list B ON (A.USER_CODE = B.USER_CODE)
+        </if>
+        <where>
+            not A.ACTIVITY_STATUS = '삭제'
+            <if test="searchValue != null and !searchValue.equals('')">
+            <if test="nation3 == 'name'">
+                AND A.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'id'">
+                AND A.USER_ID LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'password'">
+                AND A.PASSWORD LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'phone'">
+                AND A.PHONE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'birth'">
+                AND A.DATE_BIRTH LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'active'">
+                AND A.ACTIVITY_STATUS LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            </if>
+            <if test="authority == 'user'">
+            <if test="searchValue != null and !searchValue.equals('')">
+                AND
+            </if>
+                B.AUTHORITY_CODE = 1
+            </if>
+            <if test="authority == 'seller'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                B.AUTHORITY_CODE = 2
+            </if>
+            <if test="authority == 'complaint'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                A.REPORT_COUNT > 0
+            </if>
+        </where>
+    </select>
+
+    <select id="companyInfo" resultMap="businessResultMap">
+        select A.*
+        from
+            TBL_PRIVATE_BUSINESS A
+        where
+            A.USER_CODE = #{no}
+    </select>
+
+    <update id="userUpdate" parameterType="com.ohgiraffers.semiproject.manager.model.dto.UserDTO">
+        UPDATE
+            TBL_USER A
+        SET
+            A.USER_NAME = #{userName},
+            A.USER_ID = #{userId},
+            A.PASSWORD = #{password},
+            A.PHONE = #{phone},
+            A.DATE_BIRTH = #{dateBirth},
+            A.ACTIVITY_STATUS = #{activityStatus},
+            A.EMAIL = #{email},
+            A.REGISTRATION_DATE = #{registrationDate},
+            A.REPORT_COUNT = #{reportCount},
+            A.ADDRESS = #{address}
+        WHERE
+            A.USER_CODE = #{userCode}
+
+    </update>
+
+    <update id="businessUpdate" parameterType="com.ohgiraffers.semiproject.manager.model.dto.PrivateBusinessDTO">
+        UPDATE
+            tbl_private_business A
+            join tbl_user B ON (A.USER_CODE = B.USER_CODE)
+            set
+                A.BUSINESS_NAME = #{businessName},
+                A.INDUSTRY = #{industry},
+                A.ESTABLISHMENT_DATE = #{establishmentDate},
+                A.HOMEPAGE = #{homepage},
+                A.LOCATION = #{location},
+                A.BUSINESS_PHONE = #{businessPhone},
+                A.BUSINESS_LICENSE_NUMBER = #{businessLicenseNumber}
+        where
+            B.USER_CODE = #{businessCode}
+    </update>
+
+    <delete id="deleteUser">
+        update tbl_user
+        set ACTIVITY_STATUS = '삭제'
+        where USER_CODE = #{no};
+    </delete>
+
+
+
+
+</mapper>

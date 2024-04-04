@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+
+
+    <link rel="stylesheet" th:href="@{/css/login/findIdAndPwd.css}">
+
+
+
+
+    <div class="container">
+        <div class="center">
+            <div>
+
+            
+            
+                <img class="moveall" id="logo1" src="/images/01_logoimg/textLogoNone.png" alt="">
+            
+            <div class="movetext2 moveall" >
+                <span><a th:href="@{/member/login}"><img class="arrow" src="/images/minicon/backicon.jpg" alt=""></a></span>
+                <span class="gologin">아이디 찾기</span>
+            </div>
+
+            
+            <div class="joininfo">
+            <form action="/submit-form">
+                <div class="moveall">
+                    <li>Your name</li>
+                    <span><input type="text" class="box1" name="userName" id="userName"></span>
+                </div>
+
+                <div class="moveall">
+                    <li class="movebox">Your Email</li>
+                    <span><input type="text" class="box2" name="email" id="email"></span>&nbsp;&nbsp;
+                    <span class="mailbtn"><button type="submit" id="send">아이디 찾기</button></span>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const sendButton = document.querySelector("#send");
+                        sendButton.addEventListener('click', function (event) {
+                            event.preventDefault(); // 폼 제출을 방지하고 JavaScript가 처리하도록 함
+                            const email = document.getElementById("email").value;
+                            const userName = document.getElementById("userName").value;
+                            fetch('/member/findUserId', {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ email, userName })
+                            })
+                                .then(response => response.json()) // 서버로부터 JSON 응답을 기대하고 있음
+                                .then(data => {
+                                    if (data.success) {
+                                        alert(data.message); // 서버로부터의 메시지를 표시
+                                    } else {
+                                        alert(data.message); // 실패 메시지를 표시
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert("오류가 발생했습니다."); // JSON 파싱 실패 시 오류를 표시
+                                });
+                        });
+                    });
+                </script>
+
+
+                <div class="downpart">
+                    <ul class="findid">
+                        <li><a th:href="@{/member/findPwd}">비밀번호 찾기</a></li>
+                        <li><a th:href="@{/member/join}">회원가입</a></li>
+                    </ul>
+                </div>
+
+
+
+                
+            
+        
+            <div  class="joinbtn" ><a th:href="@{/member/login}"><button type="submit">다음</button></a></div>
+        </form>
+
+
+    </div>
+    
+    
+    
+        
+    <div class="down">
+        <span>Help Center</span>
+        <span>Terms of Service</span>
+        <span>Privacy Policy</span>
+        <span>@2022Yanliudesign</span>
+        </div>
+    </div>
+    </div>
+    
+    </div>
+
+
+
+
+
+</th:block>
+</html>

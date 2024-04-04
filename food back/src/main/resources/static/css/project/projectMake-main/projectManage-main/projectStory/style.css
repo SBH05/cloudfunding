@@ -1,0 +1,190 @@
+* {
+    font-family: Poppins;
+    text-decoration: none;
+}
+
+
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 1700px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+
+.back-board-container{
+    position: relative;
+    left: 600px;
+}
+
+/* 제출하기 */
+.project-start {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10vh;
+}
+
+/* 타이틀 */
+.category-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 10vh;
+}
+
+.category-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 2vh;
+}
+
+.greeting-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 20vh;
+    margin-top: 2vh;
+    margin-left: 20vh;
+}
+
+/* 타이틀 옆 별 */
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}
+
+/* 소개 영상, 사진 */
+.introduce-container {
+    display: flex;
+    margin-left: 10vh;
+}
+
+.introduce-image {
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+    width: 170px;
+    height: 50px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.introduce-image p {
+    font-size: 15px;
+    height: 100%;
+}
+
+.introduce-text-container {
+    width: 500px;
+    height: 210px;
+    background-color: #F37D1D;
+    margin-left: 10vh;
+    border-radius: 10px;
+    color: #fff;
+    padding: 30px;
+}
+
+.introduce-text-title {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.introduce-text-list {
+    line-height: 15px;
+}
+
+/* 프로젝트 요약 */
+.project-summary-container {
+    margin-left:10vh;
+    border:1px solid #b9b9b9;
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.project-summary-textBox {
+    border: none;
+    width: 290px;
+    height: 140px;
+    writing-mode: horizontal-tb;
+}
+
+.project-summary-textBox textarea {
+    border: none;
+    outline: none;
+    width: 280px;
+    height: 140px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    resize: none;
+}
+
+.project-summary-container p{
+    font-size: 13px;
+    color: #b9b9b9;
+}
+
+/* 프로젝트 스토리 */
+.project-stroy--sub-text {
+    font-size: 17px;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 2vh;
+    font-weight: bolder;
+}
+
+.project-stroy-container li {
+    font-size: 13px;
+    color: #333;
+    margin-left: 13vh;
+    margin-top: 2vh;
+}
+
+/* 소개 사진 등록 팝업 */
+.introduce-image {
+    cursor: pointer;
+    display: inline-block;
+}
+
+#image-preview {
+    max-width: 80px;
+    max-height: 80px;
+    margin-top: 10px;
+    margin-left: 10vh;
+    display: flex;
+    gap: 10px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+#image-preview img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#file-input {
+    display: none;
+}
+
+
+
+
+
+
+

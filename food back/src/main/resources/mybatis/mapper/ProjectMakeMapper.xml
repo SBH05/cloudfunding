@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.project.projectMake.model.dao.ProjectMakeMapper">
+
+
+    <resultMap id="projectMake" type="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeDTO">
+        <id property="sellerCode" column="SELLER_CODE"/>
+        <result property="category" column="CATEGORY"/>
+        <result property="type" column="TYPE"/>
+        <result property="plan" column="PLAN"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="endDate" column="END_DATE"/>
+        <result property="startDate" column="START_DATE"/>
+        <result property="summary" column="SUMMARY"/>
+        <result property="sellerType" column="SELLER_TYPE"/>
+        <result property="tag" column="TAG"/>
+    </resultMap>
+
+    <resultMap id="businessMake" type="com.ohgiraffers.semiproject.project.projectMake.model.dto.BusinessMakeDTO">
+        <id property="sellCode" column="SELL_CODE"/>
+        <result property="busiName" column="BUSI_NAME"/>
+        <result property="indu" column="INDU"/>
+        <result property="estaDate" column="ESTA_DATE"/>
+        <result property="home" column="HOME"/>
+        <result property="loca" column="LOCA"/>
+        <result property="busiPhone" column="BUSI_PHONE"/>
+        <result property="busiLicenseNumber" column="BUSI_LICENSE_NUMBER"/>
+        <result property="busiEmail" column="BUSI_EMAIL"/>
+    </resultMap>
+
+    <resultMap id="projectFileMake" type="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeFileDTO">
+        <id property="fCode" column=""/>
+        <result property="sCode" column=""/>
+        <result property="originFileName" column=""/>
+        <result property="changeFileName" column=""/>
+        <result property="filePath" column=""/>
+        <result property="createDate" column=""/>
+        <result property="type" column="TYPE"/>
+    </resultMap>
+
+    <insert id="projectStart" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeDTO">
+        insert into tbl_project_make (
+            TITLE,
+            CATEGORY,
+            TYPE,
+            PLAN,
+            TARGET_AMOUNT,
+            END_DATE,
+            START_DATE,
+            SUMMARY,
+            SELLER_TYPE,
+            SELLER_CODE)
+        values (
+                   null,
+                   #{category},
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   #{sellerCode}
+               );
+    </insert>
+
+    <select id="whatIsYourProjectCode" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeDTO">
+        select
+            *
+        from
+            tbl_project_make
+        where
+            SELLER_CODE = #{sellerCode}
+    </select>
+
+    <update id="basicInfoUpdate" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeDTO">
+        update tbl_project_make
+        set END_DATE = #{endDate},
+            TITLE = #{title},
+            TAG = #{tag}
+        where
+            SELLER_CODE = #{sellerCode}
+            ;
+    </update>
+
+    <update id="projectStartUpdate" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeDTO">
+        update tbl_project_make
+        set CATEGORY = #{category}
+        where
+            SELLER_CODE = #{sellerCode}
+        ;
+    </update>
+
+    <select id="selectMakingProject"
+    resultMap="projectMake">
+        select
+            *
+        from
+            tbl_project_make
+        where
+            SELLER_CODE = #{code}
+    </select>
+
+    <update id="typeAndTargetUpdate" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.ProjectMakeDTO">
+        update tbl_project_make
+        set TARGET_AMOUNT = #{targetAmount},
+            TYPE = #{type}
+        where
+            SELLER_CODE = #{sellerCode}
+        ;
+    </update>
+
+    <update id="busiEmailUpdate" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.BusinessMakeDTO">
+        update tbl_business_make
+        set BUSI_EMAIL = #{busiEmail}
+        where
+            SELL_CODE = #{sellCode}
+        ;
+    </update>
+
+    <select id="alreadyExist" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.BusinessMakeDTO"
+    resultMap="businessMake">
+        select
+            *
+        from
+            tbl_business_make
+        where
+            SELL_CODE = #{sellCode}
+    </select>
+
+    <insert id="businessInsert" parameterType="com.ohgiraffers.semiproject.project.projectMake.model.dto.BusinessMakeDTO">
+
+    insert into tbl_business_make (
+            SELL_CODE,
+            BUSI_NAME,
+            INDU,
+            ESTA_DATE,
+            HOME,
+            LOCA,
+            BUSI_PHONE,
+            BUSI_LICENSE_NUMBER,
+            BUSI_EMAIL)
+        values (
+                   #{sellCode},
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   #{busiEmail}
+               );
+    </insert>
+
+    <select id="selectBusiness" resultMap="businessMake">
+        select
+            *
+        from
+            tbl_business_make
+        where
+            SELL_CODE = #{sellCode}
+    </select>
+
+
+</mapper>

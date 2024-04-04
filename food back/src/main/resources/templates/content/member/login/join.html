@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+
+
+    <title>join</title>
+    <link rel="stylesheet" th:href="@{/css/login/join.css}" type="text/css">
+
+    
+<!--        <div class="container">-->
+            <div class="left">
+                <div class="detailLeft">
+
+                    <br><br><br><br><br>
+
+                <div class="jointitle">회원가입</div>
+
+                    <br>
+
+                <div class="alreadyJoin">
+                    <span>이미 계정이 있으신가요?</span> 
+                    <span class="gologin"><a th:href="@{/member/login}">로그인하기</a></span>
+                </div>
+
+                    <br><br>
+
+
+                <div class="joininfo">
+                    <form id="joinForm" th:action="@{/member/join}" method="post"></form>
+                    <div class="boxContainer">
+                        <div class="boxName">
+                            <p>이름</p>
+                            <input class="box1" type="text" maxlength="5" name="userName" id="userName" required>
+                        </div>
+
+                        <div class="boxID">
+                            <p>아이디</p>
+                            <input class="box1" type="text" maxlength="13" name="userId" id="userId" required>
+                            <span class="mailbtn"><button type="submit" id="duplicationCheck">중복확인</button></span>
+                        </div>
+
+                        <div class="boxEmailAdress">
+                            <p>이메일 주소</p>
+                            <input type="text" class="box1" name="email" id="email">
+                            <span class="mailbtn"><button type="submit" id="emailDuplicationCheck">중복확인</button></span>
+                            <span class="mailbtn"><button type="submit" id="send">인증번호 받기</button></span>
+                            <input type="hidden" name="hdValue" id="hdValue">
+                        </div>
+
+                        <div class="boxEmailCode">
+                            <p>이메일 코드입력</p>
+                            <input type="text" class="box1" name="emailCode" id="emailCode">
+                            <span class="mailbtn"><button type="submit" id="checkMail">인증번호 확인</button></span>
+                        </div>
+
+                    <!-- Email Adress Script -->
+<!--                        <script>-->
+
+<!--                            const sendButton = document.querySelector("#send");-->
+<!--                            sendButton.addEventListener('click', function () {-->
+<!--                                const email = document.getElementById("email").value;-->
+<!--                                fetch('/member/sendEmail', {-->
+<!--                                    method: "POST",-->
+<!--                                    headers: {-->
+<!--                                        'Content-Type': 'text/plain'-->
+<!--                                    },-->
+<!--                                    body: email-->
+<!--                                })-->
+<!--                                    .then(response => response.json())-->
+<!--                                    .then(data => {-->
+<!--                                        if (data) {-->
+<!--                                            alert(email + "메일을 보냈습니다. 확인하세요!");-->
+<!--                                            // 이메일 코드를 숨은 입력 필드에 저장-->
+<!--                                            console.log(data)-->
+<!--                                            document.getElementById("hdValue").value = data;-->
+<!--                                        } else {-->
+<!--                                            alert("전송 실패 하였습니다. 재시도 하세요!")-->
+<!--                                        }-->
+<!--                                    });-->
+<!--                            });-->
+
+<!--                            const checkMailButton = document.querySelector("#checkMail");-->
+<!--                            checkMailButton.addEventListener('click', function () {-->
+<!--                                const emailCode = document.getElementById("emailCode").value;-->
+<!--                                const hdValue = document.getElementById("hdValue").value;-->
+<!--                                fetch('/member/checkMail', {-->
+<!--                                    method: "POST",-->
+<!--                                    headers: {-->
+<!--                                        'Content-Type': 'application/json'-->
+<!--                                    },-->
+<!--                                    body: JSON.stringify({ emailCode: emailCode, hdValue })-->
+<!--                                })-->
+<!--                                    .then(response => response.json())-->
+<!--                                    .then(data => {-->
+<!--                                        if (data) {-->
+<!--                                            alert("인증성공");-->
+<!--                                        } else {-->
+<!--                                            alert("인증실패");-->
+<!--                                        }-->
+<!--                                    });-->
+<!--                            });-->
+<!--                        </script>-->
+                        <script>
+
+                            const emailDuplicationCheckButton = document.querySelector("#emailDuplicationCheck");
+                            emailDuplicationCheckButton.addEventListener('click', function () {
+                                const email = document.getElementById("email").value;
+                                fetch('/member/checkEmailDuplication', {
+                                    method: "POST",
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ email: email })
+                                })
+                                    .then(response => {
+                                        if(!response.ok) {
+                                            throw new Error('Network response was not ok ' + response.statusText);
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        if (data) {
+                                            alert("사용 가능한 이메일입니다. 인증번호를 받으세요!");
+                                            document.querySelector("#send").disabled = false;
+                                        } else {
+                                            alert("이미 사용중인 이메일입니다. 아이디 찾기를 진행하거나 다른 이메일을 입력해주세요.");
+                                            document.querySelector("#send").disabled = true;
+
+                                        }
+                                    });
+                            });
+
+                            // 인증번호 보내기 스크립트
+                            const sendButton = document.querySelector("#send");
+                            sendButton.addEventListener('click', function () {
+                                const email = document.getElementById("email").value;
+                                fetch('/member/sendEmail', {
+                                    method: "POST",
+                                    headers: {
+                                        'Content-Type': 'text/plain'
+                                    },
+                                    body: email
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data) {
+                                            alert(email + "메일을 보냈습니다. 확인하세요!");
+                                            // 이메일 코드를 숨은 입력 필드에 저장
+                                            console.log(data)
+                                            document.getElementById("hdValue").value = data;
+                                        } else {
+                                            alert("전송 실패 하였습니다. 재시도 하세요!")
+                                        }
+                                    });
+                            });
+
+                            const checkMailButton = document.querySelector("#checkMail");
+                            checkMailButton.addEventListener('click', function () {
+                                const emailCode = document.getElementById("emailCode").value;
+                                const hdValue = document.getElementById("hdValue").value;
+                                fetch('/member/checkMail', {
+                                    method: "POST",
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ emailCode: emailCode, hdValue })
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data) {
+                                            alert("인증성공");
+                                        } else {
+                                            alert("인증실패");
+                                        }
+                                    });
+                            });
+                        </script>
+
+                    <div class="passwordContainer">
+                        <div class="password">
+                            <p>비밀번호</p>
+                            <input class="box2"  type="password" maxlength="13" name="userPwd" id="userPwd" required>
+                        </div>
+                        <div class="passwordCheck">
+                            <p>비밀번호 확인</p>
+                            <input  class="box2" type="password" maxlength="13" name="userPwd" id="userPwdCheck" required>
+                        </div>
+                    </div> <!-- passwordContainer -->
+
+                    <div class="passwordSee">
+                        <input type="checkbox" id="showPassword" onchange="togglePassword()">
+                        <label for="showPassword">비밀번호 보이기</label>
+                    </div>
+
+                    <br><br>
+
+                    <!-- password Script -->
+                    <script>
+                        function togglePassword() {
+                            const userPwd = document.getElementById("userPwd");
+                            const showPasswordCheckbox = document.getElementById("showPassword");
+
+                            if (showPasswordCheckbox.checked) {
+                                userPwd.type = "text";
+                                userPwdCheck.type = "text";
+                            } else {
+                                userPwd.type = "password";
+                                userPwdCheck.type = "password";
+                            }
+                        }
+                    </script>
+    
+                    <div class="postNumber">
+                        <label>우편번호</label><br>
+                        <input type="text" name="zipCode" id="zipCode" class="box1" readonly>
+                        <span class="mailbtn"><button type="submit" id="searchZipCode">검색</button></span>
+                    </div>
+
+                    <div class="">
+                        <label >주소</label><br>
+                        <input type="text" name="address1" id="address1" class="box1" readonly>
+                    </div>
+
+                    <div>
+                        <label >상세주소</label><br>
+                        <input type="text" name="address2" id="address2" class="box1">
+                    </div>
+
+                    <div>
+                        <label >핸드폰번호</label><br>
+                        <input type="text" name="phone" id="phone" class="box1">
+                    </div>
+
+                    <div>
+                        <label >생년월일</label><br>
+                        <input type="text" name="dateBirth" id="dateBirth" class="box1">
+                    </div>
+
+
+                        <br><br><br>
+
+
+                    <div class="joinbtn">
+                        <a th:href="@{/member/login}"><button type="submit" >회원가입</button></a>
+                    </div>
+
+                        <br><br><br>
+
+                    </div> <!-- boxContainer -->
+        </div> <!-- joininfo -->
+
+                </div>
+
+            <div class="right">
+                <div class="detailRight"><img class="kinglogo" src="/images/01_logoimg/logoNone.png" alt=""> </div>
+            </div>
+
+            </div> <!-- hr -->
+        </div> <!-- footer -->
+
+        <div class="downLine">
+                <div class="down"></div>
+        </div>
+
+        <div class="downContainer">
+
+                <a th:href="@{/support/usermain}">고객센터</a>
+                <a th:href="@{/}">메인으로 돌아가기</a>
+
+            <br><br><br><br><br><br>
+
+        </div>
+
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:inline="javascript">
+
+        const $searchZipCode = document.getElementById("searchZipCode");
+        const $goMain = document.getElementById("goMain");
+
+        $searchZipCode.onclick = function() {
+
+            /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+            new daum.Postcode({
+                oncomplete: function(data){
+                    /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+                    document.getElementById("zipCode").value = data.zonecode;
+                    document.getElementById("address1").value = data.address;
+                    document.getElementById("address2").focus();
+                }
+            }).open();
+        }
+    </script>
+
+    </th:block>
+    </html>

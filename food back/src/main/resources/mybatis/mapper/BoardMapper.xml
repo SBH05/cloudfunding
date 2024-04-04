@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.manager.model.dao.BoardMapper">
+
+
+    <resultMap id="userResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.UserDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+    <resultMap id="userResultMap1" type="com.ohgiraffers.semiproject.manager.model.dto.UserDTO1">
+        <id property="code" column="USER_CODE"/>
+        <result property="id" column="USER_ID"/>
+        <result property="pass" column="PASSWORD"/>
+        <result property="em" column="EMAIL"/>
+        <result property="RD" column="REGISTRATION_DATE"/>
+        <result property="ad" column="ADDRESS"/>
+        <result property="name" column="REPORTED_PERSON"/>
+        <result property="birth" column="DATE_BIRTH"/>
+        <result property="ph" column="PHONE"/>
+        <result property="AS" column="ACTIVITY_STATUS"/>
+        <result property="count" column="REPORT_COUNT"/>
+        <result property="coupon" column="COUPON_STATUS"/>
+    </resultMap>
+
+
+    <resultMap id="businessResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.PrivateBusinessDTO">
+        <id property="businessCode" column="BUSINESS_CODE"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="industry" column="INDUSTRY"/>
+        <result property="establishmentDate" column="ESTABLISHMENT_DATE"/>
+        <result property="homepage" column="HOMEPAGE"/>
+        <result property="location" column="LOCATION"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="businessLicenseNumber" column="BUSINESS_LICENSE_NUMBER"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="businessEmail" column="BUSINESS_EMAIL"/>
+    </resultMap>
+
+    <resultMap id="cartResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.CartDTO">
+        <id property="cartCode" column="CART_CODE"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="optionCode" column="OPTION_CODE"/>
+        <result property="usageStatus" column="USAGE_STATUS"/>
+        <association property="projectCode" resultMap="projectResultMap"/>
+    </resultMap>
+
+    <resultMap id="userReportHistoryResultMap"
+               type="com.ohgiraffers.semiproject.manager.model.dto.UserReportHistoryDTO">
+        <id property="creationNumber" column="CREATION_NUMBER"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="reporter" column="REPORTER"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="reportedPerson" column="REPORTED_PERSON"/>
+    </resultMap>
+
+    <resultMap id="projectResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectCategory" column="PROJECT_CATEGORY"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="projectPlan" column="PROJECT_PLAN"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="projectSummary" column="PROJECT_SUMMARY"/>
+        <result property="policyAgreement" column="POLICY_AGREEMENT"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="submissionDate" column="SUBMISSION_DATE"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <association property="sellerInfo" resultMap="userResultMap"/>
+    </resultMap>
+
+    <resultMap id="noticeResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.NoticeDTO">
+        <id property="creationNumber" column="CREATION_NUMBER"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="userCode" column="USER_CODE"/>
+    </resultMap>
+
+    <resultMap id="paymentHistoryResultMap"
+               type="com.ohgiraffers.semiproject.manager.model.dto.PaymentHistoryDTO">
+        <result property="paymentCode" column="PAYMENT_CODE"/>
+        <association property="cartCode" resultMap="cartResultMap"/>
+    </resultMap>
+
+    <resultMap id="inquiryResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.InquiryDTO">
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <association property="creationNumber" resultMap="inquiryAnswerResultMap"/>
+        <association property="userCode" resultMap="userResultMap"/>
+    </resultMap>
+
+    <resultMap id="inquiryAnswerResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.InquiryAnswerDTO">
+        <result property="answerCode" column="ANSWER_CODE"/>
+        <result property="answerContent" column="ANSWER_CONTENT"/>
+        <result property="creationNumber" column="CREATION_NUMBER"/>
+        <result property="answerDate" column="ANSWER_DATE"/>
+    </resultMap>
+
+    <resultMap id="userReportResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.UserReportDTO">
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <association property="creationNumber" resultMap="userReportAnswerRM"/>
+        <association property="reporter" resultMap="userResultMap"/>
+        <association property="reportedPerson" resultMap="userResultMap1"/>
+    </resultMap>
+
+    <resultMap id="userReportAnswerRM" type="com.ohgiraffers.semiproject.manager.model.dto.UserReportAnswerDTO">
+        <result property="answerCode" column="ANSWER_CODE"/>
+        <result property="answerContent" column="ANSWER_CONTENT"/>
+        <result property="creationNumber" column="CREATION_NUMBER"/>
+        <result property="answerDate" column="ANSWER_DATE"/>
+        <result property="actionDetail" column="ACTION_DETAIL"/>
+    </resultMap>
+
+    <resultMap id="projectReportDTO" type="com.ohgiraffers.semiproject.manager.model.dto.ProjectReportHistoryDTO">
+    <id property="projectReportCode" column="PROJECT_REPORT_CODE"/>
+    <result property="reportDate" column="REPORT_DATE"/>
+    <result property="reportType" column="REPORT_TYPE"/>
+    <result property="reportReason" column="REPORT_REASON"/>
+    <result property="actionDetail" column="ACTION_DETAIL"/>
+    <association property="reportProject" resultMap="projectResultMap"/>
+    <association property="reporter" resultMap="userResultMap1"/>
+</resultMap>
+
+
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        select
+        count(*)
+        from
+        TBL_NOTICE A
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="findAllNotice" resultMap="noticeResultMap">
+        select
+        A.*
+        from
+        tbl_notice A
+        where
+        A.DELETE_STATUS = 'N'
+        <if test="searchValue != null and !searchValue.equals('')">
+            <if test="nation3 == 'code'">
+                AND A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'title'">
+                AND A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'date'">
+                AND A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+        </if>
+        ORDER BY
+        <if test="nation1 == 'code' or nation1==null or nation1.equals('')">
+            A.CREATION_NUMBER
+        </if>
+        <if test="nation1 == 'title'">
+            A.TITLE
+        </if>
+        <if test="nation1 == 'date'">
+            A.CREATION_DATE
+        </if>
+        <if test="nation2 == 'asc' or nation2==null or nation2.equals('')">
+            ASC
+        </if>
+        <if test="nation2 == 'desc'">
+            DESC
+        </if>
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+    <select id="findOneNotice" resultMap="noticeResultMap">
+        select A.*
+        from tbl_notice A
+        where A.CREATION_NUMBER = #{no}
+    </select>
+
+    <select id="selectTotalInquiryCount" resultType="_int" parameterType="hashmap">
+        select count(*)
+        from
+        tbl_inquiry_history A
+        join tbl_user C ON (A.USER_CODE = C.USER_CODE)
+        left join tbl_inquiry_answer B ON (A.CREATION_NUMBER = B.CREATION_NUMBER)
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'writer'">
+                    C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'finish'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                exists(
+                select *
+                from tbl_inquiry_history
+                where ANSWER_CODE
+                )
+            </if>
+            <if test="authority == 'yet'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                not exists(
+                select *
+                from tbl_inquiry_history
+                where ANSWER_CODE
+                )
+
+            </if>
+        </where>
+
+    </select>
+
+    <select id="findAllInquiry" resultMap="inquiryResultMap">
+        select A.*,
+        C.USER_NAME,
+        B.ANSWER_CODE
+        from
+        tbl_inquiry_history A
+        join tbl_user C ON (A.USER_CODE = C.USER_CODE)
+        left join tbl_inquiry_answer B ON (A.CREATION_NUMBER = B.CREATION_NUMBER)
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'writer'">
+                    C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'finish'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                exists(
+                select *
+                from tbl_inquiry_history
+                where ANSWER_CODE
+                )
+
+            </if>
+            <if test="authority == 'yet'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                not exists(
+                select *
+                from tbl_inquiry_history
+                where ANSWER_CODE
+                )
+
+            </if>
+        </where>
+        ORDER BY
+        <if test="nation1 == 'code' or nation1==null or nation1.equals('')">
+            A.CREATION_NUMBER
+        </if>
+        <if test="nation1 == 'title'">
+            A.TITLE
+        </if>
+        <if test="nation1 == 'writer'">
+            C.USER_NAME
+        </if>
+        <if test="nation1 == 'date'">
+            A.CREATION_DATE
+        </if>
+
+        <if test="nation2 == 'asc' or nation2==null or nation2.equals('')">
+            ASC
+        </if>
+        <if test="nation2 == 'desc'">
+            DESC
+        </if>
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+    <select id="findOneInquiry" resultMap="inquiryResultMap">
+        select A.*,
+               C.USER_NAME,
+               B.*
+
+        from tbl_inquiry_history A
+                 join tbl_user C ON (A.USER_CODE = C.USER_CODE)
+                 left join tbl_inquiry_answer B ON (A.CREATION_NUMBER = B.CREATION_NUMBER)
+        where A.CREATION_NUMBER = #{no}
+    </select>
+
+    <select id="selectTotalUserComplaintCount" resultType="_int" parameterType="hashmap">
+        select
+        count(*)
+        from
+        tbl_user_report_history A
+        left join tbl_user_report_answer D ON (A.CREATION_NUMBER = D.CREATION_NUMBER)
+        join tbl_user B ON (A.REPORTER = B.USER_CODE)
+        join tbl_user C ON (A.REPORTED_PERSON = C.USER_CODE)
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'number'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reason'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reported'">
+                    C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reporter'">
+                    B.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'finish'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                exists(
+                select *
+                from tbl_user_report_answer
+                where
+                D.ANSWER_CODE
+                )
+
+            </if>
+            <if test="authority == 'yet'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                not exists(
+                select *
+                from tbl_user_report_answer
+                where
+                D.ANSWER_CODE
+                )
+
+            </if>
+        </where>
+
+    </select>
+
+    <select id="findAllUserComplaint" resultMap="userReportResultMap">
+        select
+        A.CREATION_NUMBER,
+        A.CREATION_DATE,
+        A.TITLE,
+        A.CONTENT,
+        B.USER_CODE,
+        B.USER_NAME,
+        C.USER_CODE,
+        C.USER_NAME AS REPORTED_PERSON,
+        D.ANSWER_CODE
+        from
+        tbl_user_report_history A
+        left join tbl_user_report_answer D ON (A.CREATION_NUMBER = D.CREATION_NUMBER)
+        join tbl_user B ON (A.REPORTER = B.USER_CODE)
+        join tbl_user C ON (A.REPORTED_PERSON = C.USER_CODE)
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'number'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reason'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reported'">
+                    C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reporter'">
+                    B.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'finish'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                exists(
+                select *
+                from tbl_user_report_answer
+                where
+                D.ANSWER_CODE
+                )
+
+            </if>
+            <if test="authority == 'yet'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                not exists(
+                select *
+                from tbl_user_report_answer
+                where
+                D.ANSWER_CODE
+                )
+
+            </if>
+        </where>
+        ORDER BY
+        <if test="nation1 == 'number' or nation1==null or nation1.equals('')">
+            A.CREATION_NUMBER
+        </if>
+        <if test="nation1 == 'reason'">
+            A.TITLE
+        </if>
+        <if test="nation1 == 'reported'">
+            C.USER_NAME
+        </if>
+        <if test="nation1 == 'reporter'">
+            B.USER_NAME
+        </if>
+        <if test="nation1 == 'date'">
+            A.CREATION_DATE
+        </if>
+
+        <if test="nation2 == 'asc' or nation2==null or nation2.equals('')">
+            ASC
+        </if>
+        <if test="nation2 == 'desc'">
+            DESC
+        </if>
+
+        LIMIT #{ startRow }, #{limit}
+
+
+    </select>
+
+    <insert id="registNotice" parameterType="com.ohgiraffers.semiproject.manager.model.dto.NoticeDTO">
+        insert into tbl_notice
+        (CREATION_NUMBER,
+         CREATION_DATE,
+         TITLE,
+         CONTENT,
+         DELETE_STATUS,
+         USER_CODE)
+        values (null,
+                now(),
+                #{title},
+                #{content},
+                default,
+                1);
+    </insert>
+
+    <update id="updateNotice" parameterType="com.ohgiraffers.semiproject.manager.model.dto.NoticeDTO">
+        update tbl_notice
+        set TITLE   = #{title},
+            CONTENT = #{content}
+        where CREATION_NUMBER = #{creationNumber};
+
+    </update>
+
+    <delete id="deleteNotice" parameterType="long">
+        DELETE
+        FROM tbl_notice
+        where CREATION_NUMBER = #{no}
+    </delete>
+
+    <insert id="insertInquiryAnswer" parameterType="com.ohgiraffers.semiproject.manager.model.dto.InquiryAnswerDTO">
+
+        insert into tbl_inquiry_answer (ANSWER_CODE,
+                                        ANSWER_CONTENT,
+                                        CREATION_NUMBER,
+                                        ANSWER_DATE)
+        values (null,
+                #{answerContent},
+                #{creationNumber},
+                now());
+    </insert>
+
+    <update id="inquiryAnswerUpdate" parameterType="com.ohgiraffers.semiproject.manager.model.dto.InquiryAnswerDTO">
+        update tbl_inquiry_answer
+        set ANSWER_CONTENT = #{answerContent}
+        where CREATION_NUMBER = #{creationNumber};
+    </update>
+
+    <delete id="inquiryDelete" parameterType="long">
+        delete
+        from tbl_inquiry_history
+        where CREATION_NUMBER = #{creationNumber}
+        ;
+    </delete>
+
+    <delete id="inquiryAnswerDelete" parameterType="long">
+        delete
+        from tbl_inquiry_answer
+        where CREATION_NUMBER = #{creationNumber}
+    </delete>
+
+    <select id="selectTotalProjectComplaintCount" resultType="_int" parameterType="hashmap">
+        select
+        count(*)
+        from
+        tbl_project_report_history A
+        join tbl_user B ON (A.REPORTER = B.USER_CODE)
+        join tbl_project C ON (A.REPORT_PROJECT = C.PROJECT_CODE)
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reason'">
+                    C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reported'">
+                    B.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'finish'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                not isnull(A.ACTION_DETAIL)
+
+            </if>
+            <if test="authority == 'yet'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                isnull(A.ACTION_DETAIL)
+
+            </if>
+        </where>
+    </select>
+
+    <select id="findAllProjectComplaint" resultMap="projectReportDTO">
+        select
+        A.PROJECT_REPORT_CODE,
+        A.REPORTER,
+        A.REPORT_PROJECT,
+        A.REPORT_DATE,
+        A.REPORT_TYPE,
+        A.REPORT_REASON,
+        A.ACTION_DETAIL,
+        B.USER_NAME AS REPORTED_PERSON,
+        C.PROJECT_TITLE,
+        D.USER_NAME
+
+        from
+        tbl_project_report_history A
+        join tbl_user B ON (A.REPORTER = B.USER_CODE)
+        join tbl_project C ON (A.REPORT_PROJECT = C.PROJECT_CODE)
+        join tbl_user D ON (C.SELLER_INFO = D.USER_CODE)
+        <where>
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    A.CREATION_NUMBER LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    A.TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reason'">
+                    C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'reported'">
+                    B.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'date'">
+                    A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+            <if test="authority == 'finish'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                not isnull(A.ACTION_DETAIL)
+
+            </if>
+            <if test="authority == 'yet'">
+                <if test="searchValue != null and !searchValue.equals('')">
+                    AND
+                </if>
+                isnull(A.ACTION_DETAIL)
+
+            </if>
+        </where>
+        ORDER BY
+        <if test="nation1 == 'code' or nation1==null or nation1.equals('')">
+            A.PROJECT_REPORT_CODE
+        </if>
+        <if test="nation1 == 'title'">
+            A.REPORT_TYPE
+        </if>
+        <if test="nation1 == 'reason'">
+            A.REPORT_REASON
+        </if>
+        <if test="nation1 == 'reported'">
+            D.USER_NAME
+        </if>
+        <if test="nation1 == 'date'">
+            A.REPORT_DATE
+        </if>
+        <if test="nation2 == 'asc' or nation2==null or nation2.equals('')">
+            ASC
+        </if>
+        <if test="nation2 == 'desc'">
+            DESC
+        </if>
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+    <select id="findOneComplaintProject" parameterType="long" resultMap="projectReportDTO">
+        select
+            A.PROJECT_REPORT_CODE,
+            A.REPORTER,
+            A.REPORT_PROJECT,
+            A.REPORT_DATE,
+            A.REPORT_TYPE,
+            A.REPORT_REASON,
+            A.ACTION_DETAIL,
+            B.USER_NAME AS REPORTED_PERSON,
+            C.PROJECT_TITLE,
+            C.PROJECT_CODE,
+            D.USER_NAME
+
+        from
+            tbl_project_report_history A
+                join tbl_user B ON (A.REPORTER = B.USER_CODE)
+                join tbl_project C ON (A.REPORT_PROJECT = C.PROJECT_CODE)
+                join tbl_user D ON (C.SELLER_INFO = D.USER_CODE)
+        where
+            A.PROJECT_REPORT_CODE = #{no}
+    </select>
+
+    <select id="findOneComplaintUser" parameterType="long" resultMap="userReportResultMap">
+        select
+            A.CREATION_NUMBER,
+            A.CREATION_DATE,
+            A.TITLE,
+            A.CONTENT,
+            B.USER_CODE,
+            B.USER_NAME,
+            C.USER_CODE,
+            C.USER_NAME AS REPORTED_PERSON,
+            D.*
+        from
+            tbl_user_report_history A
+                left join tbl_user_report_answer D ON (A.CREATION_NUMBER = D.CREATION_NUMBER)
+                join tbl_user B ON (A.REPORTER = B.USER_CODE)
+                join tbl_user C ON (A.REPORTED_PERSON = C.USER_CODE)
+        where
+            A.CREATION_NUMBER = #{no}
+    </select>
+
+    <delete id="complaintUserAnswerDelete" parameterType="long">
+        delete
+        from tbl_user_report_answer
+        where
+            CREATION_NUMBER = #{no}
+        ;
+    </delete>
+
+    <delete id="complaintUserBoardDelete" parameterType="long">
+        delete
+        from tbl_user_report_history
+        where
+            CREATION_NUMBER = #{no}
+        ;
+    </delete>
+
+    <delete id="complaintProjectDelete" parameterType="long">
+        delete
+        from tbl_project_report_history
+        where
+            PROJECT_REPORT_CODE = #{no}
+        ;
+    </delete>
+
+</mapper>

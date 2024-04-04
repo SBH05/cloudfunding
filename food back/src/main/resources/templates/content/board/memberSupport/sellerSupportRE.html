@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <th:block th:replace="/fragments/sellersidebar.html"></th:block>
+    <title>sellerSupportRE</title>
+    <link rel="stylesheet" href="/css/support/supportRE.css">
+
+
+
+
+
+
+<!-- 미들 -->
+
+
+
+<div class="middle_box">
+
+    <div class="middle">
+
+        <div class="first">
+
+            <span>고객센터</span>
+        </div>
+
+        <div class="submitbtn1"><button type="submit">수정하기</button></div>
+        <div class="submitbtn2"><button type="submit">삭제하기</button></div>
+
+        <div class="box">
+            <span class="box1">작성번호 : 1</span>
+            <span class="box1">작성자: 김민*</span>
+            <span class="box2">작성일자: 23 / 12 / 1
+                <!-- <script>
+                    date = new Date().toLocaleDateString();
+                    document.write(date);
+                </script> -->
+                </span>
+        </div>
+
+
+        <form action="" method="post">
+            <div class="wirte_title">제목</div>
+            <div class="member_name">회원명</div>
+            <div class="title_detail">비밀번호 찾기</div>
+            <div class="member_detail">ohgiraffers</div>
+            <div class="bar"></div>
+
+            <div class="quest1">
+                <div class="detail" >비밀번호 찾는 법</div>
+            </div>
+
+            <div class="quest2"></div>
+
+        </form>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+</th:block>
+
+</html>

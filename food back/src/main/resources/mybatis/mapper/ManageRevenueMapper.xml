@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.manager.model.dao.ManageRevenueMapper">
+
+
+    <resultMap id="userResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.UserDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+    <resultMap id="businessResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.PrivateBusinessDTO">
+        <id property="businessCode" column="BUSINESS_CODE"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="industry" column="INDUSTRY"/>
+        <result property="establishmentDate" column="ESTABLISHMENT_DATE"/>
+        <result property="homepage" column="HOMEPAGE"/>
+        <result property="location" column="LOCATION"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="businessLicenseNumber" column="BUSINESS_LICENSE_NUMBER"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="businessEmail" column="BUSINESS_EMAIL"/>
+    </resultMap>
+
+    <resultMap id="cartResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.CartDTO">
+        <id property="cartCode" column="CART_CODE"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="optionCode" column="OPTION_CODE"/>
+        <result property="usageStatus" column="USAGE_STATUS"/>
+        <association property="projectCode" resultMap="projectResultMap"/>
+    </resultMap>
+
+    <resultMap id="userReportHistoryResultMap"
+               type="com.ohgiraffers.semiproject.manager.model.dto.UserReportHistoryDTO">
+        <id property="creationNumber" column="CREATION_NUMBER"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="reporter" column="REPORTER"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="reportedPerson" column="REPORTED_PERSON"/>
+    </resultMap>
+
+    <resultMap id="projectResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectCategory" column="PROJECT_CATEGORY"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="projectPlan" column="PROJECT_PLAN"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="projectSummary" column="PROJECT_SUMMARY"/>
+        <result property="policyAgreement" column="POLICY_AGREEMENT"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="submissionDate" column="SUBMISSION_DATE"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <association property="sellerInfo" resultMap="userResultMap"/>
+    </resultMap>
+
+    <resultMap id="paymentHistoryResultMap"
+               type="com.ohgiraffers.semiproject.manager.model.dto.PaymentHistoryDTO">
+        <result property="paymentCode" column="PAYMENT_CODE"/>
+        <association property="cartCode" resultMap="cartResultMap"/>
+    </resultMap>
+
+
+   <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+       select count(*)
+       from
+           tbl_project A
+               join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                join tbl_user C ON (A.SELLER_INFO = C.USER_CODE)
+       where
+           B.APPROVAL_STATUS = 'Y'
+           <if test="searchValue != null and !searchValue.equals('')">
+               <if test="nation3 == 'code'">
+                   AND A.PROJECT_CODE LIKE CONCAT('%', #{ searchValue }, '%')
+               </if>
+               <if test="nation3 == 'title'">
+                   AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+               </if>
+               <if test="nation3 == 'seller'">
+                   AND C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+               </if>
+               <if test="nation3 == 'price'">
+                   AND A.TARGET_AMOUNT LIKE CONCAT('%', #{ searchValue }, '%')
+               </if>
+               <if test="nation3 == 'date'">
+                   AND A.PROJECT_START_DATE LIKE CONCAT('%', #{ searchValue }, '%') OR
+                   A.PROJECT_END_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+               </if>
+           </if>
+
+   </select>
+
+    <select id="findAllProject" resultMap="projectResultMap">
+        select A.*,
+               C.USER_NAME
+        from
+        tbl_project A
+        join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+        join tbl_user C ON (A.SELLER_INFO = C.USER_CODE)
+        where
+        B.APPROVAL_STATUS = 'Y'
+        <if test="searchValue != null and !searchValue.equals('')">
+            <if test="nation3 == 'code'">
+                AND A.PROJECT_CODE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'title'">
+                AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'seller'">
+                AND C.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'price'">
+                AND A.TARGET_AMOUNT LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+            <if test="nation3 == 'date'">
+                AND A.PROJECT_START_DATE LIKE CONCAT('%', #{ searchValue }, '%') OR
+                A.PROJECT_END_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+            </if>
+        </if>
+        ORDER BY
+        <if test="nation1 == 'code' or nation1==null or nation1.equals('')">
+            A.PROJECT_CODE
+        </if>
+        <if test="nation1 == 'title'">
+            A.PROJECT_TITLE
+        </if>
+        <if test="nation1 == 'seller'">
+            C.USER_NAME
+        </if>
+        <if test="nation1 == 'price'">
+            A.TARGET_AMOUNT
+        </if>
+        <if test="nation1 == 'date'">
+            A.PROJECT_START_DATE
+        </if>
+        <if test="nation2 == 'asc' or nation2==null or nation2.equals('')">
+            ASC
+        </if>
+        <if test="nation2 == 'desc'">
+            DESC
+        </if>
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+    <select id="findOneProject" resultMap="projectResultMap">
+        select
+            A.*,
+            C.USER_NAME
+        from tbl_project A
+        join tbl_approval_history B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+            join tbl_user C ON (A.SELLER_INFO = C.USER_CODE)
+        where
+            A.PROJECT_CODE = #{no}
+    </select>
+
+
+</mapper>

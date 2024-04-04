@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+
+
+    <link rel="stylesheet" th:href="@{/css/login/findIdAndPwd.css}">
+
+
+
+
+
+    <div class="container">
+        <div class="center">
+            <div>
+
+            
+            
+                <img class="moveall" id="logo1" src="/images/01_logoimg/textLogoNone.png" alt="">
+            
+            <div class="movetext2 moveall">
+                <span><a th:href="@{/member/login}"><img class="arrow" src="/images/minicon/backicon.jpg" alt=""></a></span>
+                <span class="gologin">비밀번호 찾기</span>
+            </div>
+
+            
+            <div class="joininfo">
+
+                <form id="passwordRecoveryForm" th:action="@{/member/findPwd}" method="post">
+                    <div class="moveall">
+                        <li>Your Id</li>
+                        <li><span><input type="text" class="box1" id="userId" required></span></li> <!-- userId 필드 추가 -->
+                    </div>
+                    <div class="moveall">
+                        <li>Your Email</li>
+                        <span><input type="email" class="box2" id="email" required></span>
+                        <span class="mailbtn"><button type="button" id="sendCode">인증번호 받기</button></span>
+                    </div>
+                    <div class="moveall">
+                        <li>Authentication Code</li>
+                        <span><input type="text" class="box2" id="authCode" required></span>
+                        <span class="mailbtn"><button type="button" id="authBtn">인증번호 확인</button></span>
+                    </div>
+
+
+
+
+                <div class="downpart">
+                    <ul class="findid">
+                        <li><a th:href="@{/member/findId}">아이디 찾기</a></li>
+                        <li><a th:href="@{/member/join}">회원가입</a></li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+            <div  class="joinbtn" ><a th:href="@{/member/login}"><button type="submit" id="next" >다음</button></a></div>
+                </form>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const sendCodeButton = document.getElementById('sendCode');
+                        const verifyCodeButton = document.getElementById('authBtn');
+                        const nextButton = document.getElementById('next');
+                        const userIdInput = document.getElementById('userId');
+                        const emailInput = document.getElementById('email');
+                        const authCodeInput = document.getElementById('authCode');
+
+                        // 인증번호 받기 버튼 클릭 이벤트
+                        sendCodeButton.addEventListener('click', function () {
+                            const userId = userIdInput.value;
+                            const email = emailInput.value;
+                            console.log('userId:', userId, 'email:', email);
+
+
+                            const queryParams = new URLSearchParams({ userId, email }).toString();
+                            fetch(`/member/requestAuthCode?${queryParams}`, {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+
+                            })
+                                .then(response => {
+                                    if(!response.ok) {
+                                        throw new Error('Network response was not ok ' + response.statusText);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data.message) {
+                                        alert("인증번호가 " + email + "로 발송되었습니다. 확인하세요!");
+                                        sendCodeButton.disabled = true; // 버튼 비활성화
+                                    } else {
+                                        throw new Error('Error in response: ' + data.error);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert("인증번호 발송 중 오류가 발생했습니다.");
+                                });
+                        });
+                        // 인증번호 확인 버튼 클릭 이벤트
+                        verifyCodeButton.addEventListener('click', function () {
+                            const userId = userIdInput.value;
+                            const email = emailInput.value;
+                            const authCode = authCodeInput.value;
+                            const queryParams = new URLSearchParams({ userId, email, authCode }).toString();
+                            fetch(`/member/verifyAuthCode?${queryParams}`, {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.message) {
+                                        alert(data.message);
+                                        verifyCodeButton.disabled = true;
+                                        nextButton.disabled = false;
+                                    } else {
+                                        alert(data.error);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert("인증번호 확인 중 오류가 발생했습니다.");
+                                });
+                        });
+
+                        // 다음 버튼 클릭 이벤트
+                        nextButton.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const userId = userIdInput.value;
+                            const email = emailInput.value;
+                            const queryParams = new URLSearchParams({ userId, email}).toString();
+
+                            fetch(`/member/createTempPassword?${queryParams}`, {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.message) {
+                                        alert(data.message);
+                                        window.location.href = "/member/login";
+                                    } else {
+                                        alert(data.error);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert("임시 비밀번호 생성 중 오류가 발생했습니다.");
+                                });
+                        });
+                    });
+                </script>
+
+
+    </div>
+    
+    
+    
+        
+    <div class="down">
+        <span>Help Center</span>
+        <span>Terms of Service</span>
+        <span>Privacy Policy</span>
+        <span>@2022Yanliudesign</span>
+        </div>
+    </div>
+    </div>
+    
+    </div>
+
+
+
+
+
+</th:block>
+</html>

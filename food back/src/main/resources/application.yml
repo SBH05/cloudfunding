@@ -1,0 +1,61 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/food
+    username: ohgiraffers
+    password: ohgiraffers
+  servlet:
+    multipart:
+      enabled: true
+      location: C:/thymeleaf-springboot/
+
+
+#  server:
+#    port: 8081
+
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
+  web:
+    resources:
+      static-locations: classpath:/custom/static/location/, classpath:/other/static/location/
+
+logging:
+  level:
+    root: info
+
+
+
+# MAC용 url
+img:
+  macurl: /Users/kimminha/Desktop/JAVA/dev/07_cloudFooding(PJ)/uploadfile/Introductionimg/
+
+mybatis:
+  # mapper.xml location Setting
+  mapper-locations: mybatis/mapper/*.xml
+  # alias Setting
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+#  mail:
+#    host: smtp.gmail.com # 1
+#    port: 587 # 2
+#    username: lees8485@gmail.com # 3
+#    password: penqoytsdahudarz  # 4
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true # 5
+#          timeout: 5000 # 6
+#          starttls:
+#            enable: true # 7

@@ -1,0 +1,123 @@
+/* 사이드바 */
+.sideBar {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: rgba(255, 255, 255, 1);
+    width: 280px;
+    flex: 0 0 auto;
+    margin-bottom: 0;
+
+}
+
+.sideBar-menu {
+    width: 234px;
+    height: 100%;
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 30px;
+}
+
+.sideBar-menu ul,
+.sideBar-menu li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.sideBar-menu a {
+    text-decoration: none;
+    color: #555;
+}
+
+.sideBar-menu a:hover {
+    color: #000;
+    font-weight: bold;
+}
+
+.sideBar-toggle li {
+    margin-left: 0px;
+}
+
+.sub li a {
+    margin-left: 30px;
+}
+
+.sideBar-adver {
+    width: 223.856201171875px;
+    height: 134.313720703125px;
+    position: absolute;
+    margin-top: 30%;
+}
+
+.sideBar-adver-back {
+    background-image: linear-gradient(0deg, rgba(249.38867390155792, 202.0311614871025, 163.5030072927475, 1) 0%, rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 1) 100%);
+    width: 223.856201171875px;
+    height: 134.313720703125px;
+    left: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.sideBar-adver-text {
+    color: rgba(255, 255, 255, 1);
+    width: 182px;
+    height: 38px;
+    position: absolute;
+    left: 21px;
+    top: 23px;
+    font-family: Poppins;
+    text-align: center;
+    font-size: 14px;
+    /*letter-spacing: 1;*/
+}
+
+.sideBar-adver-button {
+    width: 181.77122497558594px;
+    height: 35.816993713378906px;
+    position: absolute;
+    left: 21px;
+    top: 78.796875px;
+}
+
+.sideBar-adver-button-back {
+    box-shadow: 2px 4px 4px rgba(79.0000256896019, 41.99999749660492, 234.00000125169754, 0.17000000178813934);
+    background-color: rgba(255, 255, 255, 1);
+    width: 181.77122497558594px;
+    height: 35.816993713378906px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.sideBar-adver-button-text {
+    color: rgba(243.00000071525574, 125.00000014901161, 29.000000171363354, 1);
+    width: 117px;
+    height: 19px;
+    position: absolute;
+    left: 32px;
+    top: 8.6484375px;
+    font-family: Poppins;
+    text-align: center;
+    font-size: 14px;
+    /*letter-spacing: 1;*/
+}
+
+.flex{
+    display: flex;
+}
+
+
+/* 마이페이지 */
+.title {
+    list-style-type: none;
+    padding: 23px;
+    font-size: 30px;
+}
+

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.project.product.model.dao.ProjectDetailMapper">
+
+    <resultMap id="projectResultMap" type="com.ohgiraffers.semiproject.project.product.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectCategory" column="PROJECT_CATEGORY"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="plan" column="PROJECT_PLAN"/>
+        <result property="sellerInfo" column="SELLER_INFO"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="projectSummary" column="PROJECT_SUMMARY"/>
+        <result property="policyAgreement" column="POLICY_AGREEMENT"/>
+        <result property="sellerType" column="SELLER_TYPE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+    </resultMap>
+
+    <resultMap id="totalStoryList" type="com.ohgiraffers.semiproject.project.product.model.dto.TotalStoryDTO">
+        <collection property="projectDTO" resultMap="projectResultMap"/>
+        <collection property="projectFileDTO" resultMap="projectFileResult"/>
+        <collection property="projectOptionDTO" resultMap="projectOptionResult"/>
+        <collection property="privateBusinessDTO" resultMap="businessResultMap"/>
+        <collection property="profileImageDTO" resultMap="profileImageResult"/>
+        <collection property="projectUserDTO" resultMap="userResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="userResultMap" type="com.ohgiraffers.semiproject.project.product.model.dto.ProjectUserDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+    <resultMap type="com.ohgiraffers.semiproject.member.model.dto.MemberDTO" id="memberResultMap">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="userPwd" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+        <result property="emailCode" column="EMAIL_CODE"/>
+
+    </resultMap>
+
+    <resultMap id="businessResultMap" type="com.ohgiraffers.semiproject.project.product.model.dto.PrivateBusinessDTO">
+        <id property="businessCode" column="BUSINESS_CODE"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="industry" column="INDUSTRY"/>
+        <result property="establishmentDate" column="ESTABLISHMENT_DATE"/>
+        <result property="homepage" column="HOMEPAGE"/>
+        <result property="location" column="LOCATION"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="businessLicenseNumber" column="BUSINESS_LICENSE-NUMBER"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="businessEmail" column="BUSINESS_EMAIL"/>
+    </resultMap>
+
+    <resultMap id="profileImageResult" type="com.ohgiraffers.semiproject.project.product.model.dto.ProfileImageDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="originalFileName" column="ORIGINAL_FILE_NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="changedProFileName" column="CHANGEDPRO_FILE_NAME"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="userCode" column="USER_CODE"/>
+    </resultMap>
+
+    <resultMap id="projectOptionResult" type="com.ohgiraffers.semiproject.project.product.model.dto.ProjectOptionDTO">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="optionType" column="OPTION_TYPE"/>
+        <result property="price" column="PRICE"/>
+        <result property="configure" column="CONFIGURE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+    </resultMap>
+
+    <resultMap id="projectFileResult" type="com.ohgiraffers.semiproject.project.product.model.dto.ProjectFileDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="originalFileName" column="ORIGINAL_FILE_NAME"/>
+        <result property="changedFileName" column="CHANGED_FILE_NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+
+    </resultMap>
+    <resultMap id="ProductReviewDTO" type="com.ohgiraffers.semiproject.project.product.model.dto.ProductReviewDTO">
+        <id property="contentNumber" column="content_number"/>
+        <result property="userCode" column="user_code"/>
+        <result property="profileImage" column="profile_image"/>
+        <result property="reviewContent" column="product_content"/>
+        <result property="projectCode" column="project_code"/>
+    </resultMap>
+
+
+    <resultMap id="MemberAndReviewDTO" type="com.ohgiraffers.semiproject.project.product.model.dto.MemberAndReviewDTO">
+        <association property="memberDTO" resultMap="memberResultMap"/>
+        <association property="productReviewDTO" resultMap="ProductReviewDTO"/>
+    </resultMap>
+
+    <select id="totalStoryList" resultMap="totalStoryList">
+        select
+            A.PROJECT_CODE,
+            A.PROJECT_TITLE,
+            A.PROJECT_SUMMARY,
+            A.PROJECT_END_DATE,
+
+
+            A.ACHIEVEMENT_STATUS,
+            A.TARGET_AMOUNT,
+            A.SELLER_INFO,
+            E.BUSINESS_NAME,
+            E.BUSINESS_EMAIL,
+            E.HOMEPAGE
+
+        FROM TBL_PROJECT A
+
+
+            JOIN tbl_private_business E ON (A.SELLER_INFO = E.USER_CODE)
+        where A.PROJECT_CODE = #{no};
+    </select>
+
+    <select id="optionList" resultMap="projectOptionResult">
+        select
+            C.OPTION_NAME,
+            C.OPTION_TYPE,
+            C.PRICE,
+            C.CONFIGURE,
+            C.PROJECT_CODE,
+            C.OPTION_CODE
+        FROM
+            TBL_PROJECT A
+                 JOIN TBL_PROJECT_OPTION C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+        WHERE
+            A.PROJECT_CODE = #{no};
+    </select>
+
+    <select id="projectimage" resultMap="projectFileResult">
+        SELECT
+            D.FILE_CODE,
+            D.CHANGED_FILE_NAME
+        FROM tbl_project A
+                 JOIN tbl_project_file D ON A.PROJECT_CODE = D.PROJECT_CODE
+        WHERE A.PROJECT_CODE = #{no}
+        ORDER BY D.FILE_CODE;
+    </select>
+
+<select id="profileimage" resultMap="profileImageResult">
+    select
+        D.FILE_CODE,
+        D.PATH,
+        D.CHANGEDPRO_FILE_NAME
+    FROM tbl_project A
+             JOIN tbl_profile_image D ON (A.SELLER_INFO = D.USER_CODE)
+    WHERE
+        A.PROJECT_CODE = #{no};
+</select>
+
+    <insert id="addReview" >
+        insert into tbl_product_review
+        (
+            user_code,
+            profile_image,
+            product_content,
+            project_code
+        )
+        values (
+                     #{userCode},
+                     #{profileImage},
+                     #{reviewContent},
+                    #{projectCode}
+
+                 )
+    </insert>
+
+    <select id="getProfileImage" resultMap="profileImageResult">
+        SELECT CHANGEDPRO_FILE_NAME
+        FROM tbl_profile_image
+        WHERE USER_CODE = #{userCode}
+    </select>
+
+    <select id="selectReview" resultMap="MemberAndReviewDTO">
+        SELECT U.USER_ID,
+               PR.user_code,
+               PR.profile_image,
+               PR.product_content
+        FROM tbl_user U
+        JOIN tbl_product_review PR ON  (U.user_code = PR.user_code)
+        WHERE PR.PROJECT_CODE = #{no}
+    </select>
+
+</mapper>

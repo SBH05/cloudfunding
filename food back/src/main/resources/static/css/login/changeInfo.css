@@ -1,0 +1,320 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: poppins;
+}
+
+
+
+a:link, a:visited{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+#popup-container{
+    display: none;
+
+}
+#layer_bg{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    font-family:Noto Sans KR;
+    font-size:13px;
+}
+#popup > h2{
+    margin-bottom: 25px;
+}
+#popup > h2 > label{
+    float: right;
+}
+#layer_popup:checked + label + #layer_bg{
+    display: block;
+}
+#layer_popup:checked + #layer_bg{
+    display: block;
+}
+#popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    width: 600px;
+    height: 550px;
+    overflow-y: auto;
+}
+.popup-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+#layer_popup{
+    display: none;
+}
+#layer_popup:checked + label + #layer_bg{
+    display: block;
+}
+#layer_popup:checked + #layer_bg{
+    display: block;
+}
+
+
+/*  asdasdasd*/
+
+.container {
+    display: flex;
+    justify-content: space-evenly; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+    width: 1920px;
+    
+    
+    margin: 0 auto; /* 화면 가운데 정렬 */
+}
+
+
+.left {
+    flex-basis: 500px; /* 왼쪽 영역의 너비를 30%로 설정 */
+    flex-shrink: 0;
+
+    position: relative;
+    right: 110px;
+    
+}
+
+.middle {
+    flex-basis: 900px; /* 가운데 영역의 너비를 50%로 설정 */
+    flex-shrink: 0;
+    
+    
+}
+
+.right {
+    flex-basis: 192px; /* 오른쪽 영역의 너비를 20%로 설정 */
+}
+
+.changeinfotitle{
+    font-size: 24px;
+    font-weight: 600;
+    padding: 40px 0;
+}
+
+
+.box1{
+    border-radius: 9px;
+    width: 360px;
+    height: 35px;
+    border: 1px solid rgb(184, 184, 184);
+}
+
+.box2{
+    border-radius: 9px;
+    width: 260px;
+    height: 35px;
+    border: 1px solid rgb(184, 184, 184);
+    
+}
+.box3{
+    border-radius: 9px;
+    width: 175px;
+    height: 35px;
+    border: 1px solid rgb(184, 184, 184);
+}
+
+.box4{
+    border-radius: 9px;
+    width: 360px;
+    height: 60px;
+    border: 1px solid rgb(184, 184, 184);
+    
+}
+
+.movetext1{
+    margin-left: 150px;
+}
+
+.movetext2{
+    margin-left: 123px;
+}
+/* ===========================================================프로필 */
+.profileimg1{
+    width: 200px;
+    position: relative;
+    left: 75px;
+    padding-bottom: 40px;
+}
+.profileimg button{
+    position: relative;
+    right: 86px;
+}
+
+#profilebtn{
+        /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+   width: 100px;
+   height: 31px;
+
+    position: relative;
+    left: 125px;
+
+   /* 배경색을 색으로 설정합니다. */
+   background-color: lightgrey;
+
+   /* 글자 색을 변경합니다. */
+   color: white;
+
+    padding: 3px;
+    
+
+   /* 모서리를 둥글게 만듭니다. */
+   border-radius: 5px;
+
+   /* 테두리를 없앱니다. */
+   border: none;
+
+   /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+   text-align: center;
+}
+
+
+#profilebtn:hover{
+    
+        /* 마우스 호버 시 배경색 변경 */
+        background-color: darkorange;
+    
+}
+
+.searchZipCode1{
+    /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+    width: 85px;
+    height: 31px;
+
+    /* 배경색을 색으로 설정합니다. */
+    background-color: lightgrey;
+
+    /* 글자 색을 변경합니다. */
+    color: white;
+
+    padding: 3px;
+
+
+    /* 모서리를 둥글게 만듭니다. */
+    border-radius: 5px;
+
+    /* 테두리를 없앱니다. */
+    border: none;
+
+    /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+    text-align: center;
+
+}
+.searchZipCode1:hover{
+    background-color: darkorange;
+}
+
+
+
+/*========================================= 회원정보 변경 버튼*/
+.changeInfobtn button {
+   /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+   width: 200px;
+   height: 50px;
+
+   /* 배경색을 색으로 설정합니다. */
+   background-color: lightgrey;
+
+   /* 글자 색을 변경합니다. */
+   color: white;
+
+   /* 글자 크기를 크게 설정합니다. */
+   font-size: 18px;
+
+   /* 모서리를 둥글게 만듭니다. */
+   border-radius: 25px;
+
+   /* 테두리를 없앱니다. */
+   border: none;
+
+   /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+   text-align: center;
+
+   /* 버튼 안의 텍스트의 여백을 조정합니다. */
+   padding: 10px 20px;
+
+   /* 마우스 호버 시 색상 변경 효과를 추가합니다. */
+
+   position: relative;
+
+   left: 160px;
+   
+}
+.changeInfobtn button:hover {
+    /* 마우스 호버 시 배경색 변경 */
+    background-color: darkorange;
+}
+.changeInfobtn{
+    padding: 50px 0;
+}
+
+.mailbtn button{
+   /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+   
+   height: 31px;
+
+   /* 배경색을 색으로 설정합니다. */
+   background-color: lightgrey;
+
+   /* 글자 색을 변경합니다. */
+   color: white;
+
+    padding: 3px;
+
+    width: 80px;
+
+   /* 모서리를 둥글게 만듭니다. */
+   border-radius: 5px;
+
+   /* 테두리를 없앱니다. */
+   border: none;
+
+   /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+   text-align: center;
+
+   /* 버튼 안의 텍스트의 여백을 조정합니다. */
+   
+
+   /* 마우스 호버 시 색상 변경 효과를 추가합니다. */
+}
+
+.mailbtn button:hover {
+    /* 마우스 호버 시 배경색 변경 */
+    background-color: darkorange;
+}
+
+
+.changeInfo{
+    position: relative;
+    left: 100px;
+    padding-bottom: 20px;
+}
+
+.ligoimg img{
+    width: 120px;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+
+
+

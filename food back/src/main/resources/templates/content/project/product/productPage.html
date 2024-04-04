@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block layout:fragment="content">
+
+
+    <link rel="stylesheet" th:href="@{/css/project/productPage/productPage.css}">
+
+    <!-- 헤더시작 -->
+
+    <!-- 헤더끝 -->
+    <div class="bodyking">
+
+        <div class="main-box">
+
+            <div class="story-con">
+                <a th:href="@{/product/productStory(no=${thumbnailList.projectDTO.projectCode})}" class="story">스토리</a>
+                <br>
+                <a th:href="@{/product/productPage(no=${thumbnailList.projectDTO.projectCode})}" class="story">구매후기</a>
+
+            </div>
+            <div class="story-con2">
+
+            </div>
+            <div class="bigPage">
+
+
+                <div class="left">
+                    <button class="writing" name="createBox" onclick="createWritingBox()">글쓰기</button>
+
+                    <!-- 리뷰 폼 -->
+                    <form class="writing-box" id="reviewForm" th:action="@{/productPage}" method="post" style="display: none;">
+                        <textarea id="reviewContent" name="reviewContent" rows="4" cols="50" placeholder="리뷰를 작성하세요..."></textarea>
+                        <input type="hidden" id="projectCode1" name="projectCode" th:value="${thumbnailList.projectDTO.projectCode}" />
+                        <button type="button" onclick="submitReview()">작성 완료</button>
+                    </form>
+
+                    <div class="review-box" th:each="review : ${ memberAndReviewDTO }" >
+                        <div class="img">
+                            <img th:src="@{|/imagePath/${review.getProductReviewDTO().getProfileImage()}|}" alt="Profile Image">
+                            <div class="img-right" th:text="${review.getMemberDTO().getUserId()}"></div>
+
+
+                        </div>
+                        <div class="comment-box">
+                            <div style="margin: 15px;"  >
+                        <div th:text="${review.getProductReviewDTO().getReviewContent()}"></div>
+<!--                                여기가 텍스트 내용-->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="guide">
+                        <div class="guide-top">
+                            <div class="guide-img">
+                                <img src="/images/04_etc/magnifying%20glass.png" alt=""
+                                     style="width: 25px; height: 25px;">
+                                <div class="guide-title">커뮤니티가이드</div>
+                            </div>
+                            <div class="pre-con">
+<pre>            프로젝트와 무관한 글, 사진, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 삭제 등 조치가 취해질 수 있습니다. 해당 내용으로
+            인해 메이커, 서포터, 제3자에게 피해가 발생되지 않도록 유의해 주세요.
+
+            삭제가 필요한 글은 info@wadiz.kr 로 신고를 접수해 주세요. 신고 접수 시 반드시 신고인 아이디, 게시물 작성자 아이디, 프
+            로젝트 이름 또는 URL을 포함해 주세요.
+
+            이름 비공개로 펀딩/예약구매 참여하면 글 작성 시 ‘참여’ 라벨이 노출되지 않습니다. 펀딩/예약구매가 필요한 이벤트에 참여
+            할 경우 유의해 주세요.
+            
+            지지서명, 응원/의견/체험리뷰는 오픈예정 또는 진행 중인 프로젝트일 때만 작성할 수 있어요.</pre>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <script>
+                    function createWritingBox() {
+
+
+                        // 새로운 글쓰기 창을 생성
+                        const writingBox = document.createElement('div');
+                        writingBox.className = 'writing-box';
+
+
+
+                        // 글쓰기 창 내부 HTML 구조
+                        writingBox.innerHTML = `
+                            <textarea id="reviewContent" name="reviewContent" rows="4" cols="50" placeholder="솔직한 후기를 남겨보세요 !!..."></textarea>
+                            <button onclick="submitReview()">작성 완료</button>
+                        `;
+
+                        // 버튼 아래에 추가
+
+                        const writingButton = document.querySelector('.writing');
+                        writingButton.parentNode.insertBefore(writingBox, writingButton.nextSibling);
+                        //글쓰기 버튼 한번만 눌리도록, 작성하지 않으면 글쓰기버튼이 계속 눌러져서 글쓰기창이 계속생김
+                        if (writingButton){
+                            writingButton.disabled = true;
+
+                        }
+
+
+                    }
+
+
+                    function submitReview() {
+                        //함수가 호출되나 확인
+                        console.log("submitReview 함수가 호출되었습니다.");
+                        // 리뷰 폼과 데이터 가져오기
+                        const formElement = document.getElementById('reviewForm');
+                        const formData = new FormData(formElement);
+
+                        // 프로젝트 코드를 현재 설정된 값에서 가져옵니다.
+                        const projectCode = document.getElementById('projectCode1').value;
+                        console.log("전송되는 프로젝트 코드: " + projectCode); // 콘솔에 프로젝트 코드를 출력하여 확인합니다.
+
+
+                        // FormData 객체 내용 확인
+                        console.log("FormData 내용 확인:");
+                        for (let [key, value] of formData.entries()) {
+                            console.log(key, value);
+                        }
+
+                        // 'projectCode' 파라미터를 formData에 추가
+                        formData.append('projectCode', projectCode);
+
+
+                        // 'no' 파라미터를 현재 URL에서 추출
+                        const queryParams = new URLSearchParams(window.location.search);
+                        const no = queryParams.get('no');
+
+                        // 'no' 파라미터를 formData에 추가
+                        formData.append('no', no);
+                        let reviewContent = document.querySelector('textarea[name="reviewContent"]').value.trim();
+                        formData.append('reviewContent', reviewContent);
+                        // 서버로 리뷰 데이터 전송
+                        fetch('/product/productPage', { // 서버의 리뷰 처리 엔드포인트로 변경하세요.
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => {
+                                if(response.ok) {
+                                    // alert("리뷰프로젝트코드전송성공")
+                                    // 서버가 리뷰를 성공적으로 처리했다면, 사용자를 리뷰가 포함된 페이지로 리디렉션
+                                    window.location.href = `/product/productPage?no=${no}`;
+                                } else {
+                                    throw new Error('Server responded with an error!');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error submitting review:', error);
+                            });
+
+                        // 기본 폼 제출 동작 방지
+                        event.preventDefault();
+
+                        // 글쓰기 창 제거
+                        const writingBox = document.querySelector('.writing-box');
+                        writingBox.parentNode.removeChild(writingBox);
+                    }
+                </script>
+
+
+                <div class="right">
+
+                    <div class="introduction-con">
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px; font-weight: bold;" th:text="${thumbnailList.projectDTO.projectTitle}" >
+                            </div>
+                            <div style="font-size: 23px; margin-bottom: 50px;" th:text="${thumbnailList.projectDTO.projectSummary}">
+                            </div>
+                            <div style="margin-bottom: 50px;"><span
+                                    style="font-size: 40px; font-weight: bold;">37</span><span>명 참여<span
+                                    class="introduction-span" style="margin-left: 20px;">10일 남음</span></span></div>
+                        </div>
+
+                        <div style="margin-bottom: 50px;"><span
+                                style="font-size: 40px; font-weight: bold;">1,056,000</span><span>원 달성<span
+                                class="introduction-span" style="margin-left: 20px;">211% 달성</span></span></div>
+
+
+                    </div>
+
+                    <div class="btns-con">
+                        <!--                        <button class="goodbtn">-->
+                        <!--                            <div onclick="like('button1')" class="like-button" id="button1">&#10084;</div>-->
+                        <!--                            <span id="likeCount">0</span></button>-->
+                        <!--이 프로젝트만 구매하는 페이지를 만들어야하는건가??-->
+                        <!--                        <a th:href="@{/order/buypage}">-->
+                        <!--                            <button class="buybtn">예약 구매하기</button>-->
+                        <!--                        </a>-->
+                    </div>
+                    <script>
+                        let liked1 = false; // 첫 번째 좋아요 상태를 나타내는 변수
+                        let liked2 = false; // 두 번째 좋아요 상태를 나타내는 변수
+                        let likeCount = 0;   // 좋아요 개수를 저장하는 변수
+
+                        function like(buttonId) {
+                            const button1 = document.getElementById('button1');
+                            const button2 = document.getElementById('button2');
+                            const likeCountElement = document.getElementById('likeCount');
+
+                            if (buttonId === 'button1') {
+                                liked1 = !liked1;
+                                liked2 = liked1;
+                            } else if (buttonId === 'button2') {
+                                liked2 = !liked2;
+                                liked1 = liked2;
+                            }
+
+                            if (liked1 || liked2) {
+                                // 하나 이상의 버튼이 좋아요 상태인 경우
+                                button1.classList.add('liked');
+                                button2.classList.add('liked');
+                                likeCount++;
+                            } else {
+                                // 두 버튼이 모두 좋아요 상태가 아닌 경우
+                                button1.classList.remove('liked');
+                                button2.classList.remove('liked');
+                                likeCount--;
+                            }
+
+                            // 좋아요 개수 업데이트
+                            likeCountElement.textContent = likeCount;
+                        }
+                    </script>
+                    <div class="businesscard-con">
+                        <div class="businesscard">
+                            <img th:src="@{|/imagePath/${profileImage.getChangedProFileName()}|}" alt="">
+                            <!--                                    여기가 판매자 이름-->
+                            <div class="businesscard-right" th:text="${thumbnailList.privateBusinessDTO.businessName}"></div>
+                        </div>
+                        <div class="businesscard-home">홈페이지:&nbsp;&nbsp;<span th:text="${thumbnailList.privateBusinessDTO.homepage}"></span></div>
+                            <!--                                 홈페이지 주소 넣는 곳-->
+<!--                            <div class="addr"></div>-->
+
+                        <div class="business-sns">email:&nbsp;&nbsp;<span th:text="${thumbnailList.privateBusinessDTO.businessEmail}"></span></div>
+                    </div>
+                    <div class="report-con">
+                        <span>프로젝트에 문제가 있나요?<span style="margin-left: 360px;"><a th:href="@{/board/inquiryWrite}">신고하러가기  ></a></span></span>
+                    </div>
+                    <div class="pickkeyword-con">
+                        <div class="pickkeyword">리워드 선택</div>
+                    </div>
+                    <!-- 스크롤바 -->
+                    <div class="scroll-container">
+                        <!-- 상품선택하는 곳 -->
+                        <form id="optionForm" th:action="@{/order/cart}" method="post">
+                            <div class="select-con">
+
+                                <div class="select-a"   th:each="option, iterStat : ${projectOption}"
+                                     th:id="'option-' + ${iterStat.index}"
+                                     onclick="selectOption(this, ${iterStat.index})"
+                                     th:data-project-code="${option.projectCode}"
+                                     th:data-option-type="${option.optionType}"
+                                     th:data-option-code="${option.optionCode}"
+
+                                >
+                                    <div class="product-0">
+                                        <!--                                        가격-->
+                                        <div class="productprice-1">
+                                            <div th:text="${option.price}"></div>
+                                        </div>
+                                        <div class="product-1">
+                                            <div th:text="${option.optionName}"></div>
+                                            <!--                                            옵션 이름ㅇ-->
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="product-2">
+                                        <!--                                    상품 구성-->
+                                        <div th:text="${option.configure}"></div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="product-3">
+                                        <div>배송비</div>
+                                        <div style="font-weight: bold;">6000원</div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="product-4">
+                                        <div>발송 시작일</div>
+                                        <div style="font-weight: bold;">2023년 12월 말 (21-말일) 예정</div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="product-5">
+                                        <div>제한 수량</div>
+                                        <div style="font-weight: bold;">50개</div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <input type="hidden" id="selectedOptionIndex" name="selectedOptionIndex" value="" />
+                            <input type="hidden" id="projectCode" name="projectCode" th:value="${thumbnailList.projectOptionDTO.projectCode}" />
+                            <input type="hidden" id="optionType" name="optionType" th:value="${thumbnailList.projectOptionDTO.optionType}" />
+                            <input type="hidden" id="optionCode" name="optionCode" th:value="${thumbnailList.projectOptionDTO.optionCode}" />
+
+                            <!--                       카트컨트롤러의     @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO 로 맴버코드(usercode가져오는것 생략)-->
+                            <!--                        <input type="hidden" id="memberCode" name="memberCode" th:value="${thumbnailList.projectUserDTO.userCode}" />-->
+
+
+                        </form>
+                        <br>
+                    </div>
+                    <div class="btns-con">
+
+                        <button class="goodbtn">
+                            <div onclick="like('button1')" class="like-button" id="button1">&#10084;</div>
+                            <span id="likeCount">0</span></button>
+                        <button class="buybtn" form="optionForm" type="submit"  onclick="submitForm()">예약 구매하기</button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="qna-con">
+        <div class="qnaPage">
+            <div class="middle">
+                <!-- 가운데 컨텐츠 -->
+                <div class="first">
+                    <span><a class="black-link" href="./BNM.html">QnA</a></span>
+
+                </div>
+
+
+                <div class="searchcontainer">
+                    <div class="searchleft1">
+                        <form action="search" method="post">
+                            <select name="nation2">
+                                <option value="search" selected>정렬컬럼</option>
+                                <option value="ch">코드(기본)</option>
+                                <option value="etc">제목</option>
+                                <option value="etc">작성일자</option>
+                            </select>
+                        </form>
+                    </div>
+
+                    <div class="searchleft2">
+                        <form action="search" method="post">
+                            <select name="nation2">
+                                <option value="search" selected>정렬방식</option>
+                                <option value="ch">오름차순</option>
+                                <option value="jp">내림차순(기본)</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div id="link" class="newWriting" onclick="location.href='productQnA'">
+                        QnA작성하기
+                    </div>
+                    <div class="searchright">
+                        <form action="search" method="post">
+                            <button class="iconlogo" type="submit"
+                                    style="width: 20px; height: 20px; border: none; background: url('/resources/images/돋보기\ 아이콘.avif') center center / cover no-repeat; padding: 0;"></button>
+                            <input type="text" name="search" required>
+                            <select name="nation2">
+                                <option value="search" selected>검색설정</option>
+                                <option value="ch">코드</option>
+                                <option value="jp">제목</option>
+                                <option value="etc">작성일자</option>
+                            </select>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <table>
+
+                        <tr>
+
+                            <th id="newcolumn">새 글</th>
+                            <th>코드</th>
+                            <th>제목</th>
+                            <th id="right">작성일자</th>
+                        </tr>
+                        <tr id="link" onclick="location.href='./noticeWrited'">
+                            <td id="new">new</td>
+                            <td>8</td>
+                            <td>이거 이마트에서 더 싸게 파는..</td>
+                            <td>2023/12/03</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>8</td>
+                            <td>최근 논란에 대해 안내드립니다.</td>
+                            <td>2023/11/16</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>8</td>
+                            <td>최근 논란에 대해 안내드립니다.</td>
+                            <td>2023/11/16</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>8</td>
+                            <td>최근 논란에 대해 안내드립니다.</td>
+                            <td>2023/11/16</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="pagination-box">
+                        <a href="#" class="prev">＜</a>
+                        <div class="page-links">
+                            <a href="#" class="page-link">1</a>
+                            <a href="#" class="page-link">2</a>
+                            <a href="#" class="page-link">3</a>
+
+                        </div>
+                        <a href="#" class="next">＞</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ... (사이드바 내용은 여기에 추가) ... -->
+    <!-- 사이드바 배경 -->
+
+
+    <!-- 사이드바 끝 -->
+
+
+    <!-- 푸터는 이아래에 붙여 -->
+
+    <!-- 푸터 시작 -->
+
+
+    <!-- 푸터끝 -->
+
+
+    <script>
+        let counterValue = 0;
+
+        // 증가 함수
+        function increase() {
+            counterValue++;
+            updateCounter();
+        }
+
+        // 감소 함수
+        function decrease() {
+            if (counterValue > 0) {
+                counterValue--;
+                updateCounter();
+            }
+        }
+
+        function updateCounter() {
+            document.getElementById('counter-value').innerText = counterValue;
+        }
+    </script>
+
+    <script>
+        function selectOption(element, index) {
+            // 모든 'select-a' 요소의 'selected' 클래스 제거
+            document.querySelectorAll('.select-a').forEach(function(el) {
+                el.classList.remove('selected');
+            });
+
+            // 클릭된 요소에 'selected' 클래스 추가
+            element.classList.add('selected');
+
+            // 선택된 옵션의 인덱스 설정
+            document.getElementById('selectedOptionIndex').value = index;
+
+            // 선택된 옵션의 프로젝트 코드와 옵션 타입을 설정
+            document.getElementById('projectCode').value = element.dataset.projectCode;
+            document.getElementById('optionType').value = element.dataset.optionType;
+            document.getElementById('optionCode').value = element.dataset.optionCode;
+
+
+            // 선택된 옵션 정보를 JSON 객체로 생성
+            var selectedOptionDetails = {
+                price: element.querySelector(".productprice-1 div").innerText,
+                optionName: element.querySelector(".product-1 div").innerText,
+                configure: element.querySelector(".product-2 div").innerText,
+                projectType: element.dataset.projectCode,
+                optionType: element.dataset.optionType,
+                optionCode: element.dataset.optionCode
+
+            };
+
+            // JSON 객체를 문자열로 변환하여 숨겨진 필드의 값으로 설정
+            document.getElementById('selectedOptionIndex').value = JSON.stringify(selectedOptionDetails);
+        }
+    </script>
+
+    <script>
+        function submitForm() {
+            // 선택된 옵션이 있는지 확인
+            var selectedOptionValue = document.getElementById('selectedOptionIndex').value;
+            if (selectedOptionValue) {
+                // 선택된 옵션이 있으면 폼을 제출합니다.
+                document.getElementById('optionForm').submit();
+                window.location.href = '/order/cart';
+                // window.href.
+            } else {
+                // 선택된 옵션이 없으면 사용자에게 알림
+                alert('옵션을 선택해주세요.');
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('.select-a').forEach((element, index) => {
+                element.setAttribute('onclick', `selectOption(this, ${index})`);
+            });
+        });
+    </script>
+
+</th:block>
+</html>

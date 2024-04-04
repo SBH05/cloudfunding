@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <link rel="stylesheet" href="/css/sellerManage/sellerProjectDetail.css">
+
+
+            <div class="middle_box">
+                <div class="middle">
+                    <div class="first">
+                        <a class="black3-link" th:href="@{#}" id="questionLink"> > </a>
+                        <span> 정산내역 </span>
+                    </div>
+
+                    <div class="seller_info"><span>황황정육</span></div>
+                    <div class="ing_loca">
+                        <div class="ing">달성성공</div>
+                    </div>
+
+
+
+                    </div>
+
+                    <div class="bar"></div>
+
+                    <div class="order_infotitle">
+                        <span>정산 정보</span>
+                    </div>
+
+                    <div class="order_infoIme">
+                        <img src="/images/food/image_111.png" alt="로고" width="90">
+                    </div>
+                    <div class="order_info">
+                        <a class="black3-link" span href="#">풍미가 좋은 드라이에이징 삼겹살</a><br><br>
+                        <span>달성금액</span><br>
+
+                    </div>
+                    <div class="order_infopri">
+                        <span>9,500,000 won</span>
+                    </div>
+
+                    <div class="bar2"></div>
+                    <div class="order_titleprice">
+                        <span >달성 금액</span><br>
+                        <span >수수료</span><br>
+                        <span></span><br>
+                        <span >총 금액</span><br>
+                    </div>
+
+                    <div class="order_price">
+                        
+                        <span id="total" >9,500,000 won</span><br>
+                        <span id="fee">5%</span><br>
+                        <span></span><br>
+                        <span id="result"> 9,025,000won</span><br><br>
+                    </div>
+                    <div class="bar3"></div>
+
+
+                    <div class="deliver_infobuyer">
+                        <div class="deliver_buyer_infotitle">
+                            <span>영수증</span><br>
+                            <span>수령인</span><br>
+                            <span></span><br>
+                            <span>금액</span><br>
+                        </div>
+
+                        <div class="deliver_buyer_infoinput">
+                            <span></span><br>
+                            <span>황황정육</span><br>
+                            <span></span><br>
+                            <span>9,025,000won</span><br>
+                        </div>                     
+                    </div>
+                    
+                    
+                    
+                </div>           
+            </div>
+
+
+</th:block>
+        
+
+</html>

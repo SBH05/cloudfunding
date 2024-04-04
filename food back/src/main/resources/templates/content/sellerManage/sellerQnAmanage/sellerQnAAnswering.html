@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <link rel="stylesheet" href="/css/QnA/QnAAnswering.css">
+
+
+    <th:block th:replace="/fragments/sellersidebar.html"></th:block>
+    <title>sellerProjectQnA-AnswerIng</title>
+
+
+
+
+
+        <div class="middle_box">
+        
+            <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                
+                <span>프로젝트 QnA</span>
+            </div>
+
+
+
+
+            <div class="box">
+                <span class="box1">작성번호 : 1</span>
+                <span class="box1">작성자:김민*</span>
+                <span class="box2">작성일자 : 23/ 11 /20</span>
+            </div>
+
+            <form action="" method="post">
+                <div class="wirte_title">제목 </div>
+                <div class="project_title">프로젝트명</div>
+                <div class="seller_name">판매자</div>
+                <div class="title_detail">풍미가 좋은 드라이에이징 삼겹살</div>
+                <div class="project_detail">풍미가 좋은 드라이에이징 삼겹살</div>
+                <div class="seller_detail">황황도축시장</div>
+                <div class="bar"></div>
+
+                <div class="quest1">
+                <div class="detail" >얼마나 보관할 수 있나요?? </div>
+                </div>
+
+                <div class="quest2">
+                    <div class="detail" >
+                        <textarea style = "background-color:transparent" placeholder="답변을 입력해주세요." ></textarea>
+                    </div>
+                </div>
+                <div class="submitbtn"><button type="submit">등록하기</button></div>
+            </form>            
+
+
+            </div>
+        </div>
+
+
+
+
+</th:block>
+
+</html>

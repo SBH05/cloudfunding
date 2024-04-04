@@ -1,0 +1,378 @@
+
+        /* 중간 제목 */
+		.first{
+			font-size: 30px;
+			font-weight: 1000;
+			margin-top: 40px;
+			margin-left: 0px;
+		}
+
+				/* 중간영역 시작 */
+		.middle {
+			width:1260px;
+			height:1980px;
+			position:relative;
+			left:0px;
+			top:20px;
+			box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+			background-color: rgba(255, 255, 255, 1);
+		}
+
+
+
+		.middle_box {
+
+			width:1420px;
+			height:2150px;
+			position:relative;
+			left:460px;
+			top:40px
+		}
+
+
+
+
+                .logo1 {
+                    width: 140px; /* 원하는 너비로 설정하세요. */
+                    height: auto; /* 높이는 자동으로 조정됩니다. */
+                    margin-top: 40px;
+                }
+
+
+                .black-link,
+                .black-link:visited {
+                    color: white;
+                    text-decoration: none; /* 밑줄 제거 */
+                }
+        
+                /* 탈퇴 영역 */
+                .withdrawal {
+                    
+                    position:absolute;
+                    left:190px;
+					top: 290px;
+					height:990px;
+                    width:890px;
+                    color: rgba(88, 88, 88, 1);
+                }
+
+                /* 탈퇴자 이름*/
+                .withdrawal_name{
+                    font-size: 30px;
+                    color: rgba(88, 88, 88, 1);
+
+                } 
+
+                /* 탈퇴막는글자 */
+                .withdrawal_not{
+                    position:absolute;
+                    font-size: 17px;
+                    width: 670px;
+                    top: 65px;
+                    left: 0px;
+                    color: rgba(88, 88, 88, 1);
+                }
+
+                /* 문의박스 */
+
+                .withdrawal_notbox{
+
+                    position:absolute;
+                    width: 670px;
+                    height: 200px;
+                    top: 140px;
+                    border:1px solid;
+                    border-color:rgba(88, 88, 88, 1);
+                    background-color: white;
+                    border-radius: 5px;
+                }
+
+                /* 문의박스내용1 */
+                
+                .withdrawal_notinsert{
+                    position:absolute;
+                    top: 10px;
+                    left: 30px;
+                    font-size: 20px;
+                    color: rgba(88, 88, 88, 1);
+                }
+
+                /* 문의박스내용2 */
+                .withdrawal2_notinsert{
+                    position:absolute;
+                    top: 50px;
+                    left: 30px;
+                    font-size: 15px;
+                    color: rgba(88, 88, 88, 1);
+                }
+
+                /* 문의박스내용3 */
+                
+                .withdrawal3_notinsert{
+                    position:absolute;
+                    top: 90px;
+                    left: 30px;
+                    font-size: 20px;
+                    color: rgba(88, 88, 88, 1);
+                }
+
+                /* 문의박스내용4 */
+                
+                .withdrawal4_notinsert{
+                    position:absolute;
+                    top: 130px;
+                    left: 30px;
+                    font-size: 15px;
+                    color: rgba(88, 88, 88, 1);
+                }
+
+
+                    /* 불편사유 */
+                    .incon{
+                        font-size: 30px;
+                        color: rgba(88, 88, 88, 1);
+                        position:absolute;
+                        top: 420px;
+                        left: 0px;
+                    } 
+
+                    /* 필수 별 */
+                    .star{
+                        color: orange;
+                    }
+
+                    .incon_in{
+                        font-size: 17px;
+                        color: rgba(88, 88, 88, 1);
+                        position:absolute;
+                        top: 470px;
+                        left: 0px;
+                    } 
+
+					/* 불편사유 이유 */
+					.incon_reason{                                      						
+                        position:absolute;
+                        top: 520px;
+                        left: 0px;
+						color:rgba(88, 88, 88, 1);
+						font-size: 17px;
+						width: 310px;
+						height: 30px;
+						padding: 4px;
+						
+                    }
+
+					/* 탈퇴전 안내사항 영역 */
+					.notice{
+						position:absolute;
+                        top: 630px;
+						width: 890px;
+						height: 400px;
+                        left: 0px;
+						color:rgba(88, 88, 88, 1);						
+					}
+
+					.notice1_input{
+						position:absolute;
+						font-size: 30px;
+						top: 0px;
+					}
+
+					.notice2_input{
+						position:absolute;
+						font-size: 17px;
+						top: 60px;
+						left: 1px;					
+					}
+
+					.notice3_input{
+						position:absolute;
+						font-size: 17px;
+						top: 90px;
+						left: 1px;
+						color: orange;					
+					}
+
+
+
+					.notice4_input{
+						position:absolute;
+						font-size: 17px;
+						top: 180px;
+						left: 1px;					
+					}
+
+					.notice5_input{
+						position:absolute;
+						font-size: 14px;
+						top: 210px;
+						left: 1px;					
+					}
+
+					
+					.notice6_input{
+						position:absolute;
+						font-size: 17px;
+						top: 290px;
+						left: 1px;					
+					}
+					
+					.notice7_input{
+						position:absolute;
+						font-size: 14px;
+						top: 320px;
+						left: 1px;					
+					}
+
+										
+					.notice8_input{
+						position:absolute;
+						font-size: 17px;
+						top: 400px;
+						left: 1px;					
+					}
+					
+					.notice9_input{
+						position:absolute;
+						font-size: 14px;
+						top: 430px;
+						left: 1px;					
+					}
+
+					.notice10_input{
+						position:absolute;
+						font-size: 17px;
+						top: 510px;
+						left: 1px;					
+					}
+					
+					.notice11_input{
+						position:absolute;
+						font-size: 14px;
+						top: 540px;
+						left: 1px;					
+					}
+					
+					.notice12_input{
+						position:absolute;
+						font-size: 17px;
+						top: 620px;
+						left: 1px;					
+					}
+					
+					.notice13_input{
+						position:absolute;
+						font-size: 14px;
+						top: 650px;
+						left: 1px;					
+					}
+
+					/* 안내 확인 박스 */
+					.notice_check{
+						position:absolute;
+						top:730px;
+						color:rgba(88, 88, 88, 1);
+						font-size: 20px;
+					}
+
+
+
+					/* 구분선 */
+
+					.bar{
+						width:890px;
+						position:absolute;
+						top:150px;
+						border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+					}
+
+					.bar1{
+						width:890px;
+						position:absolute;
+						top:260px;
+						border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+					}
+
+					.bar2{
+						width:890px;
+						position:absolute;
+						top:370px;
+						border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+					}
+
+					.bar3{
+						width:890px;
+						position:absolute;
+						top:480px;
+						border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+					}
+
+					.bar4{
+						width:890px;
+						position:absolute;
+						top:590px;
+						border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+					}
+
+					.bar5{
+						width:890px;
+						position:absolute;
+						top:700px;
+						border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+					}
+
+
+
+					/* 본인확인 영역 */
+
+					.identi{
+						position:absolute;
+						left: 0px;
+						top: 1500px;
+					}
+
+					/* 본인확인 글자 */
+					.identi_title{
+						font-size: 27px;
+					}
+
+
+
+
+
+			/* 본인확인 버튼 */
+
+			
+		.identi_box{
+			/* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+			padding: 10px 50px ;
+			
+		
+			/* 배경색을 주황색으로 설정합니다. */
+			background-color: rgba(243, 125, 29, 1);
+
+			/* 글자 색을 변경합니다. */
+			color: white;
+		
+			/* 글자 크기를 크게 설정합니다. */
+
+		
+			/* 모서리를 둥글게 만듭니다. */
+			border-radius: 5px;
+		
+			/* 테두리를 없앱니다. */
+			border: none;
+		
+			/* 버튼 안의 텍스트를 가운데 정렬합니다. */
+			text-align: center;
+		
+			/* 버튼 안의 텍스트의 여백을 조정합니다. */
+
+			text-decoration: none; /* 밑줄 제거 */
+
+		}
+
+	
+
+
+		

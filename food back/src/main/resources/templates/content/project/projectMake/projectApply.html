@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block layout:fragment="content">
+
+
+    <link rel="stylesheet" th:href="@{/css/project/projectMake/projectApply.css}">
+
+
+    <div class="buyok">
+        <th:block th:replace="/fragments/sellersidebar.html"></th:block>
+        <div class="buyokay">
+
+
+            <div class="payinfo">
+                <div style="float: left;">
+                    <a th:href="@{/프로젝트신청이전페이지}"><img src="/images/minicon/backbtn.jpg"
+                                                      width="25px" height="25px"></a>
+                </div>
+                <div><h2>이전</h2></div>
+            </div>
+            <div class="maininfo">
+
+                <div class="payment-confirmation">
+                    <div class="firstlogo"><a th:href="@{/}"><img src="/images/minicon/로고2.png" alt=""
+                                                                  width="150px"></a></div>
+
+                    <h3><pre>     프로젝트신청이 완료되었습니다.
+         심사 승인 후 공개됩니다.
+        </pre>
+                    </h3>
+                    <div class="secondlogo"><img src="/images/minicon/foodbox.png" alt=""></div>
+                </div>
+
+                <div class="product-list">
+                    <div class="product-status">
+                        <div class="orderStatus">
+                            <span><div class="pay" style="color: orange;">프로젝트 신청</div></span>&mdash;<span><img
+                                src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>심사중</span>&mdash;<span><img
+                                src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>승인 및 게시</span>
+                        </div>
+                    </div>
+                    <a th:href="@{/}" class="fin">메인으로 돌아가기</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
+</html>

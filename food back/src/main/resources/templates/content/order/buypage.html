@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/payment/buypage.css}">
+
+
+        <div id="left">
+            <div class="payment-info">
+                <div style="float: left;">
+                    <a th:href="@{/order/cart}"><img src="/images/minicon/backbtn.jpg" width="25px"
+                            height="25px"></a>
+                </div>
+                <div>
+                    <h2>결제정보</h2>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="payment-area">
+                    <div class="payment-product" th:each="cartItem: ${buyPageList}">
+                        <h4>결제상품</h4>
+                        <div class="menu-item">
+                            <div class="projectTitle" th:text="${cartItem.projectCode.title}">상품명</div>
+                        </div>
+                        <div id="counter-container">
+                            <div id="counter-controls">
+                                <div class="cartCount" th:text="${cartItem.count}">수량</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bilge">
+
+                    <div class="coupon-action"><div> </div></div>
+                <div class="total-product-amount">
+                    <span class="total-amount">상품 전체금액</span>
+                </div>
+                <div class="apply-coupon">
+                    <span class="total-amount"></span>
+                </div>
+                <div class="delivery-fee">
+                    <span class="shipping-cost">배송비</span>
+                </div>
+                <div class="final-amount">
+                    <span class="gun-cost">총금액</span>
+                </div>
+            </div>
+
+            <button class="payment" type="button" onclick="togglePopup()">결제</button>
+            <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc;">
+                <!-- Popup content -->
+                <p>결제합니다</p>
+
+                <button class="qr"> KakaoPay 결제 완료 </button>
+                <img src="/images/food/1hxaX.jpg" alt="Food Image">
+                <button onclick="closePopup()">닫기</button>
+                <input type="hidden" name="status" id="status" >
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="right">
+
+            <div id="right">
+                <div id="progress">
+                    <span><div class="pay">주문/결제</div></span>&mdash;<span><img src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>배송중</span>&mdash;<span><img src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>배송완료</span>
+                </div>
+                <div class="void"></div>
+
+                <div class="order-details-con">
+
+                     <div class="order-details" >
+                        <h4>주문 상세정보</h4>
+
+                         <div class="secondname">
+                             <div>이름</div>
+                             <input type="text" name="userName" id="userName" required></input>&nbsp;
+                         </div>
+
+                         <div class="phone">
+                             <div class="number">핸드폰 번호</div>
+                             <input type="text" name="phone" id="phone" required>&nbsp;</input>
+                         </div>
+
+                            <div class="searchZipCode1" >
+                                <input type="button" value="검색" class="searchZipCode" id="address">
+                                <div class="box1">우편주소</div>
+                                <input type="text" name="searchZipCode" id="searchZipCode" required >
+                             </div>
+
+                            <div class="detailed-address">
+                                <div class="req">주소</div>
+                                <input type="text" name="adrs" id="adrs" required >
+                             </div>
+
+                            <div class="detailed-address">
+                                <div class="req">상세주소</div>
+                                <input type="text" name="detailedAdrs" id="detailedAdrs" required >&nbsp;
+                            </div>
+
+                            <div class="requested">
+                                <div class="req">요청사항</div>
+                                <input type="text" name="request" id="request" >&nbsp;
+                            </div>
+
+                            <input type="checkbox" id="confirmationCheckbox">
+                            <label for="confirmationCheckbox">주문정보를 모두 확인했습니다</label>
+                    </div>
+                </div>
+        </div>
+
+        </div>
+
+
+
+
+<!--    주소 창 찾기-->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:inline="javascript">
+
+        const $address = document.getElementById("address");
+        $address.onclick = function() {
+
+            /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+            new daum.Postcode({
+                oncomplete: function(data){
+                    /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+                    document.getElementById("searchZipCode").value = data.zonecode;
+                    document.getElementById("adrs").value = data.address;
+                    document.getElementById("detailedAdrs").focus();
+                }
+            }).open();
+        }
+
+
+        function togglePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+
+
+//<img th:src="@{|/thumbPath/${cart.getChangeName()}|}" width="60px" height="60px" alt="Product Thumbnail">
+
+    </script>
+
+</th:block>
+</html>

@@ -1,0 +1,207 @@
+* {
+    font-family: Poppins;
+    text-decoration: none;
+}
+
+
+
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 1750px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+.back-board-container{
+    position: relative;
+    left: 600px;
+}
+
+/* 모든 입력창 포커스 되면 투명하게 */
+input:focus::placeholder {
+    color: transparent;
+}
+
+/* 제출하기 */
+.project-start {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10vh;
+}
+
+.checkbox-list {
+    margin-left: 10vh;
+}
+
+label strong {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    font-family: Poppins;
+}
+
+/* 타이틀 */
+.category-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 10vh;
+}
+
+.category-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 2vh;
+}
+
+.greeting-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 20vh;
+    margin-top: 2vh;
+    margin-left: 20vh;
+}
+
+/* 타이틀 옆 별 */
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}
+
+.owner-container {
+    margin-left: 10vh;
+}
+
+/* 프로젝트 제목 입력 */
+.putIn-title {
+    margin-left: 10vh;
+    width: 200px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+}
+
+.putIn-title input {
+    outline: none;
+    border: none;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.putIn-title p {
+    font-size: 13px;
+    color: #b9b9b9;
+}
+
+.first-image-box {
+    background-color: #F37D1D;
+    width: 500px;
+    height: 180px;
+    border-radius: 10px;
+    border: none;
+    margin-left: 10vh;
+}
+
+.first-image-title {
+    font-size: 25px;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.first-image-sub-title {
+    font-size: 15px;
+    color: #fff;
+}
+
+.first-image-box {
+    padding: 60px;
+}
+
+/* 프로젝트 종료일 입력창 */
+.project-end-container {
+    margin-left: 10vh;
+    width: 200px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+}
+
+.project-end-text {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    color: #b9b9b9;
+}
+
+/* 검색용 태그(#) 입력창 */
+.search-tag-container {
+    margin-left: 10vh;
+    width: 350px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+}
+
+.search-tag-text {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    color: #b9b9b9;
+    width: 330px;
+    background-color: none;
+}
+
+.search-tag {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.search-tag-#text {
+    width: 100px;
+}
+
+/* 태그 가로로 나열 */
+#outputTag {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search-tag {
+    margin-right: 10px;
+}
+
+/* 태그 삭제버튼 */
+.delete-tag {
+    margin-left: 10px;
+    color: #fff;
+    background-color: #d9d9d9;
+    padding: 2px 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.delete-tag:hover {
+    background-color: #b9b9b9;
+}

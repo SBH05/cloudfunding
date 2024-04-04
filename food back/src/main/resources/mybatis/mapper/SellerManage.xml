@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.sellerManage.model.dao.sellerManage">
+
+
+    <resultMap id="sellerProjectManage" type="com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageProjectDTO">
+        <id property="code" column="PROJECT_CODE"/>
+        <result property="memberCode" column="SELLER_INFO"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="start" column="PROJECT_START_DATE"/>
+        <result property="end" column="PROJECT_END_DATE"/>
+        <result property="amount" column="TARGET_AMOUNT"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="planCode" column="PLAN_CODE"/>
+        <result property="plan" column="PRICE"/>
+        <result property="businessCode" column="USER_CODE"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+    </resultMap>
+
+
+    <resultMap id="sellerUserResultMap" type="com.ohgiraffers.semiproject.sellerManage.model.dto.SellerUserMangeDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+        <result property="paymentCode" column="PAYMENT_CODE"/>
+        <result property="cartCode" column="CART_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="option" column="OPTION_TYPE"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="returnHistory" column="APPLICATION_DATE"/>
+        <result property="delivery" column="DELIVERY_DATE"/>
+        <result property="deliveryStatus" column="DELIVERY_STATUS"/>
+    </resultMap>
+
+    <resultMap id="sellerQnAmanageResultMap" type="com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageQnADTO">
+        <id property="creationNo" column="CREATION_NUMBER"/>
+        <result property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="creation" column="CREATION_DATE"/>
+        <result property="seller" column="SELLER_CODE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="answerNO" column="ANSWER_CODE"/>
+        <result property="answerContent" column="ANSWER_CONTENT"/>
+        <result property="answerDay" column="ANSWER_DATE"/>
+    </resultMap>
+    
+
+
+
+    <select id="sellerProjectDetail" resultMap="sellerProjectManage">
+        SELECT
+            A.PROJECT_CODE,
+            A.PROJECT_TITLE,
+            A.TARGET_AMOUNT,
+            A.ACHIEVEMENT_STATUS,
+            A.SELLER_INFO,
+            A.PROGRESS_STATUS,
+            C.PRICE,
+            D.BUSINESS_NAME
+
+        FROM tbl_project A
+                 JOIN tbl_user B ON (A.SELLER_INFO = B.USER_CODE)
+                 JOIN tbl_plan C ON (A.PROJECT_PLAN = C.PLAN_CODE)
+                 JOIN tbl_private_business D ON (B.USER_CODE = D.USER_CODE)
+        WHERE  A.PROJECT_CODE =2
+
+    </select>
+
+
+
+
+    <select id="sellerProject" resultMap="sellerProjectManage">
+        SELECT
+            A.PROJECT_CODE,
+            A.PROJECT_TITLE,
+            A.TARGET_AMOUNT,
+            A.ACHIEVEMENT_STATUS,
+            A.SELLER_INFO,
+            A.PROGRESS_STATUS,
+            A.PROJECT_END_DATE,
+            A.PROJECT_START_DATE
+
+        FROM tbl_project A
+                 JOIN tbl_user B ON (A.SELLER_INFO = B.USER_CODE)
+        WHERE B.USER_ID = #{userId}
+
+    </select>
+
+
+
+
+
+    <select id="sellerUser" resultMap="sellerUserResultMap">
+        SELECT
+            C.USER_NAME,
+            C.PHONE,
+            C.ADDRESS,
+            C.USER_ID,
+            B.PROJECT_TITLE,
+            B.SELLER_INFO,
+            D.OPTION_TYPE,
+            E.DELIVERY_DATE,
+            E.DELIVERY_STATUS,
+            G.APPLICATION_DATE
+
+        FROM tbl_cart A
+                 JOIN tbl_project B ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                 JOIN tbl_user C ON (A.USER_CODE = C.USER_CODE = B.SELLER_INFO )
+                 JOIN tbl_project_option D ON (A.OPTION_CODE = D.OPTION_CODE)
+                 JOIN tbl_delivery E ON (C.USER_CODE = E.USER_CODE)
+                 JOIN tbl_payment_history F ON(A.CART_CODE = F.CART_CODE)
+                 JOIN tbl_cancel_history G ON (F.PAYMENT_CODE = G.PAYMENT_CODE)
+        WHERE  B.SELLER_INFO = #{ userCode }
+
+    </select>
+
+
+    <select id="sellerQnA" resultMap="sellerQnAmanageResultMap">
+        SELECT
+            A.CREATION_NUMBER,
+            A.CREATION_DATE,
+            A.TITLE,
+            A.CONTENT,
+            B.USER_CODE,
+            C.ANSWER_CONTENT,
+            C.ANSWER_DATE
+
+        FROM tbl_qna_history A
+            JOIN tbl_user B ON(A.USER_CODE = B.USER_CODE = A.SELLER_CODE)
+            JOIN tbl_qna_answer C ON(A.CREATION_NUMBER = C.CREATION_NUMBER)
+        WHERE A.SELLER_CODE = #{ userCode }
+
+    </select>
+
+
+
+
+
+
+</mapper>

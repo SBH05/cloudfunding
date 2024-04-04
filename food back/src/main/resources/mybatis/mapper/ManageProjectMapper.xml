@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.manager.model.dao.ManageProjectMapper">
+
+    <resultMap id="userResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.UserDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+    <resultMap id="approvalHistory" type="com.ohgiraffers.semiproject.manager.model.dto.ApprovalHistoryDTO">
+        <id property="approvalCode" column="APPROVAL_CODE"/>
+        <result property="approvalDate" column="APPROVAL_DATE"/>
+        <result property="declineReason" column="DECLINE_REASON"/>
+        <result property="approvalStatus" column="APPROVAL_STATUS"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+    </resultMap>
+
+    <resultMap id="projectResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.ProjectDTO">
+        <id property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
+        <result property="projectCategory" column="PROJECT_CATEGORY"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="projectPlan" column="PROJECT_PLAN"/>
+        <result property="targetAmount" column="TARGET_AMOUNT"/>
+        <result property="projectSummary" column="PROJECT_SUMMARY"/>
+        <result property="policyAgreement" column="POLICY_AGREEMENT"/>
+        <result property="progressStatus" column="PROGRESS_STATUS"/>
+        <result property="submissionDate" column="SUBMISSION_DATE"/>
+        <result property="projectStartDate" column="PROJECT_START_DATE"/>
+        <result property="projectEndDate" column="PROJECT_END_DATE"/>
+        <result property="achievementStatus" column="ACHIEVEMENT_STATUS"/>
+        <association property="sellerInfo" resultMap="userResultMap"/>
+    </resultMap>
+
+    <select id="newProject" resultMap="projectResultMap">
+        select A.*
+        from tbl_project A
+
+    </select>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(*)
+        FROM TBL_PROJECT A
+        JOIN TBL_USER B ON (A.SELLER_INFO = B.USER_CODE)
+        left join tbl_approval_history C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+
+        <where>
+            <if test="authority == 'all'">
+                not exists(
+                select *
+                from
+                tbl_approval_history B
+                where B.PROJECT_CODE = A.PROJECT_CODE
+                )
+                or C.APPROVAL_STATUS = 'N'
+            </if>
+            <if test="authority == 'new'">
+
+
+                not exists(
+                select *
+                from
+                tbl_approval_history B
+                where B.PROJECT_CODE = A.PROJECT_CODE
+                )
+            </if>
+            <if test="authority == 'decline'">
+                C.APPROVAL_STATUS = 'N'
+            </if>
+            <if test="authority == 're'">
+                A.PROJECT_TYPE = '리펀딩'
+            </if>
+
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    AND A.PROJECT_CODE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'seller'">
+                    AND B.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'submissionDate'">
+                    AND A.SUBMISSION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+
+        </where>
+    </select>
+
+    <select id="findAllProject" resultMap="projectResultMap">
+        SELECT
+        A.*,
+        B.USER_NAME,
+        C.APPROVAL_STATUS
+
+        FROM TBL_PROJECT A
+        JOIN TBL_USER B ON (A.SELLER_INFO = B.USER_CODE)
+        left join tbl_approval_history C ON (A.PROJECT_CODE = C.PROJECT_CODE)
+
+        <where>
+            <if test="authority == 'all'">
+                not exists(
+                select *
+                from
+                tbl_approval_history B
+                where B.PROJECT_CODE = A.PROJECT_CODE
+                )
+                or C.APPROVAL_STATUS = 'N'
+            </if>
+            <if test="authority == 'new'">
+
+
+                not exists(
+                select *
+                from
+                tbl_approval_history B
+                where B.PROJECT_CODE = A.PROJECT_CODE
+                )
+            </if>
+            <if test="authority == 'decline'">
+                C.APPROVAL_STATUS = 'N'
+            </if>
+            <if test="authority == 're'">
+                A.PROJECT_TYPE = '리펀딩'
+            </if>
+
+            <if test="searchValue != null and !searchValue.equals('')">
+                <if test="nation3 == 'code'">
+                    AND A.PROJECT_CODE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'title'">
+                    AND A.PROJECT_TITLE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'seller'">
+                    AND B.USER_NAME LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+                <if test="nation3 == 'submissionDate'">
+                    AND A.SUBMISSION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
+                </if>
+            </if>
+
+        </where>
+        ORDER BY
+        <if test="nation1 == 'code' or nation1==null or nation1.equals('')">
+            A.PROJECT_CODE
+        </if>
+        <if test="nation1 == 'title'">
+            A.PROJECT_TITLE
+        </if>
+        <if test="nation1 == 'seller'">
+            B.USER_NAME
+        </if>
+        <if test="nation1 == 'submissionDate'">
+            A.SUBMISSION_DATE
+        </if>
+        <if test="nation2 == 'desc' or nation2==null or nation2.equals('')">
+            DESC
+        </if>
+        <if test="nation2 == 'asc'">
+            ASC
+        </if>
+
+
+        LIMIT #{ startRow }, #{limit}
+    </select>
+
+
+    <select id="findOneProject" resultMap="projectResultMap">
+        select A.*,
+               B.USER_NAME,
+               B.USER_CODE
+        from tbl_project A
+                 join tbl_user B ON (A.SELLER_INFO = B.USER_CODE)
+        where A.PROJECT_CODE = #{no}
+
+    </select>
+
+    <select id="findStatus" resultType="_int">
+        select if(exists(select B.APPROVAL_STATUS
+                         from tbl_approval_history B
+                                  join tbl_project A ON (A.PROJECT_CODE = B.PROJECT_CODE)
+                         where A.PROJECT_CODE = #{no}), 1, 0)
+
+    </select>
+
+    <select id="status">
+        select B.APPROVAL_STATUS
+        from tbl_approval_history B
+                 join tbl_project A ON (A.PROJECT_CODE = B.PROJECT_CODE)
+        where A.PROJECT_CODE = #{no}
+    </select>
+
+    <insert id="declineReason" parameterType="com.ohgiraffers.semiproject.manager.model.dto.ApprovalHistoryDTO">
+        insert
+        into tbl_approval_history
+        (APPROVAL_CODE,
+         APPROVAL_DATE,
+         DECLINE_REASON,
+         APPROVAL_STATUS,
+         PROJECT_CODE)
+        values (null,
+                now(),
+                #{declineReason},
+                default,
+                #{projectCode})
+    </insert>
+
+    <insert id="approve" parameterType="long">
+        insert
+        into tbl_approval_history
+        (APPROVAL_CODE,
+         APPROVAL_DATE,
+         DECLINE_REASON,
+         APPROVAL_STATUS,
+         PROJECT_CODE)
+        values (null,
+                now(),
+                null,
+                'Y',
+                #{projectCode})
+    </insert>
+
+
+</mapper>

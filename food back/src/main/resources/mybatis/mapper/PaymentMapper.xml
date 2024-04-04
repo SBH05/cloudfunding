@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.semiproject.order.model.dao.PaymentMapper">
+
+    <resultMap id="CartResultMap" type="com.ohgiraffers.semiproject.order.model.dto.CartDTO">
+        <id property="cartCode" column="CART_CODE"/>
+        <result property="status" column="USAGE_STATUS"/>
+        <result property="count" column="CART_COUNT"/>
+        <association property="memberCode" resultMap="MemberResultMap"/>
+        <association property="projectCode" resultMap="ProjectResultMap"/>
+        <association property="projectOptionCode" resultMap="ProjectOptionResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="MemberResultMap" type="com.ohgiraffers.semiproject.manager.model.dto.UserDTO">
+        <id property="userCode" column="USER_CODE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="email" column="EMAIL"/>
+        <result property="registrationDate" column="REGISTRATION_DATE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="dateBirth" column="DATE_BIRTH"/>
+        <result property="phone" column="PHONE"/>
+        <result property="activityStatus" column="ACTIVITY_STATUS"/>
+        <result property="reportCount" column="REPORT_COUNT"/>
+        <result property="couponStatus" column="COUPON_STATUS"/>
+    </resultMap>
+
+
+    <resultMap id="ProjectResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectDTO">
+        <id property="code" column="PROJECT_CODE"/>
+        <result property="title" column="PROJECT_TITLE"/>
+        <result property="type" column="PROJECT_TYPE"/>
+        <result property="amount" column="TARGET_AMOUNT"/>
+        <result property="end" column="PROJECT_END_DATE"/>
+        <result property="summary" column="PROJECT_SUMMARY"/>
+        <result property="agree" column="POLICY_AGREEMENT"/>
+        <result property="sellerType" column="SELLER_TYPE"/>
+        <result property="status" column="ACHIEVEMENT_STATUS"/>
+        <result property="start" column="PROJECT_START_DATE"/>
+        <result property="progress" column="PROGRESS_STATUS"/>
+        <association property="plan" resultMap="PlanResultMap"/>
+        <association property="seller" resultMap="MemberResultMap"/>
+        <association property="category" resultMap="ProjectCategoryResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="PlanResultMap" type="com.ohgiraffers.semiproject.order.model.dto.PlanDTO">
+        <id property="code" column="PLAN_CODE"/>
+        <result property="name" column="PLAN_NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="detail" column="PLAN_DETAIL"/>
+    </resultMap>
+
+    <resultMap id="ProjectCategoryResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectCategoryDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+    </resultMap>
+
+    <resultMap id="ProjectOptionResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectOptionDTO">
+        <id property="code" column="OPTION_CODE"/>
+        <result property="name" column="OPTION_NAME"/>
+        <result property="type" column="OPTION_TYPE"/>
+        <result property="price" column="PRICE"/>
+        <result property="config" column="CONFIGURE"/>
+        <association property="projectCode" resultMap="ProjectResultMap"/>
+    </resultMap>
+
+
+    <resultMap id="cartFileResultMap" type="com.ohgiraffers.semiproject.order.model.dto.ProjectFileDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="originName" column="ORIGINAL_FILE_NAME"/>
+        <result property="changeName" column="CHANGED_FILE_NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="deleteStatus" column="DELETE_STATUS"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <association property="projectDTO" resultMap="ProjectResultMap"/>
+    </resultMap>
+
+
+    <update id="selectCount" parameterType="hashmap">
+        update tbl_cart
+        set CART_COUNT = #{counter}
+        where CART_CODE = #{cartCode}
+    </update>
+
+
+    <select id="buyHistory" resultMap="CartResultMap">
+
+        SELECT
+            A.CART_CODE,
+            A.PROJECT_CODE,
+            A.OPTION_CODE,
+            A.CART_COUNT,
+            B.PROJECT_TITLE,
+            C.OPTION_TYPE,
+            C.PRICE,
+            C.CONFIGURE,
+            D.CHANGED_FILE_NAME
+
+        FROM
+            tbl_cart A
+        LEFT JOIN
+             tbl_project B ON A.PROJECT_CODE = B.PROJECT_CODE
+        LEFT JOIN
+             tbl_project_option C ON A.OPTION_CODE = C.OPTION_CODE
+        LEFT JOIN
+            tbl_project_file D ON D.PROJECT_CODE = A.PROJECT_CODE
+        where
+            A.CART_CODE = #{cartCode}
+    </select>
+
+
+
+
+</mapper>

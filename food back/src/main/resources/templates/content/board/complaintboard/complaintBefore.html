@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>신고 게시판 답변완료</title>
+	<link rel="stylesheet" href="/css/manager/board/complaintBefore.css">
+
+
+
+
+	<div class="container">
+	<th:block th:replace="/fragments/managersidebar.html"></th:block>
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span><a class="black-link" th:href="@{/board/complaintMain}">신고 게시판</a></span>
+                <span><strong>></strong></span>
+                <span>세부내용</span>
+            </div>
+        
+            <div id="image">
+				<a href="#"><img class="logo1" src="/images/01_logoimg/textLogoNone.png" alt=""></a>
+				<div id="CRUDcontainer">
+					
+					<div class="searchleft1">
+						<form action="search" method="post">
+							<select name="nation2"  >
+								<option value="search"selected>상태</option>
+								<option value="ch">처리 중(기본)</option>
+								<option value="etc">처리 완료</option>
+							</select>
+						</form>
+					</div>
+					<div id="delete"
+                     th:onclick="'location.href=\'/board/complaintUserDelete?no='+ @{${detail.creationNumber.creationNumber}} + '\''"
+
+                    >삭제</div>
+			</div>
+			</div>
+            
+
+            <div class="box">
+                <span class="box1" th:text="|신고 코드 : ${detail.creationNumber.creationNumber}|"></span>
+                <span class="box1" th:text="|신고자 : ${detail.reporter.userName}|"></span>
+                <span class="box2" th:text="|신고일자 : ${detail.creationDate}|"></span>
+                <span class="box3">처리 전</span>
+            </div>
+            
+            <div>
+                <form action="">
+                    <div class="title">
+                        <span id="details">제목</span>
+                        <span id="details2" th:text="${detail.title}"></span>
+                    </div>
+                    <div class="detail">
+                        <div id="details">신고대상자 정보</div>
+
+                        <div id="details2">
+							<div id="color">신고대상자</div>
+							<div id="writer" th:text="${detail.reportedPerson.name}"></div>
+							<div id="color">해당 위치로 이동</div>
+							<div id="writer">(해당 프로젝트로 이동 링크)</div>
+						</div>
+                    </div>
+                    <div class="detail">
+                        <div id="details">신고 세부 사유</div>
+
+						<div id="details2" th:text="${detail.content}">
+                        </div>
+
+                    </div>
+<!--                    <div class="submitbtn"><button type="submit">글쓰기</button></div>-->
+                </form>
+            </div>
+
+        
+            
+        
+            
+
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+    </div>
+
+
+
+</th:block>
+</html>

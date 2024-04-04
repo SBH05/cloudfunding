@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<th:block layout:fragment="content">
+
+    <link th:href="@{/css/login/changeInfo.css}" rel="stylesheet">
+
+
+    <div class="container">
+        <th:block th:replace="/fragments/usersidebar.html"></th:block>
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="changeinfotitle">개인정보 변경</div>
+            <div class="ligoimg"><img src="/images/textlogonone_2.png" alt=""></div>
+
+
+            <!-- 회원정보 변경 폼-->
+            <div class="middle">
+
+                <th:block sec:authorize="isAuthenticated()">
+
+                    <form id="profileForm" action="/member/inputFile" method="post">
+                        <div class="profileimg">
+                            <img class="profileimg1" th:src="@{|/imagePath/${profileImgDTO.getChangedproFileName()}|}" alt="">
+                            <div class="profilebtn" id="profilebtn">등록하기</div>
+                            <input type="checkbox" id="layer_popup">
+                            <label for="layer_popup"></label>
+
+                            <div id="layer_bg">
+                                <div id="popup">
+
+                                    <label class="popup-close" for="layer_popup">X</label>
+                                    <input type="file"  id="file-input" accept="image/jpeg, image/png" name="file-input"
+                                           onchange="handleFileSelect(this)">
+                                    <div id="image-preview"></div>
+                                    <a onclick="window.location.reload()" style="cursor:pointer;" class="confirmImage">
+                                        <div class="confirmImage"></div>
+                                        <span class="confirmImage"><input type="button" value="확인" id="imgbtn"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <script>
+                        // 파일을 서버에 전송하는 함수
+                        function sendFile(file) {
+                            var formData = new FormData();
+                            formData.append('file-input', file);
+
+                            fetch('/member/inputFile', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        return response.json();
+                                    }
+                                    throw new Error('Network response was not ok.');
+                                })
+                                .then(data => {
+                                    console.log('Success:', data);
+                                    // 여기서 응답 처리 로직 추가
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+                        }
+
+                        // '확인' 버튼 클릭 이벤트 리스너
+                        document.getElementById('imgbtn').addEventListener('click', function() {
+                            var inputFile = document.getElementById('file-input');
+                            if (inputFile.files.length > 0) {
+                                sendFile(inputFile.files[0]);
+                            } else {
+                                console.log('No file selected.');
+                            }
+                        });
+                    </script>
+
+                    <form id="updateInfoForm" action="/member/update-info" method="post" >
+
+
+                        <div>
+
+                            <li>이름</li>
+                            <li><span><input class="box1" type="text" readonly th:value="${memberDTO.userName}"></span></li>
+
+                        </div>
+
+                        <div>
+                            <li>이메일 주소</li>
+                            <span><input type="text" id="email" name="email" class="box2" th:value="${memberDTO.email}" data-original-email="${memberDTO.email}"></span>&nbsp;&nbsp;&nbsp;<span class="mailbtn"><button
+                                type="button" class="emaildocheck" id="emaildocheck">중복확인</button></span>
+
+                        </div>
+
+
+                        <li>
+                            <span>비밀번호</span>
+                            <span class="movetext2">비밀번호 확인</span>
+                        </li>
+                        <li>
+        <span>
+            <input placeholder="8자 이상의 영어, 숫자 입력" class="box3" type="password" maxlength="13" name="userPwd"
+                   id="userPwd" required>
+        </span>
+                            &nbsp;&nbsp;
+                            <span>
+            <input class="box3" type="password" maxlength="13" name="memberPwd2">
+        </span>
+                        </li>
+                        <input type="checkbox" id="showPassword" onchange="togglePassword()">
+                        <label for="showPassword">비밀번호 보이기</label>
+
+                        <div>
+
+                            <label>우편번호</label><br>
+                            <input type="text" name="zipCode" id="zipCode" class="box2" th:value="${zipCode}" readonly> &nbsp;
+                            <input type="button" value="검색" class="searchZipCode1" id="searchZipCode" >
+                        </div>
+                        <div>
+                            <label>주소</label><br>
+                            <input type="text" name="address1" id="address1" class="box1" th:value="${address1}" readonly>
+                        </div>
+                        <div>
+                            <label>상세주소</label><br>
+                            <input type="text" name="address2" id="address2" class="box1" th:value="${address2}">
+                        </div>
+                        <div>
+                            <label>핸드폰번호</label><br>
+                            <input type="text" name="phone" id="phone" class="box1" th:value="${memberDTO.phone}">
+                        </div>
+                        <div>
+                            <label>생년월일</label><br>
+                            <input type="text" name="dateBirth" id="dateBirth" class="box1" th:value="${memberDTO.dateBirth}">
+                        </div>
+
+
+
+
+            <div class="changeInfobtn">
+                <button type="submit">회원정보 변경</button>
+            </div>
+            </form>
+            <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+            <script th:inline="javascript">
+
+                const $searchZipCode = document.getElementById("searchZipCode");
+                const $goMain = document.getElementById("goMain");
+
+                $searchZipCode.onclick = function () {
+
+                    /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+                    new daum.Postcode({
+                        oncomplete: function (data) {
+                            /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+                            document.getElementById("zipCode").value = data.zonecode;
+                            document.getElementById("address1").value = data.address;
+                            document.getElementById("address2").focus();
+                        }
+                    }).open();
+                }
+                $goMain.onclick = function() {
+                    location.href = "/";
+                }
+
+
+            </script>
+
+                        <script>
+                            function togglePassword() {
+                                const userPwd = document.getElementById("userPwd");
+                                const showPasswordCheckbox = document.getElementById("showPassword");
+
+                                if (showPasswordCheckbox.checked) {
+                                    userPwd.type = "text";
+                                } else {
+                                    userPwd.type = "password";
+                                }
+                            }
+                        </script>
+                        <script>
+                            // 이메일 중복 확인 AJAX 요청
+                            document.getElementById('emaildocheck').addEventListener('click', function() {
+
+                                var emailField = document.getElementById('email');
+                                var email = emailField.value;
+                                var originalEmail = emailField.getAttribute('data-original-email');
+
+                                // 수정하지 않았다면 중복 확인 절차 생략
+                                if (email === originalEmail) {
+                                    document.getElementById('updateInfoBtn').disabled = false;
+                                    alert('이메일이 변경되지 않았습니다. 중복 확인이 필요 없습니다.');
+                                    return;
+                                }
+                                fetch('/member/email-check', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({ email: email }),
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.isEmailAvailable) {
+                                            // 이메일이 중복되지 않는 경우
+                                            document.getElementById('updateInfoBtn').disabled = false;
+                                            alert('사용 가능한 이메일입니다.');
+                                        } else {
+                                            // 이메일이 중복되는 경우
+                                            document.getElementById('updateInfoBtn').disabled = true;
+                                            alert('이미 사용 중인 이메일입니다.');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    });
+                            });
+
+                            // 회원정보 변경 폼 제출
+                            document.getElementById('updateInfoForm').addEventListener('submit', function(event) {
+                                event.preventDefault(); // 기본 폼 제출 이벤트 방지
+                                var formData = new FormData(this);
+                                console.log(formData);
+                                fetch('/member/update-info', {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            alert('회원 정보가 성공적으로 수정되었습니다.');
+                                            window.location.href = '/';
+                                        } else {
+                                            alert('회원 정보 수정에 실패했습니다. ' + data.message);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    });
+                            });
+                        </script>
+
+            <script>
+
+
+
+
+                document.getElementById("profilebtn").addEventListener("click", function () {
+                    document.getElementById("layer_popup").checked = true;
+                    document.body.classList.add("popup-open");
+                });
+
+                // 팝업이 열릴 때 body에 클래스 추가
+                document.getElementById("layer_popup").addEventListener("change", function () {
+                    document.body.classList.toggle("popup-open", this.checked);
+                });
+
+                // 팝업 외부 클릭 시 팝업 닫기
+                document.getElementById("profileimg").addEventListener("click", function (e) {
+                    if (e.target === this) {
+                        document.getElementById("layer_popup").checked = false;
+                        document.body.classList.remove("popup-open");
+                    }
+                });
+
+                function handleFileSelect(input) {
+                    var files = input.files;
+                    var preview = document.getElementById('image-preview');
+
+                    // 이미지 파일이 맞는지, 용량 및 해상도 조건 충족 확인
+                    if (files.length === 1) {
+                        var file = files[0];
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            var image = new Image();
+                            image.src = e.target.result;
+
+                            image.onload = function () {
+                                if (
+                                    (file.type === 'image/jpeg' || file.type === 'image/png') &&
+                                    file.size <= 3 * 1024 * 1024 && // 3MB 제한
+                                    image.width >= 300 && image.height >= 300
+                                ) {
+                                    // 기존 이미지 제거
+                                    preview.innerHTML = '';
+
+                                    // 조건 충족 시 이미지 미리보기 추가
+                                    var imgElement = document.createElement('img');
+                                    imgElement.src = e.target.result;
+                                    imgElement.style.maxWidth = '490px';
+                                    imgElement.style.maxHeight = '400px';
+                                    imgElement.onclick = function () {
+                                        removeImage(this);
+                                    };
+                                    preview.appendChild(imgElement);
+                                } else {
+                                    alert('이미지 형식 또는 크기가 제한에 맞지 않습니다.');
+                                }
+                            };
+                        };
+
+                        reader.readAsDataURL(file);
+                    } else if (files.length > 1) {
+                        alert('이미지는 1개만 등록 가능합니다.');
+                    }
+                }
+
+                function removeImage(imgElement) {
+                    // 클릭된 이미지 제거
+                    imgElement.parentNode.removeChild(imgElement);
+                    // 미리보기에서도 이미지 제거
+                    var preview = document.getElementById('image-preview');
+                    preview.innerHTML = '';
+                }
+
+                function confirmImage() {
+                    var preview = document.getElementById('image-preview');
+                    var clonedImage = preview.firstElementChild;
+
+                    if (clonedImage) {
+                        // 기존 이미지 삭제
+                        removeImage(clonedImage);
+
+                        var newImage = document.createElement('img');
+                        newImage.src = clonedImage.src;
+                        newImage.style.maxWidth = '200px';
+                        newImage.style.maxHeight = '200px';
+                        newImage.onclick = function () {
+                            removeImage(this);
+                        };
+
+                        // 대체된 이미지를 .profile-image-container 아래 모든 이미지 대상으로 변경
+                        var profileImages = document.querySelectorAll('.profile-image-container img');
+                        profileImages.forEach(function (img) {
+                            img.parentNode.removeChild(img);
+                        });
+
+                        document.querySelector('.profile-image-container').appendChild(newImage);
+                        closePopup();
+                    } else {
+                        alert('이미지를 먼저 등록해주세요.');
+                    }
+                }
+            </script>
+                </th:block>
+        </div>
+    </div>
+
+
+    <div class="right">
+        <!-- 우측 컨텐츠 -->
+    </div>
+    </div>
+
+</th:block>
+</html>

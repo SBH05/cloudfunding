@@ -1,0 +1,96 @@
+ <!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/payment/buyok.css}">
+    
+<!--커밋을위한주석-->
+    
+
+
+
+
+    <div class="buyok">
+        <div class="buyokay">
+
+        
+        <div class="payinfo">
+            <div style="float: left;">
+<!--                <a th:href="@{/order/buyok}"><img src="/images/minicon/backbtn.jpg"-->
+<!--                     width="25px" height="25px"></a>-->
+            </div>
+        <div><h2>결제 정보</h2></div>
+    </div>
+    <div class="maininfo">
+        
+        <div class="payment-confirmation">
+            <div class="firstlogo"><a th:href="@{/}"><img src="/images/minicon/로고2.png" alt="" width="150px"></a></div>
+            
+            <h3><pre>        구매해주셔서 감사합니다.
+         결제가 완료되셨습니다.
+            </pre></h3>
+            <div class="secondlogo"><img src="/images/minicon/로고1.PNG" alt=""></div>
+        </div>
+        <div class="product-status">
+            <div class="orderStatus">
+                <span><div class="pay" style="color: orange;"></div></span>결제완료<span><img src="/images/minicon/checkbtn.PNG" class="uncheck"></span>&mdash;<span>배송중</span>&mdash;<span><img src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>배송완료</span>
+            </div>
+        </div>
+        <div class="product-list">
+            <div class="under">
+                <div class="prd"><h4></h4></div>
+
+                <div class="product-area" th:each="buyHistoryInfo : ${buyHistoryInfo}">
+                    <div class="food">
+                        <input type="hidden"><img style="float: left;" th:src="@{|/thumbPath/${buyHistoryInfo.changeName}|}"></input>
+                        <input type="hidden" name="hdProject" id="hdProject" ></input>
+                        <input type="hidden" style="float: right ;" name="hdOptionType" id="hdOptionType" ></input>
+                        <input type="hidden" class="amt" name="hdCounterValue" id="hdCounterValue" ></input>
+                    </div>
+
+                </div>
+
+
+
+                <span class="history">
+                    <span></span>
+                    <input type="hidden" name="hdTotalPrice" id="hdTotalPrice" ></input>
+                    <br>
+                    <br>
+                    <span></span>
+                    <span style="float: right ;" class="won" ></span>
+                    <br><br>
+                    <span></span>
+                    <input type="hidden" name="hdDeliveryCost" id="hdDeliveryCost" ></input>
+                    <br><br>
+                    <span></span>
+                    <input type="hidden" name="hdGunWon" id="hdGunWon"  ></input>
+                </span>
+
+                        <div>
+                            <input type="hidden" name="searchZipCode" ></input>
+                            <input type="hidden" name="adrs" ></input>
+                            <input type="hidden" name="detailedAdrs" ></input>
+                        </div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+</div>
+
+<script>
+
+
+
+</script>
+
+</th:block>
+</html>

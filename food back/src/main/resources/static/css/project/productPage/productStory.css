@@ -1,0 +1,388 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    background-size: cover;
+    /* 창 화면에 100%로 배경 이미지 크기 조절 */
+    background-repeat: no-repeat;
+    /* 배경 이미지 반복 없음 */
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.select-a.selected {
+    background-color: floralwhite; /* 선택된 항목의 배경색 */
+    /* 여기에 추가적인 스타일을 정의할 수 있습니다. */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+
+
+
+/* =================================================================== 프로젝트 내용 ===========================================================================================================*/
+.bodyking{
+    /* width: 100%;*/
+    height: 2800px;
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+
+}
+.bigPage{
+    position: relative;
+    width: 1750px;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 100px; */
+
+
+
+
+}
+
+.left{
+    width: 1000px;
+    height: 2500px;
+    /* background-color: beige; */
+}
+.right{
+    width: 700px;
+    height: 2500px;
+    /* background-color: burlywood; */
+}
+.story-con{
+    height: 125px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    /* margin-top: ; */
+    border-bottom: 1px solid #999;
+    width: 1200px;
+    margin-left: 275px;
+
+
+}
+.story-con2{
+    height: 125px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    /* margin-top: ; */
+}
+.story{
+    height: 50px;
+    margin-top: 50px;
+    margin-right: 30px;
+    font-size: 30px;
+}
+.review{
+    height: 50px;
+    margin-top: 50px;
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+
+
+
+/*=================================================================== 왼쪽====================================================================================*/
+
+.imgmove img{
+    width: 920px;
+    border-radius: 10px;
+}
+
+.imgmove{
+    padding-bottom: 100px;
+}
+
+.textfont{
+    font-size: 30px;
+    padding: 20px 0;
+}
+
+.button1{
+
+}
+.storybutton{
+    padding: 20px 400px;
+    font-size: 18px;
+    background-color: white;
+    color: lightgray;
+
+    border-color: lightgray;
+    
+    
+}
+
+
+
+
+
+
+/* =========================================================== 오른쪽 ====================================================================================================*/
+
+
+
+.like-button {
+	font-size: 2em;
+	cursor: pointer;
+	transition: color 0.5s;
+}
+
+.liked {
+	color: red;
+}
+.introduction-con{
+    border-bottom: 1px solid #999;
+    height: 420px;
+}
+.introduction{
+    font-size: 36px;
+}
+.introduction-span{
+    background-color: orange;
+    height: 30px;
+    width: 100px;
+    font-size: 20px;
+}
+.btns-con{
+    height: 200px;
+    width: auto;
+    /* background-color: antiquewhite; */
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬을 위한 설정 */
+    justify-content: space-between;
+
+}
+.goodbtn{
+    width: 85px;
+    height: 85px;
+    color: white;
+    border: none;
+    background-color: orange;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.buybtn{
+    width: 570px;
+    height: 85px;
+    background-color: orange;
+    color: white;
+    border: none;
+    font-size: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.businesscard-con{
+    height: 210px;
+    border: 1px solid beige;
+    border-radius: 10px;
+}
+.businesscard img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.businesscard{
+    margin-left: 50px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center; /* 세로 정렬을 중앙으로 설정 */
+
+}
+.businesscard-right{
+    margin-left: 10px;
+    margin-bottom: 2px;
+    font-size: 20px;
+}
+.businesscard-home{
+    display: flex;
+    align-items: center; /* 세로 정렬을 중앙으로 설정 */
+    margin-left: 50px;
+    margin-top: 30px;
+
+}
+.addr{
+    margin-left: 50px;
+    text-decoration: underline;
+
+}
+.business-sns{
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.business-sns img{
+    margin-left: 75px;
+    width: 30px;
+}
+.report-con{
+    height: 50px;
+    background-color: #999;
+    margin-top: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center; /* 세로 정렬을 중앙으로 설정 */
+
+}
+.pickkeyword-con{
+
+    /* background-color: aquamarine; */
+
+}
+.pickkeyword{
+    height: 50px;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 70px;
+
+}
+
+
+.select-a{
+    height: 380px;
+    width: 625px;
+    margin-top: 50px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    padding: 25px;
+}
+.select-b{
+    height: 380px;
+    width: 625px;
+    margin-top: 50px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    padding: 25px;
+
+}
+.select-c{
+
+    height: 380px;
+    width: 625px;
+    margin-top: 50px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    padding: 25px;
+
+
+}
+.prouct-mid{
+
+    /* margin-bottom: 25px ; */
+
+}
+.product-0{
+    /* height: 100px; */
+    /* background-color: burlywood; */
+}
+.product-1{
+    height: 60px;
+    align-items: center;
+    display: flex;
+
+}
+.product-2{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.product-3{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.product-4{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.product-5{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productprice-1{
+    font-size: 20px;
+    font-weight: bold;
+    /* margin-bottom: 20px; */
+
+}
+
+.product-bottom{
+    display: flex;
+    align-items: center;
+    /* 수직 가운데 정렬을 위한 설정 */
+    justify-content: space-between;
+}
+
+.scroll-container {
+    max-height: 900px; /* 스크롤이 나타날 최대 높이를 지정 */
+    overflow-y: auto;
+    border: none;
+}
+
+/* 스크롤바 스타일 변경 */
+.scroll-container::-webkit-scrollbar {
+    width: 12px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바 트랙 스타일 변경 */
+.scroll-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 스크롤바 트랙 배경색 */
+}
+
+/* 스크롤바 버튼 스타일 변경 및 radius 추가 */
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* 스크롤바 버튼 배경색 */
+    border-radius: 6px; /* 버튼의 모서리 반경 */
+    /* border: 3px solid #555; */
+    /* 버튼의 테두리 스타일 */
+}
+
+
+
+
+
+
+
+.pagination-box {
+    display: flex;
+    align-items: center;
+}
+
+.page-links {
+    display: flex;
+    margin: 0 10px;
+}
+
+.page-link, .prev, .next {
+    padding: 5px 10px;
+    background: rgb(240, 240, 240);
+    margin: 0 3px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 10px; /* 모서리를 둥글게 만듦 */
+}
+
+.page-link:hover, .prev:hover, .next:hover {
+    background-color: darkorange;
+    cursor: pointer;
+}

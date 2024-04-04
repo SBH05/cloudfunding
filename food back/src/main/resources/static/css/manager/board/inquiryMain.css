@@ -1,0 +1,481 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins;
+}
+
+/* 배경 보드 */
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1300px;
+    height: 100%;
+    border-radius: 30px;
+    margin: 100px 0 150px 200px;
+    padding: 100px;
+    box-sizing: border-box;
+}
+
+a:link, a:visited{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+/* body - 배경화면 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    background-size: cover;
+    /* 창 화면에 100%로 배경 이미지 크기 조절 */
+    background-repeat: no-repeat;
+    /* 배경 이미지 반복 없음 */
+}
+
+/* logo - margin  */
+.logo-image {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* 네비게이션 메뉴 부모 요소 */
+nav {
+    text-align: center;
+    min-width: 60px;
+    min-height: 20px;
+}
+
+/* 네비게이션 메뉴 목록 */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+/* 작은 화면에서 메뉴 항목 숨김 */
+@media screen and (max-width: 760px) {
+    nav ul {
+        display: none;
+    }
+}
+
+/* 네비게이션 메뉴 항목 스타일 */
+nav ul li {
+    margin: 0 15px;
+    min-width: 60px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    /* 가로고정 */
+    flex-grow: 0;
+    /* 세로 고정 */
+}
+
+
+/* 네비게이션 메뉴 하이퍼링크 스타일 */
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    height: 100%;
+    box-sizing: border-box;
+    /* 정확한 패딩값을 주기 위함 */
+}
+
+/* 검색어 - 부모  */
+.search-box {
+    background-color: #eee;
+    padding: 3px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    margin-right: auto;
+}
+
+/* 검색어 - 자식 (입력 필드) */
+.search-box input {
+    padding: 5px;
+    width: 100%;
+    /* 수정: 입력 필드를 100%로 설정하여 부모에 맞춤 */
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+/* 검색 버튼 스타일 */
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* 아이콘 스타일 (Font Awesome) */
+.search-button i {
+    font-size: 18px;
+    color: #555;
+}
+
+/* 프로젝트 시작하기  */
+.project-button {
+    background-color: #f90;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 40px;
+    margin-left: auto;
+    display: flex;
+}
+
+/* 미디어 쿼리: 화면이 작아질 때 */
+@media screen and (max-width: 1200px) {
+    .project-button {
+        display: none;
+    }
+}
+
+/* 프로젝트 버튼 디자인 */
+.project-button a {
+    background-color: #f90;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* 슬라이딩 메뉴  */
+.menu {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    /* margin-left: auto; */
+}
+
+/* 더보기 토글 메뉴  */
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 22px;
+    min-width: 60px;
+    min-height: 20px;
+}
+
+/* 미디어 쿼리: 화면이 작아질 때 */
+@media screen and (max-width: 1200px) {
+    .menu-item {
+        display: none;
+        /* 화면이 작아지면 숨김 */
+    }
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    z-index: 1;
+    padding: 50px;
+    left: 0;
+    right: 0;
+    top: 100%;
+    width: 100%;
+}
+
+
+.menu-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.menu-content ul li {
+    margin: 10px;
+}
+
+.menu-content a {
+    text-decoration: none;
+    color: #fff;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+.logo1 {
+    width: 140px; /* 원하는 너비로 설정하세요. */
+    height: auto; /* 높이는 자동으로 조정됩니다. */
+}
+
+.black-link,
+.black-link:visited {
+    color: black;
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.iconlogo {
+    position: relative;
+    top: 6px; /* 아이콘을 아래로 5px 이동 */
+
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-box {
+    display: flex;
+    align-items: center;
+}
+
+.page-links {
+    display: flex;
+    margin: 0 10px;
+}
+
+.page-link, .prev, .next {
+    padding: 5px 10px;
+    background: rgb(240, 240, 240);
+    margin: 0 3px;
+    text-decoration: none;
+    color: #b9b9b9;
+    border-radius: 5px;
+    border: none;
+}
+
+.page-link:hover, .prev:hover, .next:hover {
+    background-color: #F37B1F;
+    color: #fff;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #F37B1F; /* 클릭된 상태의 배경 색상 */
+    color: #fff; /* 클릭된 상태의 텍스트 색상 */
+}
+
+table {
+    border-collapse: collapse; /* 테이블 셀 경계를 합침 */
+    width: 100%; /* 테이블이 부모 요소에 가득 차도록 함 */
+    border-spacing: 10px;
+}
+
+/* 게시판 줄 */
+th, td {
+    border-top: 1px solid #ddd; /* 상단에만 회색 선 추가 */
+    border-bottom: 1px solid #ddd; /* 하단에만 회색 선 추가 */
+    padding: 20px; /* 셀 안의 여백 설정 */
+    text-align: center; /* 셀 안의 텍스트를 왼쪽 정렬 */
+    cursor: pointer;
+}
+
+th {
+    /* background-color: #f2f2f2; 헤더 셀에 연한 회색 배경색 추가 */
+    border-top: none; /* 헤더 셀의 상단 선 제거 */
+    border-bottom: 1px solid #ddd; /* 헤더 셀의 하단에만 회색 선 추가 */
+}
+
+td a{
+    color: black;
+}
+
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.left {
+    flex-basis: 380px; /* 왼쪽 영역의 너비를 30%로 설정 */
+    flex-shrink: 0;
+    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.1);
+}
+
+#link{
+    cursor: pointer;
+}
+
+.searchcontainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.searchright {
+    display: flex;
+    justify-content: flex-end;
+    align-items : center;
+    margin-left: auto;
+}
+
+.searchleft1{
+    margin: 0px 10px 0px 0px;
+}
+
+.searchleft2{
+    margin: 0px 10px 0px 0px;
+}
+
+.newWriting{
+    margin-left: 300px;
+    border:solid;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+#newcolumn{
+    visibility: hidden;
+}
+
+#new{
+    color: red;
+}
+
+.ing{
+    width: 110px;
+    padding: 7px 10px ;
+    background-color: lightgray;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.success{
+    width: 110px;
+    padding: 7px 10px ;
+    background-color: orange;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.fail{
+    width: 110px;
+    padding: 7px 10px ;
+    background-color: #404B52;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.nation1 {
+    margin-left: -30px;
+}
+
+.searchright button {
+    width: 100px;
+    height: 35px;
+    background-color: lightgrey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.searchleft button {
+    width: 100px;
+    height: 35px;
+    background-color: lightgrey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.searchright button:hover {
+    background-color: #F37B1F;
+}
+
+.submit button {
+    width: 100px;
+    height: 35px;
+    background-color: lightgrey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.submit button:hover {
+    background-color: #F37B1F;
+}
+
+.searchleft1 select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+}
+
+.searchleft2 select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+}
+
+.searchleft3 select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+    margin-right: 20px;
+}
+
+.searchright select {
+    width: 150px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+    margin-left: 10px;
+}
+
+.searchright input {
+    width: 200px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 10px;
+    border-style: none;
+    border: 1px solid #b9b9b9;
+}

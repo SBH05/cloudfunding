@@ -1,0 +1,181 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: Poppins;
+}
+
+a:link, a:visited{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+    width: 1920px;
+    margin: 0 auto; /* 화면 가운데 정렬 */
+    padding-bottom: 100px;
+}
+
+.left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+
+.jointitle{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.alreadyJoin span {
+    color: #b9b9b9;
+}
+
+.gologin a{
+    margin-left: 30px;
+    color: #b9b9b9 ;
+    font-weight: bold;
+}
+
+.joininfo div{
+    padding: 20px 0;
+}
+
+.box1{
+    border-radius: 5px;
+    width: 330px;
+    height: 35px;
+    border: 1px solid #b9b9b9;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.box2{
+    border-radius: 5px;
+    width: 260px;
+    height: 35px;
+    border: 1px solid #b9b9b9;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+}
+
+.box4{
+    border-radius: 9px;
+    width: 360px;
+    height: 60px;
+    border: 1px solid rgb(184, 184, 184);
+}
+
+.movetext1{
+    margin-left: 150px;
+}
+
+.movetext2{
+    position: relative;
+    left: 128px;
+}
+
+.joinbtn button {
+    width: 330px;
+    height: 50px;
+    background-color: lightgrey;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    padding: 10px 20px;
+}
+.joinbtn button:hover {
+    background-color: #F37B1F;
+}
+
+.mailbtn button:hover {
+    background-color: #F37B1F;
+}
+
+#duplicationCheck:hover {
+    background-color: #F37B1F;
+}
+
+/* 버튼 디자인 */
+.mailbtn button {
+    width: 100px;
+    height: 35px;
+    background-color: lightgrey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.searchZipCode1:hover{
+    background-color: #F37B1F;
+}
+
+.kinglogo{
+    width: 600px;
+    height: auto;
+}
+
+.detailLeft{
+    /*margin-left: 500px;*/
+}
+
+/*.detailRight{*/
+/*    margin-top: 220px;*/
+/*    margin-left: 100px;*/
+/*}*/
+
+.down {
+    width: 1500px;
+    border-top: 1px solid #b9b9b9;
+}
+
+.downLine {
+    justify-content: center;
+    display: flex;
+}
+
+.downContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 100px 0px;
+    align-items: center;
+}
+
+.downContainer a {
+    color: inherit;
+    text-decoration: none;
+    color: #b9b9b9;
+    margin: 0px 50px 0px 50px;
+}
+
+.movetext1{
+    position: relative;
+    right: 148px;
+}
+
+.movetext2{
+    position: relative;
+    right: 120px;
+}
+
+.passwordContainer {
+    display: flex;
+    margin-bottom: -40px;
+}
+
+.passwordSee label {
+    font-size: 13px;
+    color: #b9b9b9;
+}

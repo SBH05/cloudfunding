@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<th:block layout:fragment="content">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 회원 조회 세부사항</title>
+    <link rel="stylesheet" href="/css/manager/search/userDetail.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <div class="container">
+        <th:block th:replace="/fragments/managersidebar.html"></th:block>
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span><a class="black-link" th:href="@{/manager/search/userMain}">사용자 회원 조회</a></span>
+                <span><a class="black-link"> > </a></span>
+                <span><a class="black-link">세부 정보</a></span>
+
+            </div>
+
+            <div class="CRUDcontainer">
+
+                <div>
+                    <a href="#"><img class="logo1" src="/images/01_logoimg/textLogoNone.png" alt=""></a></div>
+
+                <div class="CRUD">
+
+                    <div class="stop">
+                        <form action="search" method="post">
+                            <select name="nation2">
+                                <option value="search">사용자 정지</option>
+                                <option value="stopWeek">일주일 정지</option>
+                                <option value="stopMonth">한달 정지</option>
+                                <option value="stopThreeMonth">3달 정지</option>
+
+                            </select>
+                        </form>
+                    </div>
+
+
+                    <div class="update"
+                         th:onclick="'location.href=\'/manager/search/userUpdate?no='+ @{${userInfo.userCode}} + '\''"
+                    >
+                        수정
+
+                    </div>
+
+                    <div class="delete" id="delete"
+                         th:onclick="'location.href=\'/manager/search/delete?no='+ @{${userInfo.userCode}} + '\''"
+                    >
+
+                        삭제
+                    </div>
+                    <input type="hidden" name="number" id="number" th:value="${userInfo.userCode}">
+
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // 삭제 버튼 클릭 시 확인 창 표시
+                            var deleteButton = document.getElementById('delete');
+                            if (deleteButton) {
+                                deleteButton.addEventListener('click', function () {
+                                    var confirmed = confirm('삭제하시겠습니까?');
+                                    if (confirmed) {
+                                        // 확인을 누른 경우, 주어진 URL로 이동
+                                        var userCode = document.getElementById('number').value;
+                                        var deleteUrl = '/manager/search/delete?no=' + userCode;
+                                        window.location.href = deleteUrl;
+                                    }
+                                });
+                            }
+                        });
+
+                        /*]]>*/
+                    </script>
+                </div>
+            </div>
+
+            <!-- <div class="searchcontainer">
+                <div class="searchleft1">
+                    <form action="search" method="post">
+                        <select name="nation2"  >
+                            <option value="search"selected>정렬컬럼</option>
+                            <option value="ch">이름(기본)</option>
+                            <option value="etc">아이디</option>
+                            <option value="etc">비밀번호</option>
+                            <option value="etc">전화번호</option>
+                            <option value="etc">생년월일</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="searchleft2">
+                    <form action="search" method="post">
+                        <select name="nation2"  >
+                            <option value="search"selected>정렬방식</option>
+                            <option value="ch">오름차순(기본)</option>
+                            <option value="jp" >내림차순</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="searchright">
+                    <form action="search" method="post">
+                        <button class="iconlogo" type="submit" style="width: 20px; height: 20px; border: none; background: url('/resources/images/돋보기\ 아이콘.avif') center center / cover no-repeat; padding: 0;"></button>
+                        <input type="text" name="search" required>
+                        <select name="nation2"  >
+                            <option value="search"selected>검색설정</option>
+                            <option value="ch">활동</option>
+                            <option value="jp" >휴면</option>
+                            <option value="etc">기타</option>
+                        </select>
+                    </form>
+                </div>
+            </div> -->
+
+
+            <div class="main">
+                <table>
+
+                    <tr>
+
+                        <th>이름</th>
+                        <th>아이디</th>
+                        <th>비밀번호</th>
+                        <th>전화번호</th>
+                        <th>생년월일</th>
+                        <th>활동상태</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${userInfo.userName}"></td>
+                        <td th:text="${userInfo.userId}"></td>
+                        <td th:text="${userInfo.password}"></td>
+                        <td th:text="${userInfo.phone}"></td>
+                        <td th:text="${userInfo.dateBirth}"></td>
+                        <td th:text="${userInfo.activityStatus}"></td>
+                        <!--                        <td><span class="ing">활동</span></td>-->
+                    </tr>
+
+                </table>
+            </div>
+            <div class="searchDetail">
+                <strong><h4>세부정보</h4></strong>
+                <table>
+
+                    <tr>
+                        <th>이메일</th>
+                        <th>가입일자</th>
+                        <th>신고누적</th>
+                        <th>주소</th>
+                    </tr>
+
+                    <tr>
+                        <td th:text="${userInfo.email}"></td>
+                        <td th:text="${userInfo.registrationDate}"></td>
+                        <td th:text="${userInfo.reportCount}"></td>
+                        <td th:text="${userInfo.address}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <th:block th:if="${#objects.nullSafe(companyInfo,default)}">
+                <div class="searchDetail1">
+                    <strong><h4>회사정보</h4></strong>
+                    <table>
+
+                        <tr>
+                            <th>상호/법인명</th>
+                            <th>업종</th>
+                            <th>설립일</th>
+                            <th>홈페이지 주소</th>
+                            <th>소재지</th>
+                            <th>대표 전화번호</th>
+                            <th>사업자 등록번호</th>
+                            <th>회사 이메일</th>
+                        </tr>
+
+                        <tr>
+                            <td th:text="${companyInfo.businessName}"></td>
+                            <td th:text="${companyInfo.industry}"></td>
+                            <td th:text="${companyInfo.establishmentDate}"></td>
+                            <td th:text="${companyInfo.homepage}"></td>
+                            <td th:text="${companyInfo.location}"></td>
+                            <td th:text="${companyInfo.businessPhone}"></td>
+                            <td th:text="${companyInfo.businessLicenseNumber}"></td>
+                            <td th:text="${companyInfo.businessEmail}"></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </th:block>
+
+            <th:block th:if="${!#lists.isEmpty(userFunding)}">
+                <div class="buyList"><strong><h4>판매내역</h4></strong>
+
+
+                    <table>
+
+                        <tr>
+                            <th>순번</th>
+                            <th>프로젝트 명</th>
+                            <th>펀딩기간</th>
+                            <th>펀딩결과</th>
+                        </tr>
+
+                        <tr th:each="funding : ${userFunding}">
+                            <td th:text="${funding.projectCode}"></td>
+                            <td th:text="${funding.projectTitle}"></td>
+                            <td th:text="|${funding.projectStartDate} ~ ${funding.projectEndDate}|"></td>
+                            <td th:text="${funding.achievementStatus}"><span class="ing"></span></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </th:block>
+
+            <th:block th:if="${!#lists.isEmpty(userReport)}">
+                <div class="buyList">
+                    <strong><h4>경고 내역</h4></strong>
+
+                    <table>
+
+                        <tr>
+                            <th>순번</th>
+                            <th>제목</th>
+                            <th>신고 접수일</th>
+                            <th>상세 사유</th>
+                            <th>신고자 코드</th>
+                        </tr>
+
+                        <tr th:each="report : ${userReport}">
+                            <td th:text="${report.creationNumber}"></td>
+                            <td th:text="${report.title}"></td>
+                            <td th:text="${report.creationDate}"></td>
+                            <td th:text="${report.content}"></td>
+                            <td th:text="${report.reporter}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </th:block>
+
+
+            <th:block th:if="${!#lists.isEmpty(userBuy)}">
+                <div class="buyList"><strong><h4>구매내역</h4></strong>
+
+                    <table>
+
+                        <tr>
+                            <th>순번</th>
+                            <th>프로젝트 명</th>
+                            <th>판매자</th>
+                            <th>펀딩기간</th>
+                            <th>펀딩결과</th>
+                        </tr>
+
+                        <tr th:each="buy : ${userBuy}">
+                            <td th:text="${buy.cartCode}"></td>
+                            <td th:text="${buy.projectCode.projectTitle}"></td>
+                            <td th:text="${buy.projectCode.sellerInfo.userName}"></td>
+                            <td th:text="|${buy.projectCode.projectStartDate} ~ ${buy.projectCode.projectEndDate}|"></td>
+                            <td th:text="${buy.projectCode.achievementStatus}"><span class="ing"></span></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </th:block>
+
+
+        </div>
+
+
+
+    <div class="right">
+        <!-- 우측 컨텐츠 -->
+    </div>
+    </div>
+</th:block>
+
+
+</html>

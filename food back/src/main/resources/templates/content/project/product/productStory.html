@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block layout:fragment="content">
+
+
+    <link rel="stylesheet" th:href="@{/css/project/productPage/productStory.css}">
+
+
+
+
+    <div class="bodyking" >
+
+        <div class="main-box">
+
+            <div class="story-con">
+                <a th:href="@{/product/productStory(no=${thumbnailList.projectDTO.projectCode})}" class="story">스토리</a>
+                <br>
+                <a th:href="@{/product/productPage(no=${thumbnailList.projectDTO.projectCode})}" class="story">구매후기</a>
+
+            </div>
+            <div class="story-con2">
+
+            </div>
+            <div class="bigPage">
+
+
+                <div class="left">
+
+                    <div class="imgmove" >
+                        <img th:src="@{|/thumbPath/${projectFile[0].getChangedFileName()}|}" alt="">
+<!--                        <img th:src="@{|/thumbPath/${thumbnailList.projectFileDTO[0].getChangedFileName()}|}" alt="">-->
+<!--                        <img th:src="@{|/thumbPath/${thumbnailList.projectFileDTO[0].getPath()}/${thumbnailList.projectFileDTO[0].getChangedFileName()}|}" alt="">-->
+<!--                        <img th:src="@{|/thumbPath/${thumbnailList.projectFileDTO[0].getPath()}|}" alt="">-->
+<!--                    <img th:src="@{|/thumbPath${thumbnailList.projectFileDTO[0].getChangedFileName()}|}" alt="">-->
+                            <!--       왼쪽위 사진        -->
+
+                    </div>
+
+
+                    <div>
+                        <div class="textfont">프로젝트 스토리</div>
+                        <div class="imgmove">
+                            <img th:src="@{|/thumbPath/${projectFile[1].getChangedFileName()}|}" alt="">
+                                    <!-- 메인사진 위치 -->
+                        </div>
+                    </div>
+
+                    <div class="button1">
+                        <div>
+                            <button class="storybutton">스토리 더보기</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!--   ======================오른쪽 시작 ==============================  -->
+                <div class="right">
+
+                    <div class="introduction-con">
+                        <div>
+                            <!-- 프로젝트 타이틀 자리 입니다.-->
+                            <div style="font-size: 36px; margin-bottom: 10px; font-weight: bold;" th:text="${thumbnailList.projectDTO.projectTitle}" >
+                            </div>
+                                <!-- 타이틀 아래 소개글자리 입니다.-->
+                            <div style="font-size: 23px; margin-bottom: 50px;" th:text="${thumbnailList.projectDTO.projectSummary}">
+                            </div>
+                            <div style="margin-bottom: 50px;"><span
+                                    style="font-size: 40px; font-weight: bold;">37</span><span>명 참여<span
+                                    class="introduction-span" style="margin-left: 20px;">10일 남음</span></span></div>
+                        </div>
+                                            <!--남은 시간 자리입니다. -->
+
+                        <div style="margin-bottom: 50px;"><span
+                                style="font-size: 40px; font-weight: bold;">1,056,000</span><span>원 달성<span
+                                class="introduction-span" style="margin-left: 20px;">211% 달성</span></span></div>
+
+
+                    </div>
+
+                    <div class="btns-con">
+
+
+                        <script>
+                            let liked1 = false; // 첫 번째 좋아요 상태를 나타내는 변수
+                            let liked2 = false; // 두 번째 좋아요 상태를 나타내는 변수
+                            let likeCount = 0;   // 좋아요 개수를 저장하는 변수
+
+                            function like(buttonId) {
+                                const button1 = document.getElementById('button1');
+                                const button2 = document.getElementById('button2');
+                                const likeCountElement = document.getElementById('likeCount');
+
+                                if (buttonId === 'button1') {
+                                    liked1 = !liked1;
+                                    liked2 = liked1;
+                                } else if (buttonId === 'button2') {
+                                    liked2 = !liked2;
+                                    liked1 = liked2;
+                                }
+
+                                if (liked1 || liked2) {
+                                    // 하나 이상의 버튼이 좋아요 상태인 경우
+                                    button1.classList.add('liked');
+
+                                    likeCount++;
+                                } else {
+                                    // 두 버튼이 모두 좋아요 상태가 아닌 경우
+                                    button1.classList.remove('liked');
+
+                                    likeCount--;
+                                }
+
+                                // 좋아요 개수 업데이트
+                                likeCountElement.textContent = likeCount;
+                            }
+                        </script>
+                    </div>
+                    <div class="businesscard-con">
+                        <div class="businesscard">
+                            <img th:src="@{|/imagePath/${profileImage.getChangedProFileName()}|}" alt="">
+                            <!--                                    여기가 판매자 이름-->
+                            <div class="businesscard-right" th:text="${thumbnailList.privateBusinessDTO.businessName}"></div>
+                        </div>
+                        <div class="businesscard-home">홈페이지:&nbsp;&nbsp;<span th:text="${thumbnailList.privateBusinessDTO.homepage}"></span></div>
+                        <!--                                 홈페이지 주소 넣는 곳-->
+                        <!--                            <div class="addr"></div>-->
+
+                        <div class="business-sns">email:&nbsp;&nbsp;<span th:text="${thumbnailList.privateBusinessDTO.businessEmail}"></span></div>
+                    </div>
+                    <div class="report-con">
+                        <span>프로젝트에 문제가 있나요?<span style="margin-left: 360px;"><a th:href="@{/board/inquiryWrite}">신고하러가기  ></a></span></span>
+                    </div>
+                    <div class="pickkeyword-con">
+                        <div class="pickkeyword">리워드 선택</div>
+                    </div>
+                    <!-- 스크롤바 -->
+                    <div class="scroll-container">
+                        <!-- 상품선택하는 곳 -->
+
+                        <form id="optionForm" th:action="@{/order/cart}" method="post">
+                        <div class="select-con">
+
+                            <div class="select-a"   th:each="option, iterStat : ${projectOption}"
+                                                    th:id="'option-' + ${iterStat.index}"
+                                                    onclick="selectOption(this, ${iterStat.index})"
+                                                    th:data-project-code="${option.projectCode}"
+                                                    th:data-option-type="${option.optionType}"
+                                                    th:data-option-code="${option.optionCode}"
+
+                                                        >
+                                <div class="product-0">
+<!--                                        가격-->
+                                    <div class="productprice-1">
+                                        <div th:text="${option.price}"></div>
+                                    </div>
+                                    <div class="product-1">
+                                        <div th:text="${option.optionName}"></div>
+<!--                                            옵션 이름ㅇ-->
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="product-2">
+<!--                                    상품 구성-->
+                                    <div th:text="${option.configure}"></div>
+                                </div>
+                                <hr>
+
+                                <div class="product-3">
+                                    <div>배송비</div>
+                                    <div style="font-weight: bold;">6000원</div>
+                                </div>
+
+                                <hr>
+
+                                <div class="product-4">
+                                    <div>발송 시작일</div>
+                                    <div style="font-weight: bold;">2023년 12월 말 (21-말일) 예정</div>
+                                </div>
+
+                                <hr>
+
+                                <div class="product-5">
+                                    <div>제한 수량</div>
+                                    <div style="font-weight: bold;">50개</div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                                <input type="hidden" id="selectedOptionIndex" name="selectedOptionIndex" value="" />
+                        <input type="hidden" id="projectCode" name="projectCode" th:value="${thumbnailList.projectOptionDTO.projectCode}" />
+                        <input type="hidden" id="optionType" name="optionType" th:value="${thumbnailList.projectOptionDTO.optionType}" />
+                        <input type="hidden" id="optionCode" name="optionCode" th:value="${thumbnailList.projectOptionDTO.optionCode}" />
+
+<!--                       카트컨트롤러의     @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO 로 맴버코드(usercode가져오는것 생략)-->
+<!--                        <input type="hidden" id="memberCode" name="memberCode" th:value="${thumbnailList.projectUserDTO.userCode}" />-->
+
+
+                        </form>
+
+                        <br>
+                    </div>
+                    <div class="btns-con">
+
+                        <button class="goodbtn">
+                            <div onclick="like('button1')" class="like-button" id="button1">&#10084;</div>
+                            <span id="likeCount">0</span></button>
+                        <button class="buybtn" form="optionForm" type="submit"  onclick="submitForm()">예약 구매하기</button>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let counterValue = 0;
+
+        // 증가 함수
+        function increase() {
+            counterValue++;
+            updateCounter();
+        }
+
+        // 감소 함수
+        function decrease() {
+            if (counterValue > 0) {
+                counterValue--;
+                updateCounter();
+            }
+        }
+
+        function updateCounter() {
+            document.getElementById('counter-value').innerText = counterValue;
+        }
+    </script>
+
+
+
+    <script>
+        function selectOption(element, index) {
+            // 모든 'select-a' 요소의 'selected' 클래스 제거
+            document.querySelectorAll('.select-a').forEach(function(el) {
+                el.classList.remove('selected');
+            });
+
+            // 클릭된 요소에 'selected' 클래스 추가
+            element.classList.add('selected');
+
+            // 선택된 옵션의 인덱스 설정
+            document.getElementById('selectedOptionIndex').value = index;
+
+            // 선택된 옵션의 프로젝트 코드와 옵션 타입을 설정
+            document.getElementById('projectCode').value = element.dataset.projectCode;
+            document.getElementById('optionType').value = element.dataset.optionType;
+            document.getElementById('optionCode').value = element.dataset.optionCode;
+
+
+            // 선택된 옵션 정보를 JSON 객체로 생성
+            var selectedOptionDetails = {
+                price: element.querySelector(".productprice-1 div").innerText,
+                optionName: element.querySelector(".product-1 div").innerText,
+                configure: element.querySelector(".product-2 div").innerText,
+                projectType: element.dataset.projectCode,
+                optionType: element.dataset.optionType,
+                optionCode: element.dataset.optionCode
+
+            };
+
+            // JSON 객체를 문자열로 변환하여 숨겨진 필드의 값으로 설정
+            document.getElementById('selectedOptionIndex').value = JSON.stringify(selectedOptionDetails);
+        }
+    </script>
+
+    <script>
+        function submitForm() {
+            // 선택된 옵션이 있는지 확인
+            var selectedOptionValue = document.getElementById('selectedOptionIndex').value;
+            if (selectedOptionValue) {
+                // 선택된 옵션이 있으면 폼을 제출합니다.
+                document.getElementById('optionForm').submit();
+                window.location.href = '/order/cart';
+                // window.href.
+            } else {
+                // 선택된 옵션이 없으면 사용자에게 알림
+                alert('옵션을 선택해주세요.');
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('.select-a').forEach((element, index) => {
+                element.setAttribute('onclick', `selectOption(this, ${index})`);
+            });
+        });
+    </script>
+
+    <script>
+        function showMoreStories() {
+            // AJAX 요청을 사용하여 서버로부터 추가 이미지 경로를 받아옴
+            fetch('/path-to-server-endpoint') // 실제 요청할 서버의 엔드포인트로 변경
+                .then(response => response.json())
+                .then(data => {
+                    // 서버로부터 받은 이미지 경로 배열을 사용하여 각 이미지 태그를 생성
+                    data.imagePaths.forEach(imagePath => {
+                        const newImage = document.createElement('img');
+                        newImage.src = `/thumbPath/${KingTigerPlatter.png}`; // 각 이미지 경로
+                        newImage.alt = 'Additional Story Image';
+                        // 생성된 이미지 태그를 페이지에 추가
+                        const storyContainer = document.querySelector('.story-con2');
+                        storyContainer.appendChild(newImage);
+                    });
+
+                    // "스토리 더보기" 버튼 숨기기
+                    const storyButton = document.querySelector('.storybutton');
+                    storyButton.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching additional stories:', error);
+                });
+        }
+    </script>
+
+
+
+</th:block>
+</html>

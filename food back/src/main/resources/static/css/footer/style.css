@@ -1,0 +1,101 @@
+/* 푸터 */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+    padding: 0 5%; /* 좌우 여백을 화면 너비의 5%로 지정 */
+}
+
+.footer {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+}
+
+.footer-back {
+    background-color: rgb(233, 233, 233);
+    width: 100%;
+    height: 230px;
+    position: absolute;
+    margin-top: 0px;
+}
+
+.footer-left {
+    transform: rotate(6.141813577836304deg);
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.footer-group {
+    height: 163px;
+    position: absolute;
+    left: 500px;
+}
+
+.footer-group-design {
+    width: 100px;
+    height: 163px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.footer-down {
+    color: rgba(185.00000417232513, 185.00000417232513, 185.00000417232513, 1);
+    width: 500px;
+    height:max-content;
+    position: absolute;
+    top: 130px;
+    font-family: Poppins;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.footer-up {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    left: 0px;
+    top: 10px;
+
+}
+
+.footer-up-right {
+    color: rgba(185.00000417232513, 185.00000417232513, 185.00000417232513, 1);
+    width: 300px;
+    height: 30px;
+    position: absolute;
+    left: 300px;
+    top: 50px;
+    font-family: Poppins;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: -1px;
+    margin-left: 30px;
+}
+
+.footer-up-left {
+    color: rgba(185.00000417232513, 185.00000417232513, 185.00000417232513, 1);
+    width: 300px;
+    height: 30px;
+    position: absolute;
+    top: 50px;
+    font-family: Poppins;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.footer-logo {
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+    z-index: 1;
+    margin-left: 15vh;
+
+}

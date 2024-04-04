@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+    <link rel="stylesheet" href="/css/manager/board/memberinquriryWriting.css">
+
+
+    <title>신고 글쓰기</title>
+
+    <div class="container">
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span>신고하기</span>
+
+            </div>
+        
+            <div>
+				<a href="#"><img class="logo1" src="/images/01_logoimg/textLogoNone.png" alt=""></a>            </div>
+            
+
+            <div class="box">
+                <span class="box1">작성번호 : 1</span>
+                <!-- <span class="box1">작성자:김민*</span> -->
+                <span class="box2">작성일자 :
+					     <script>
+                            date = new Date().toLocaleDateString();
+							document.write(date);
+                        </script>
+				</span>
+
+            </div>
+            
+            <div>
+                <form action="">
+                    <div class="detail_title">
+                        <div id="details">제목</div>
+
+                        <div id="details3">
+                        <textarea name="" id="writeTitle" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="detail">
+                        <div id="details">내용</div>
+
+                        <div id="details2">
+                        <textarea name="" id="answer" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="submitbtn"><button type="submit">글쓰기</button></div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+
+    </div>
+
+
+</th:block>
+</html>

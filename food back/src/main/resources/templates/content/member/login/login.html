@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+    <th:block  layout:fragment="content">
+    <title>login</title>
+
+    <link rel="stylesheet" th:href="@{/css/login/login.css}" type="text/css">
+
+    <div id="wrap">
+    <div id="login">
+    <ul class="signin">
+        <a th:href="@{/#}"><img id="logo1" src="/images/textlogonone_2.png" alt=""></a>
+
+        <br><br><br><br><br>
+
+        <li class="signin_text">로그인</li>
+
+        <br><br><br>
+
+        <form id="loginForm" th:action="@{/member/login}" method="post">
+
+            <div class="signInContainer">
+                <div class="user_id">
+                        <label class="movetext1" >아이디</label>
+                        <br>
+                        <input type="text" name="userId" value="user01">
+                </div>
+
+                    <br><br>
+
+                <div class="user_Password">
+                    <label class="movetext2" >비밀번호</label>
+                    <br>
+                    <input type="password" name="userPwd" value="1234">
+                </div>
+            </div>
+
+            <br><br><br>
+
+        <div class="btlogin">
+            <button  type="submit" value="로그인" id="loginSubmit">로그인</button>
+        </div>
+        </form>
+    </ul>
+
+        <br>
+
+    <div class="downpart">
+
+        <div class="finidContainer">
+            <div class="findid">
+                <div><a th:href="@{/member/findId}">아이디 찾기</a></div>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <div><a th:href="@{/member/findPwd}">비밀번호 찾기</a></div>
+            </div>
+        </div>
+
+        <br><br><br>
+    
+        <div class="signInMessage">회원가입으로 Cloud Fooding의 다양한 혜택을 경험해 보세요!</div>
+
+        <br>
+
+        <div class="btjoin"><a th:href="@{/member/join}"><button>회원가입</button></a></div>
+    </div>
+
+        <div class="downLine">
+            <div class="down"></div>
+        </div>
+
+        <div class="downContainer">
+
+            <a th:href="@{/support/usermain}">고객센터</a>
+            <a th:href="@{/}">메인으로 돌아가기</a>
+
+            <br><br><br><br><br><br>
+
+        </div>
+
+
+
+
+
+</div>
+    
+</div>
+
+
+
+</th:block>
+</html>

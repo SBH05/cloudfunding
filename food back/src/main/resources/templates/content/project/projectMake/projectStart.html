@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block  layout:fragment="content">
+
+    <script th:src="@{/js/project/projectMake-main/projectMake/projectMake.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/project/projectMake-main/projectMake/css.css}">
+
+    <th:block th:replace="/fragments/projectMakesidebar.html"></th:block>
+    <div class="back-side-container">
+
+
+        <form th:action="@{/projectMake/projectStart}" id="search" method="post">
+
+            <input
+                    type="hidden"
+                    id="memberId"
+                    name="sellerCode"
+                    th:value="${ #authentication.getPrincipal().memberDTO.getUserCode() }">
+
+        <section class="back-board-container">
+            <!-- 배경 시트 좌측 상단 텍스트 -->
+            <div class="greeting-text"><span sec:authentication="principal.memberDTO.userId"></span>님, 반갑습니다!</div>
+            <!-- 배경 시트 -->
+            <div class="back-board">
+                <!-- 로고 -->
+                <div class="board-logo img">
+                <img src="/images/01_logoimg/textLogoNone.png">
+                </div>
+                <!-- 카테고리 -->
+                <div class="category">
+                    <div class="category-text">카테고리<span class="greeting-text-star"> *</span></div>
+                    <div class="category-sub-text">프로젝트와 가장 잘 어울리는 카테고리를 선택해 주세요. 프로젝트를 만들고 바꿀 수 있어요.</div>
+
+                    <select id="menuBar" name="category">
+                        <option th:each="option : ${option}"
+                                th:value="${option}"
+                                th:text="${option}"
+                                th:selected="${option == project.category}">카테고리 선택</option>
+<!--                        <option href="#" onclick="changeMenu(this)" value="음료">음료</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="주류">주류</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="베이커리">베이커리</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="해외음식">해외음식</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="채소">채소</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="해산물">해산물</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="과일">과일</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="냉동식품">냉동식품</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="소스">소스</option>-->
+<!--                        <option href="#" onclick="changeMenu(this)" value="디저트">디저트</option>-->
+                    </select>
+
+                    <button type="submit" class="project-start" th:href="@{/projectMake/projectStart}">제출하기</button>
+
+                    <br><br><br><br><br>
+
+                    <div class="category">
+                        <div class="category-text">프로젝트 진행 시 참고해 주세요.</div>
+                        <div class="category-sub-text">1. 프로젝트 오픈 과정</div>
+
+                        <br><br><br>
+                    </div>
+                </div>
+                <div class="project-image">
+                <img src="/images/프로젝트 진행 시 참고해 주세요..png">
+                </div>
+
+                    <div class="list-container">
+                       
+                        <div class="list-item">
+                        <div class="list-title">작성</div><br>
+                            <span class="list-content">
+                                <li>[프로젝트 관리] 메뉴를 모두 작성하면 작성할 수 있어요.</li>
+                                <li>프로젝트 샘플 이미지가 스토리에 포함되어야 해요.</li>
+                            </span>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-title">심사</div><br>
+                            <span class="list-content">
+                                <li>제품을 유통할 수 있는지, 스토리에 작성한 내용이 적합한지 확인해요.</li>
+                                <li>심사 중 수정 요청 피드백을 받을 수 있고, 최종 제출 후 심사 완료까지 평균 7일 걸려요.</li>
+                            </span>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-title">공개</div><br>
+                            <span class="list-content">
+                                <li>최종 승인 후 판매자가 공개 일정을 설정할 수 있어요.</li>
+                                <li>원하는 일정에 맞춰 바로 공개하거나 예약이 가능해요.</li>
+                            </span>
+                        </div>
+                    </div>
+
+                        <div class="category">
+                            <div class="category-sub-text">2. 프로젝트 유형</div>
+                            <br><br><br>
+                        </div>
+                        <!-- 프로젝트 유형 -->
+                        <div class=type-container>
+                            <span class="type-container-or">OR</span>
+                            <div class=folder-container1>
+                                <div class="folder1-up"></div>
+                                <div class="folder1-down"></div>
+                            </div>
+                            <div class=folder-container2>
+                                <div class="folder2-up"></div>
+                                <div class="folder2-down"></div>
+                            </div>
+                            <span class="folder1-title">펀딩</span>
+                            <span class="folder2-title">리펀딩</span>
+                            <div class=folder1-box>
+                                <span class="folder1-box-in">새로운 제품, 서비스, 콘텐츠를 소개해요. 개인의 기부, 후원 활동을 위해 자금을 모을 수도 있어요.
+                                </span>
+                            </div>
+                            <div class=folder2-box>
+                                <span class="folder2-box-in">인기펀딩 제품, 서비스, 콘텐츠를 소개해요. 다수 구매자의 요청이나 리펀딩 프로젝트로 순위에 오른 제품들이 참여해요.
+                                </span>
+                            </div>
+                        </div>
+                        <!-- 프로젝트 유형 -->
+
+                </div>
+        </section>
+        </form>
+        </div>
+
+
+</th:block>
+
+</html>

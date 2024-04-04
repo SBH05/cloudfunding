@@ -1,0 +1,239 @@
+
+		.first{
+			font-size: 30px;
+			font-weight: 1000;
+			margin-top: 40px;
+			margin-left: 3%;
+		}
+
+
+
+        				/* 중간영역 시작 */
+
+
+		.middle {
+			width:1260px;
+			height:900px;
+			position:relative;
+			left:0px;
+			top:20px;
+			box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+			background-color: rgba(255, 255, 255, 1);
+		}
+
+
+
+		.middle_box {
+
+			width:1420px;
+			height:1050px;
+			position:relative;
+			left:460px;
+			top:40px
+		}
+
+
+
+				/* 내용작성 박스*/
+				.quest { 
+					background-color:whitesmoke;
+					border-top: 1px solid #ddd; 
+					width:1059px;
+					height:503px;
+					position:absolute;
+					left:65.5px;
+					top:277px;				
+				}
+
+				
+					.detail{				
+					border-top: none; 
+					position: relative;
+					padding-left: 0px;
+					padding-top: 0px;					
+				}
+
+				/* 내용작성 글상자 */
+				textarea {
+					width:1059px;
+					height:500px;
+					border: none;
+					resize: none;
+					font-size: 30px;
+					
+				}
+
+
+				.title_detail {
+					position:absolute;
+					left:115px;
+					top:192px;
+					border: none;
+					resize: none;
+											
+				}
+
+
+				.project_detail{
+
+					position:absolute;
+					left:520px;
+					top:192px;
+					border: none;
+					resize: none;
+				}
+
+
+				.seller_detail{
+
+					position:absolute;
+					left:890px;
+					top:192px;
+					border: none;
+					resize: none;
+				}
+
+				input {
+					width: 250px;
+					height: 23px;
+					border: none;
+				}
+				
+			
+
+				/* 판매자명 */
+				.seller_name {
+
+					color:rgba(181.09426975250244, 183.07396352291107, 192.31249898672104, 1);
+					width:60px;
+					height:18px;
+					position:absolute;
+					left:820px;
+					top:190px;
+					font-family:Poppins;					
+					font-size:20px;	
+				}
+				
+
+				/* 프로젝트명 */
+				.project_title {
+
+					color:rgba(181.09426975250244, 183.07396352291107, 192.31249898672104, 1);
+					width:100px;
+					height:18px;
+					position: relative;
+					left:410px;
+					top:23px;
+					font-family:Poppins;					
+					font-size:20px;	
+				}
+				
+
+
+				/* 글쓰기 제목 */
+				.wirte_title { 
+					color:rgba(181.09426975250244, 183.07396352291107, 192.31249898672104, 1);
+					width:40px;
+					height:18px;
+					position:absolute;
+					left:65px;
+					top:190px;
+					font-family:Poppins;
+					text-align:left;
+					font-size:20px;	
+				}
+
+
+				.bar { 
+					transform: rotate(0.0000038196945235904664deg);
+					width:1108px;
+					height:0px;
+					position:absolute;
+					left:40.5px;
+					top:225px;
+				}
+				.bar { 
+					border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+				}
+
+
+
+
+
+				.box1{
+					width: 140px;
+					
+					background-color: rgb(241, 241, 241);
+					color: gray;
+					border-radius: 10px;
+					padding: 7px;
+					
+					margin: 15px;
+					text-align: center;
+				}
+				.box2{
+					width: 200px;
+					color: gray;
+					
+					background-color:  rgb(241, 241, 241);
+					border-radius: 10px;
+				
+					padding: 7px;
+					margin: 15px;
+					text-align: center;
+				}
+				
+				
+				
+				.box{
+					display: flex;
+					justify-content: right;
+					
+				}
+
+
+				
+				.submitbtn button{
+					/* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+					width: 110px;
+					padding: 7px 10px ;
+				
+				
+					/* 배경색을 주황색으로 설정합니다. */
+					background-color: orange;
+				
+					/* 글자 색을 변경합니다. */
+					color: white;
+				
+					/* 글자 크기를 크게 설정합니다. */
+					
+				
+					/* 모서리를 둥글게 만듭니다. */
+					border-radius: 9px;
+				
+					/* 테두리를 없앱니다. */
+					border: none;
+				
+					/* 버튼 안의 텍스트를 가운데 정렬합니다. */
+					text-align: center;
+				
+					/* 버튼 안의 텍스트의 여백을 조정합니다. */
+					
+					margin: 15px;
+
+					position:absolute;
+
+					left: 430px;
+
+					top: 520px;
+				
+				}
+				
+				.submitbtn button:hover{
+					background-color: darkorange;
+				}
+				
+				.black-link{
+					color: black;
+				}
+				

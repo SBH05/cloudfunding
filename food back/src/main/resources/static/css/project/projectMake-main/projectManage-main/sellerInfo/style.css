@@ -1,0 +1,188 @@
+* {
+    font-family: Poppins;
+    text-decoration: none;
+}
+
+
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 1200px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+
+.back-board-container{
+    position: relative;
+    left: 600px;
+}
+
+/* 제출하기 */
+.project-start {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10vh;
+}
+
+/* 타이틀 */
+.category-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 10vh;
+}
+
+.category-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 2vh;
+}
+
+.greeting-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 20vh;
+    margin-top: 2vh;
+    margin-left: 20vh;
+}
+
+/* 타이틀 옆 별 */
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}
+
+/* 판매자 명 */
+.seller-name-container {
+    margin-left: 10vh;
+}
+
+.seller-name-textBox {
+    border: 1px solid #b9b9b9;
+    width: 150px;
+    height: 30px;
+    background-color: none;
+    border-radius: 5px;
+}
+.seller-name-container textarea {
+    outline: none;
+    resize: none;
+    border: none;
+    width: 140px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.seller-name-container p {
+    font-size: 13px;
+    color: #b9b9b9;
+}
+
+/* 판매자 프로필 이미지 */
+.profile-image-imgBox {
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+    width: 80px;
+    height: 25px;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+    margin-left: 10vh;
+}
+
+.profile-image-container p {
+    font-size: 13px;
+    color: #b9b9b9;
+    margin-left: 10vh;
+}
+
+/* 판매자 프로필 이미지 팝업 */
+#popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+#popup-content {
+    background: #fff;
+    padding: 20px;
+    max-width: 300px;
+    text-align: right;
+}
+
+#popup-content img {
+    max-width: 100%;
+    max-height: 300px;
+    margin-bottom: 10px;
+}
+
+#popup-close {
+    cursor: pointer;
+    font-size: 13px;
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+}
+
+#image-preview {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+}
+
+#image-preview img {
+    max-width: 80px;
+    max-height: 80px;
+    margin: 5px;
+}
+
+.profile-image-container img {
+    margin-left: 10vh;
+}
+
+/* 판매자 이메일 */
+.sellerEmail {
+    width: 200px;
+    margin-left: 10vh;
+}
+
+.sellerEmail input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+select {
+    width: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    outline: none;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+
+<th:block  layout:fragment="content">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객센터 답변완료</title>
+    <link rel="stylesheet" href="/css/manager/board/inquiryAnswered.css">
+
+
+
+    
+
+    <div class="container">
+
+		<th:block th:replace="/fragments/managersidebar.html"></th:block>
+
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span><a class="black-link" th:href="@{/board/inquiryMain}">고객센터</a></span>
+                <span><strong>></strong></span>
+                <span>상세보기</span>
+            </div>
+        
+            <div class="CRUDcontainer">
+				<a href="#"><img class="logo1" src="/images/01_logoimg/textLogoNone.png" alt=""></a>
+
+                <span id="delete"
+                      th:onclick="'location.href=\'/board/inquiryDelete?no='+ @{${detail.creationNumber.creationNumber}} + '\''"
+
+                >
+					삭제
+				</span>
+
+                <span id="update"
+                      th:onclick="'location.href=\'/board/inquiryUpdate?no='+ @{${detail.creationNumber.creationNumber}} + '\''"
+
+                >
+					수정
+				</span>
+
+			</div>
+            
+
+            <div class="box">
+                <span class="box1" th:text="|작성번호 : ${detail.creationNumber.creationNumber}|"></span>
+                <span class="box1" th:text="|작성자 : ${detail.userCode.userName}|"></span>
+                <span class="box2" th:text="|작성일자 : ${detail.creationDate}|"></span>
+                <span class="box3" th:if="${detail.creationNumber.answerCode == null or detail.creationNumber.answerCode == 0}"
+                    th:text="답변대기"></span>
+                <span class="box3" th:if="${detail.creationNumber.answerCode} > 0">답변완료</span>
+            </div>
+            
+            <div>
+                <form action="">
+                    <div class="title">
+                        <span id="details">제목</span>
+                        <span id="details2" th:text="${detail.title}"></span>
+                    </div>
+                    <div class="detail">
+                        <div id="details" >내용</div>
+
+                        <div id="details2" th:text="${detail.content}">
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div id="details">답변</div>
+
+                        <div id="details2" th:text="${detail.creationNumber.answerContent}">
+                        </div>
+                    </div>
+<!--                    <div class="submitbtn"><button type="submit">글쓰기</button></div>-->
+                </form>
+            </div>
+
+        
+            
+        
+            
+            <!-- <div class="pagination">
+                <div class="pagination-box">
+                    <a href="#" class="prev">＜</a>
+                    <div class="page-links">
+                        <a href="#" class="page-link">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        
+                    </div>
+                    <a href="#" class="next">＞</a>
+                </div>
+            </div> -->
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+    </div>
+
+
+
+
+</th:block>
+</html>

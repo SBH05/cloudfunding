@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/list/watchlist.css}">
+
+
+
+
+
+
+<!-- 헤더시작 -->
+    <th:block th:replace="/fragments/usersidebar.html"></th:block>
+
+<!-- 헤더끝 -->
+<div class="bodyking">
+    
+
+        <!-- ... (사이드바 내용은 여기에 추가) ... -->
+        <!-- 사이드바 배경 -->
+        
+
+
+<!--    사이드바 끝-->
+
+    <div class="mid-con">
+        <!-- 구매내역페이지 -->
+        <div class="h3list"><h3>나의 펀딩 리스트</h3></div>
+        <div class="mid">
+            <div class="midmenu">
+                <div class="logo">
+                    <a th:href="@{/}"><img src="/images/minicon/로고2.png" width="150px" alt=""></a>
+                </div>
+                <div class="cancel-con">
+                    <button class="cancel">펀딩취소</button>
+                </div>
+                <div class="criteria">
+                    <span class="criteria1">상품명 / 마감일정</span>
+                    <span class="criteria2">달성률</span>
+                    <span class="criteria3">가격</span>
+                    <span class="criteria4">상품옵션</span>
+                </div>
+                <div class="menucheck">
+                    <div class="checkbox-con">
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <a class="foodimg" th:href="@{/product/productStory}">
+                        <img src="/images/minicon/KakaoTalk_20231019_131150823.jpg" alt="">
+                    </a>
+                    <div class="nameAndCount">
+                        <div class="name">음식이름</div>
+                        <div class="count">마감예정</div>
+                    </div>
+                    <div class="achvm">
+                    50%
+                    </div>
+                    <div class="price-con">
+                        <div class="price">30000원</div>
+                    </div>
+                    <div class="option">
+                        <div>상품옵션란</div>
+                    </div>
+                </div>
+                <div class="menucheck">
+                    <div class="checkbox-con">
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <a class="foodimg" th:href="@{/product/productStory}">
+                        <img src="/images/minicon/KakaoTalk_20231019_131150823.jpg" alt="">
+                    </a>
+                    <div class="nameAndCount">
+                        <div class="name">음식이름</div>
+                        <div class="count">마감예정</div>
+                    </div>
+                    <div class="achvm">
+                    50%
+                    </div>
+                    <div class="price-con">
+                        <div class="price">30000원</div>
+                    </div>
+                    <div class="option">
+                        <div>상품옵션란</div>
+                    </div>
+                </div>
+                <div class="menucheck">
+                    <div class="checkbox-con">
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <a class="foodimg" th:href="@{/product/productStory}">
+                        <img src="/images/minicon/KakaoTalk_20231019_131150823.jpg" alt="">
+                    </a>
+                    <div class="nameAndCount">
+                        <div class="name">음식이름</div>
+                        <div class="count">마감예정</div>
+                    </div>
+                    <div class="achvm">
+                    50%
+                    </div>
+                    <div class="price-con">
+                        <div class="price">30000원</div>
+                    </div>
+                    <div class="option">
+                        <div>상품옵션란</div>
+                    </div>
+                </div>
+                <div class="menucheck">
+                    <div class="checkbox-con">
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <a class="foodimg" th:href="@{/product/productStory}">
+                        <img src="/images/minicon/KakaoTalk_20231019_131150823.jpg" alt="">
+                    </a>
+                    <div class="nameAndCount">
+                        <div class="name">음식이름</div>
+                        <div class="count">마감예정</div>
+                    </div>
+                    <div class="achvm">
+                    50%
+                    </div>
+                    <div class="price-con">
+                        <div class="price">30000원</div>
+                    </div>
+                    <div class="option">
+                        <div>상품옵션란</div>
+                    </div>
+                </div>
+                <div class="menucheck">
+                    <div class="checkbox-con">
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <a class="foodimg" th:href="@{/product/productStory}">
+                        <img src="/images/minicon/KakaoTalk_20231019_131150823.jpg" alt="">
+                    </a>
+                    <div class="nameAndCount">
+                        <div class="name">음식이름</div>
+                        <div class="count">마감예정</div>
+                    </div>
+                    <div class="achvm">
+                    50%
+                    </div>
+                    <div class="price-con">
+                        <div class="price">30000원</div>
+                    </div>
+                    <div class="option">
+                        <div>상품옵션란</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="pagination">
+            <div class="pagination-box">
+                <a href="#" class="prev">＜</a>
+                <div class="page-links">
+                    <a href="#" class="page-link">1</a>
+                    <a href="#" class="page-link">2</a>
+                    <a href="#" class="page-link">3</a>
+                    
+                </div>
+                <a href="#" class="next">＞</a>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    
+        
+
+    
+        
+
+    
+</div>
+
+    
+
+
+
+
+  <script>
+    let counterValue = 0;
+
+    // 증가 함수
+    function increase() {
+        counterValue++;
+        updateCounter();
+    }
+
+    // 감소 함수
+    function decrease() {
+        if (counterValue > 0) {
+            counterValue--;
+            updateCounter();
+        }
+    }
+    function updateCounter() {
+        document.getElementById('counter-value').innerText = counterValue;
+    }
+</script>
+
+
+</th:block>
+</html>

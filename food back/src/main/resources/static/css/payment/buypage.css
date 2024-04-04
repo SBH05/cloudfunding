@@ -1,0 +1,414 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+ 
+ a:link, a:visited{
+    text-decoration: none;
+ }
+ 
+ li{
+    list-style: none;
+ }
+
+ 
+ .orderer-info input {
+    border: 1px solid #999;
+    background-color: white;
+ }
+
+ .orderer-info {
+     /* border: 1px solid #999; */
+    font-size: 12px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+            flex-direction: column;
+            align-items: center;
+    /* border: 1px solid palevioletred; */
+    width: 600px;
+    height: 250px;
+
+ }
+ .orderer-info-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .order-details-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .order-details-con input{
+    border: 1px solid #999;
+    background-color: white;
+    
+ }
+
+ 
+ .order-details{
+    font-size: 12px;
+    border-radius: 10px;
+
+    /* border: 1px solid blue; */
+    width: 600px;
+    height: 330px;
+ }
+ /* .{
+    float: left;    
+ } */
+ .payment-info{
+    /* border: 1px solid black; */
+    height: 100px;
+ }
+ .pay{
+    color: orange;
+ }
+ .payment-area{
+    /* border: 1px solid red; */
+    margin-left: 100px;
+    /* width: 800px; */
+    
+ }
+ #progress{
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+.orderer-info>h4{
+    margin-bottom: 10px;
+    margin-right: 430px;
+}
+.order-details>h4{
+    margin-bottom: 15px;
+    margin-left: 50px;
+    
+}
+
+ 
+#counter-value {
+    font-size: 12px;
+    margin: 0 10px;
+}
+
+.btn {
+    font-size: 9px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    /* border-bottom: 1px solid #ddd; 구분선을 추가하려면 사용하세요 */
+}
+
+.menu-name {
+    flex: 1;
+}
+
+.menu-price {
+    width: 100px;
+    text-align: right;
+}
+
+#counter-container {
+    display: flex;
+    align-items: center;
+}
+
+#counter-controls {
+    /* width: 200px;
+    height: 50px; */
+    display: flex;
+    align-items: center;
+}
+
+.trash-btn {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    bageckground-image: url('/3조결제/trashicon.png');
+    background-size: cover;
+    margin-left: auto;
+}
+#body {
+    display: flex;
+    justify-content: space-between;
+    height: 1000px;
+    background-color: white;
+}
+
+#left{
+    /* border: 1px solid red; */
+    width: 920px;
+    height: 100%;
+    /* background-color: gray; */
+    
+}
+#right{
+    background-color: rgb(245, 245, 245);
+    width: 920px;
+    height: 730px;
+}
+.right{
+    width: 920px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#left{
+    height: 730px;
+}
+.uncheck{
+    width: 30px;
+    height: 30px;
+    margin-top: 7px;
+}
+
+.bilge{
+    /* border: 1px solid gray; */
+    width: 763px;
+   
+    margin-left: 155px;
+}
+
+.payment-con{
+    
+      margin-top: 100px ;
+    display: flex;
+    justify-content: flex-end;
+      align-items: flex-end;
+}
+
+.total-product-amount {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    /* border-bottom: 1px solid #ddd; 구분선을 추가하려면 사용하세요 */
+}
+.coupon-action{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+
+.coupon-action > div {
+    margin-right: 10px; /* 적절한 간격 조정 */
+ /* display: flex; */
+    align-items: center; /* 텍스트와 입력란을 세로로 중앙 정렬 */
+    
+}
+.coupon-action input{
+    background-color: rgb(245, 245, 245);
+    width:600px;
+    margin-left: 0px;
+    height: 40px;
+    border-radius: 5px;
+    
+}
+.coupon-btn{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.number{
+    margin-right : 430px;
+}
+
+
+.apply-coupon{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    /* border-bottom: 1px solid #ddd; 구분선을 추가하려면 사용하세요 */
+}
+
+.delivery-fee{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.final-amount{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.payment {
+    background-color: orange;
+    color: white;
+    border: 1px solid orange;
+    border-radius: 5px; /* 테두리를 약간 둥글게 만듭니다 */
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    margin-left: 800px;
+    /* margin-bottom: ; */
+    /* padding: ; */
+}
+form {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+    padding: 5px;
+}
+
+button[type="submit"] {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    color: orange;
+    border: 1px solid orange;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.gun-won{
+    color: orange;
+}
+.name{
+    display: flex;
+    justify-content: space-around;
+    /* padding: 8px; */
+    font-size: 12px;
+}
+.name input {
+    padding: 8px;
+    font-size: 12px;
+    width: 230px; /* 성과 이름 입력창의 크기를 동일하게 조절 */
+    
+}
+
+.email input {
+    padding: 8px;
+    font-size: 12px;
+    
+    width: 500px; /* 이메일 입력창을 부모 요소에 맞게 100%로 설정 */
+}
+
+.phone select,
+.phone input {
+    padding: 8px;
+    font-size: 12px;
+}
+.phone {
+    
+    justify-content: space-around;
+}
+.phone input{
+    width: 381px;
+}
+#countryCode{
+    height: 32px;
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+    box-shadow:  1px gray; /* 그림자 설정 */
+}
+.void{
+    /* border: 1px solid aqua; */
+    height: 50px;
+}
+.adrs input {
+    padding: 8px;
+    font-size: 12px;
+    height: 32px;
+    width: 500px; /* 이메일 입력창을 부모 요소에 맞게 100%로 설정 */
+}    
+.searchZipCode1 {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box1 {
+    margin-right: 475px;
+}
+.box2{
+    margin-right: 450px;
+}
+.req{
+    margin-right: 450px;
+}
+.detailed-address input{
+    padding: 8px;
+    font-size: 12px;
+    height: 32px;
+    width: 500px;
+}
+.detailed-address{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.requested{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.requested input{
+    padding: 8px;
+    font-size: 12px;
+    height: 100px;
+    width: 500px;
+}
+
+.order-confirmation {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* 필요한 여백 조절 */
+    margin-left: 50px;
+}
+
+.order-confirmation input {
+    margin-right: 8px; /* 체크박스와 레이블 사이 간격 조절 */
+}
+
+.order-confirmation label {
+    font-size: 14px;
+}
+#right input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px; /* 둥근 테두리 설정 */
+    box-shadow: 1px gray; /* 그림자 설정 */
+}
+
+
+
+ .coupon-action input[type=text]{
+    /* border: none; */
+    border: 1px solid #999;
+ }
+
+/* 버튼 공통 설정 */
+.btn {
+    border-radius:10px;
+    width:20px;
+    height:25px;
+    cursor:pointer;
+    border:0px;
+    color:orange;
+}
+

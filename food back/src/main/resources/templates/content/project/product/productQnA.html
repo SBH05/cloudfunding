@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block layout:fragment="content">
+
+    <link rel="stylesheet" th:href="@{/css/project/productPage/productQnA.css}">
+
+
+    <div class="container">
+        <!-- 사이드바 배경 -->
+        <th:block th:replace="/fragments/usersidebar.html"></th:block>
+
+        <div class="middle">
+            <!-- 가운데 컨텐츠 -->
+            <div class="first">
+                <span><a class="black-link">QnA</a></span>
+                <span><strong>></strong></span>
+                <span>글 쓰기</span>
+            </div>
+
+
+            <div class="box">
+                <span class="box1">작성번호 : 1</span>
+                <!-- <span class="box1">작성자:김민*</span> -->
+                <span class="box2">작성일자:2023/11/15</span>
+                <!-- <span class="box3">답변 전</span> -->
+            </div>
+
+            <div>
+                <form action="">
+                    <div class="detail_title">
+                        <div id="details">제목</div>
+
+                        <div id="details3">
+                            <textarea name="" id="writeTitle" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <div id="details">내용</div>
+
+                        <div id="details2">
+                            <textarea name="" id="answer" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="submitbtn">
+                        <button type="button" onclick="redirectToProductPage()">글쓰기</button>
+                    </div>
+                </form>
+
+                <script>
+                    function redirectToProductPage() {
+                        window.location.href = '/product/productPage';
+                    }
+                </script>
+            </div>
+
+
+            <div class="pagination">
+                <div class="pagination-box">
+                    <a href="#" class="prev">＜</a>
+                    <div class="page-links">
+                        <a href="#" class="page-link">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+
+                    </div>
+                    <a href="#" class="next">＞</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="right">
+            <!-- 우측 컨텐츠 -->
+        </div>
+    </div>
+
+
+</th:block>
+</html>

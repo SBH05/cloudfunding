@@ -1,0 +1,336 @@
+
+
+		.logo1 {
+			width: 140px; /* 원하는 너비로 설정하세요. */
+			height: auto; /* 높이는 자동으로 조정됩니다. */
+			margin-top: 40px;
+		}
+		.black-link,
+		.black-link:visited {
+			color: white;
+			text-decoration: none; /* 밑줄 제거 */
+		}
+
+		.black2-link,
+		.black2-link:visited {
+			color: orange;
+			text-decoration: none; /* 밑줄 제거 */
+		}
+
+
+		.black3-link,
+		.black3-link:visited {
+			color: rgba(88, 88, 88, 1);
+			text-decoration: none; /* 밑줄 제거 */
+		}
+
+
+
+
+		
+		.iconlogo {
+			position: relative;
+			top: 6px; /* 아이콘을 아래로 5px 이동 */
+			
+		}
+		
+		.pagination {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
+		
+		
+		
+		.pagination-box {
+			display: flex;
+			align-items: center;
+		}
+		
+
+
+		
+		.container {
+			display: flex;
+			justify-content: space-between; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+			width: 100%;
+			height: 1020px;
+			
+			margin: 0 auto; /* 화면 가운데 정렬 */
+		}
+		
+		
+
+		
+		.first{
+			font-size: 30px;
+			font-weight: 1000;
+			margin-top: 40px;
+			margin-left: 0px;
+		}
+
+				/* 중간영역 시작 */
+		.middle {
+			width:1360px;
+			height:900px;
+			position:relative;
+			left:0px;
+			top:20px;
+			box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+			background-color: rgba(255, 255, 255, 1);
+		}
+
+
+
+		.middle_box {
+
+			width:1420px;
+			height:1050px;
+			position:relative;
+			left:300px;
+			top:40px
+		}
+
+
+				.seller_info{
+
+					position:absolute;
+					left:200px;
+					top:150px;
+					width:80px;
+					height:25px;
+					font-size: 18px;
+					color: rgba(88, 88, 88, 1);
+				}
+
+				.order_infotitle{
+					position:absolute;
+					left:25px;
+					top:310px;
+					font-size: 18px;
+					color: rgba(88, 88, 88, 1);
+				}
+
+
+				.order_info{
+					position:absolute;
+					left:120px;
+					top:370px;
+					font-size: 14px;
+					color: rgba(88, 88, 88, 1);
+				}
+
+
+				.order_infoIme{
+					position:absolute;
+					left:10px;
+					top:370px;
+				}
+
+				.order_infopri{
+
+					position:absolute;
+					left:420px;
+					top:400px;
+					color: rgba(88, 88, 88, 1);
+				}
+
+				.order_titleprice{
+					position:absolute;
+					left:120px;
+					top:550px;
+					color: rgba(88, 88, 88, 1);
+					line-height: 40px;
+				}
+
+				.order_price{
+					height: 150px;
+					position:absolute;
+					left:420px;
+					top:550px;
+					color: rgba(88, 88, 88, 1);
+					line-height: 40px;
+				}
+
+
+
+				.bar { 
+					transform: rotate(0.0000038196945235904664deg);
+					width:520px;
+					height:0px;
+					position:absolute;
+					left:10px;
+					top:300px;
+					border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+				}
+
+
+				.bar2 { 
+					transform: rotate(0.0000038196945235904664deg);
+					width:520px;
+					height:0px;
+					position:absolute;
+					left:10px;
+					top:500px;
+					border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+				}
+
+				.bar3 { 
+					transform: rotate(0.0000038196945235904664deg);
+					width:520px;
+					height:0px;
+					position:absolute;
+					left:10px;
+					top:760px;
+					border:1px solid rgba(238.00000101327896, 238.00000101327896, 238.00000101327896, 1);
+				}
+
+
+
+
+
+
+			/* 버튼 디자인 */
+			.ing{
+
+				height: 30px;
+	
+				/* 배경색을 주황색으로 설정합니다. */
+				background-color: orange;
+			
+				/* 글자 색을 변경합니다. */
+				color: white;
+			
+				/* 모서리를 둥글게 만듭니다. */
+				border-radius: 5px;
+			
+				/* 테두리를 없앱니다. */
+				border: none;
+			
+				/* 버튼 안의 텍스트를 가운데 정렬합니다. */
+				text-align: center;
+				line-height: 30px;
+			}
+
+				/*버튼위치  */
+
+			.ing_loca{
+
+				position:absolute;
+				width: 120px;
+				padding: 8px 7px ;
+				top: 190px;
+				left: 170px;
+			}
+
+			.ing_loca2{
+				position:absolute;
+				width: 85px;
+				height: 40px;
+				padding: 8px 7px ;
+				top: 190px;
+				left: 250px;
+			}
+
+			.ing_loca3{
+				position:absolute;
+				width: 85px;
+				height: 40px;
+				padding: 8px 7px ;
+				top: 800px;
+				left: 240px;
+			}
+
+
+
+			.deliver_info{
+
+				position:absolute;
+				top: 250px;
+				font-size: 10px;
+				left: 10px;
+			}
+
+
+			/* 배송 정보 */
+
+			.deliver_infobuyer{
+				position:absolute;
+				border:1px solid black;
+				background-color:white;
+				top: 190px;
+				left: 750px;
+				width: 400px;
+				height: 400px;
+				
+			}
+
+			.deliver_buyer_infotitle{
+				position:absolute;
+				color: rgba(88, 88, 88, 1);
+				top: 50px;
+				left: 30px;
+				font-size: 18px;
+				letter-spacing: 1px;
+				line-height: 65px;
+			}
+
+			
+			.deliver_buyer_infoinput{
+				position:absolute;
+				color: black;
+				top: 50px;
+				left: 170px;
+				font-size: 18px;
+				letter-spacing: 1px;
+				line-height: 65px;
+			}
+
+
+
+			
+
+			/* 답변완료 상태 버튼 */
+
+			
+		.close{
+			/* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+			width: 20px;
+			padding: 7px 10px ;
+			
+		
+			/* 배경색을 주황색으로 설정합니다. */
+			background-color: orange;
+		
+			/* 글자 색을 변경합니다. */
+			color: white;
+		
+			/* 글자 크기를 크게 설정합니다. */
+
+		
+			/* 모서리를 둥글게 만듭니다. */
+			border-radius: 5px;
+		
+			/* 테두리를 없앱니다. */
+			border: none;
+		
+			/* 버튼 안의 텍스트를 가운데 정렬합니다. */
+			text-align: center;
+		
+			/* 버튼 안의 텍스트의 여백을 조정합니다. */
+
+		}
+
+		/* 음식이미지  */
+		.food{
+		
+				width:44px;
+				height:35px;
+				position:relative;
+				left: 0px;
+				top: 8px;
+			
+			}
+		
+

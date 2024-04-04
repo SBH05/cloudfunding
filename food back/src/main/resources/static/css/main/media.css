@@ -1,0 +1,121 @@
+/* 헤더 메뉴 */
+@media screen and (max-width: 910px) {
+    nav ul {
+        display: none;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    nav.ul.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* 프로젝트 생성 */
+@media screen and (max-width: 600px) {
+    .project-button {
+        display: none;
+    }
+}
+
+/* 더보기 토글 */
+@media screen and (max-width: 1200px) {
+    .menu-item {
+        display: none;
+    }
+}
+
+/* 이모티콘 아이콘 */
+@media screen and (min-width: 768px) {
+    .icon-item {
+        padding: calc(5px + 2vw);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .icon-item {
+        padding: calc(5px + 3vw);
+    }
+}
+
+/* 랭킹 */
+@media screen and (max-width: 900px) {
+    .ranking li {
+        transition: margin-left 0.5s ease;
+        font-size: 0.8em;
+    }
+
+    .ranking img {
+        margin-right: 5px;
+        width: 5vh;
+        height: 5vh;
+    }
+}
+
+/* 랭킹 - 제목 */
+@media screen and (max-width: 1100px) {
+    .ranking p {
+        transition: margin-left 0.5s ease;
+        margin-left: -15vh;
+        font-size: 3vh;
+        margin-top: 10vh;
+    }
+}
+
+/* 랭킹 - 전체 */
+@media screen and (max-width: 800px) {
+    .ranking-column {
+    }
+}
+
+/* 랭킹 - 음식제목 */
+@media screen and (max-width: 1200px) {
+    .ranking ul .text {
+        display: none;
+    }
+}
+
+/* 랭킹 - 음식랭킹 */
+@media screen and (max-width: 1200px) {
+    .ranking ul .rank {
+        font-size: 2vh;
+    }
+}
+
+/* 푸터 텍스트 */
+@media screen and (max-width: 1000px) {
+    .footer-up {
+        display: none;
+    }
+
+    .footer-down {
+        display: none;
+    }
+}
+
+/* 푸터 로고 */
+@media screen and (max-width: 1000px) {
+    .footer-logo {
+        margin-left: auto;
+        margin-right: auto;
+        transition: margin-left 0.5s ease;
+    }
+
+    .footer {
+        text-align: center; /* 중앙 정렬 */
+    }
+}
+
+/* 첫 번째 정사각형 아이콘 */
+@media screen and (max-width: 1000px) {
+    .first-square-icon-wrapper p {
+        font-size: 1.5vh;
+    }
+}
+/* 두 번째 정사각형 아이콘 */
+@media screen and (max-width: 600px) {
+    .second-square-icon-wrapper p {
+        font-size: 1.5vh;
+    }
+}

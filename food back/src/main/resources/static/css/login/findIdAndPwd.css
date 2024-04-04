@@ -1,0 +1,203 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+a:link, a:visited{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+
+
+
+.container {
+    display: flex;
+    justify-content: center; /* 컨테이너 내부 요소들을 좌측과 우측에 배치 */
+    width: 1920px;
+    
+    
+    margin: 0 auto; /* 화면 가운데 정렬 */
+}
+
+
+
+
+.joininfo div {
+    padding: 20px 0;
+    
+}
+
+.movebox{
+    padding:7px;
+}
+.movetext2{
+    padding-bottom: 30px;
+    position: relative;
+    left: 100px
+}
+
+.box1{
+    border-radius: 9px;
+    width: 360px;
+    height: 35px;
+    border: 1px solid rgb(184, 184, 184);
+    
+}
+
+.box2{
+    border-radius: 9px;
+    width: 260px;
+    height: 35px;
+    border: 1px solid rgb(184, 184, 184);
+    
+}
+
+form{
+    padding-bottom: 100px;
+}
+
+.joinbtn button {
+    
+    position: relative;
+    left: 300px;    
+   /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+   width: 350px;
+   height: 50px;
+
+   /* 배경색을 색으로 설정합니다. */
+   background-color: lightgrey;
+
+   /* 글자 색을 변경합니다. */
+   color: white;
+
+   /* 글자 크기를 크게 설정합니다. */
+   font-size: 18px;
+
+   /* 모서리를 둥글게 만듭니다. */
+   border-radius: 25px;
+
+   /* 테두리를 없앱니다. */
+   border: none;
+
+   /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+   text-align: center;
+
+   /* 버튼 안의 텍스트의 여백을 조정합니다. */
+   padding: 10px 20px;
+
+   /* 마우스 호버 시 색상 변경 효과를 추가합니다. */
+   
+}
+.joinbtn button:hover {
+    /* 마우스 호버 시 배경색 변경 */
+    background-color: darkorange;
+}
+
+.mailbtn button{
+   /* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
+   
+   height: 31px;
+
+   /* 배경색을 색으로 설정합니다. */
+   background-color: lightgrey;
+
+   /* 글자 색을 변경합니다. */
+   color: white;
+
+    padding: 3px;
+    
+
+   /* 모서리를 둥글게 만듭니다. */
+   border-radius: 5px;
+
+   /* 테두리를 없앱니다. */
+   border: none;
+
+   /* 버튼 안의 텍스트를 가운데 정렬합니다. */
+   text-align: center;
+
+   /* 버튼 안의 텍스트의 여백을 조정합니다. */
+   
+
+   /* 마우스 호버 시 색상 변경 효과를 추가합니다. */
+}
+
+.mailbtn button:hover {
+    /* 마우스 호버 시 배경색 변경 */
+    background-color: darkorange;
+}
+
+
+
+
+#logo1 {
+    width: 300px; /* 원하는 너비로 설정하세요. */
+    height: auto; /* 높이는 자동으로 조정됩니다. */
+    padding: 30px;
+    margin-left: 25px;
+}
+
+
+.findid {
+    display: flex;
+    padding: 0;
+    position: relative;
+    left: 290px;
+
+       
+}
+.findid a{
+    margin: 50px;
+    color: black; /* 링크 기본 색상을 검정색으로 지정 */
+}
+
+
+.arrow{
+    width: 25px;
+    position: relative;
+    background-color: white;
+    top: 7px;
+}
+.center{
+    
+    
+    
+    justify-content: center;
+
+    height: 1000px;
+    width: 1000px;
+}
+
+.moveall{
+    position: relative;
+
+    left: 300px;
+}
+
+.down{
+    
+    padding-top: 20px;
+    border-top: 1px solid grey;
+}
+
+.down span{
+    position: relative;
+    left: 170px;
+    margin: 30px;
+}
+.movetext1{
+    position: relative;
+    right: 148px;
+}
+.movetext2{
+    position: relative;
+    right: 120px;
+}
+

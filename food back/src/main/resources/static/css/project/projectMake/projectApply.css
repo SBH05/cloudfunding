@@ -1,0 +1,159 @@
+
+
+
+/* 바디쪽 */
+
+
+.buyok{
+    width: 1920px;
+    /*height: 700px;*/
+    /* border: 1px solid red; */
+}
+.buyokay{
+   margin-left: 200px;
+    height: 924px;
+}
+.maininfo {
+    width: 1300px;
+    height: 650px;
+    /* border: 1px solid gray; */
+    /*background-color: rgb(245, 245, 245);*/
+    /* border-radius: 10px; */
+    margin-left: 200px;
+    display: flex; /*Flexbox 사용*/
+     flex-direction: column; 
+    /* 열 방향으로 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center;
+     /* 수직 가운데 정렬 */
+}
+
+.payment-confirmation {
+    width: 350px;
+    height: 250px;
+    
+}
+.firstlogo{
+    display: flex; /* Flexbox 사용 */
+    flex-direction: column; /* 열 방향으로 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+.secondlogo{
+    display: flex; /* Flexbox 사용 */
+    flex-direction: column; /* 열 방향으로 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+.secondlogo>img{
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+}
+
+
+.product-list {
+    width: 900px;
+    height: 250px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+     /* Flexbox 사용 */
+    justify-content: center;
+     /*수평 가운데 정렬*/
+    align-items: center;
+     /*수직 가운데 정렬*/
+    /* justify-content: space-between; */
+}
+.product-status{
+    
+    width: 500px;
+    height: 70px;
+}
+.orderStatus{
+    margin-top: 20px;
+    display: flex; /* Flexbox 사용 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+.uncheck{
+    width: 30px;
+    height: 30px;
+    
+}
+.product-area {
+    width: 400px;
+    height: 190px;
+    /* border: 1px solid blueviolet; */
+    float: left;
+    margin-top: 20px;
+}
+.history{
+    width: 400px;
+    height: 190px;
+    /* border: 1px solid blueviolet; */
+    float: right;
+    margin-top: 20px;
+    
+}
+.under{
+    width: 900px;
+    height: 250px;
+    /* border: 1px solid brown; */
+    
+}
+.tt>img{
+    width: 55px;
+    /* float: left; */
+}
+.prices{
+    float: right;
+}
+.amt{
+    margin-top: 15px;
+    margin-left:100px;
+}
+.food{
+    /* padding: 5px;  */
+    width: 400px;
+    height: 60px;
+    /* flex-direction:column */
+}
+
+
+.fin{
+    background-color: #F37D1D;
+    color: #fff;
+    width: 230px;
+    padding: 10px 0 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 바디끝 */
+
+

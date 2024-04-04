@@ -1,0 +1,234 @@
+* {
+    font-family: Poppins;
+    text-decoration: none;
+}
+
+
+.back-board {
+    box-shadow: 0px 10px 60px rgba(225.83437621593475, 236.193745136261, 248.62500607967377, 0.5);
+    background-color: #fff;
+    width: 1000px;
+    height: 2000px;
+    border-radius: 30px;
+    padding-bottom: 50px;
+    margin: 20px 0 100px 100px;
+}
+
+.back-board-container{
+    position: relative;
+    left: 600px;
+}
+
+/* 제출하기 */
+.project-start {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10vh;
+}
+
+.checkbox-list {
+    margin-left: 10vh;
+}
+
+label strong {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    font-family: Poppins;
+}
+
+/* 타이틀 */
+.category-text {
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 10vh;
+}
+
+.category-sub-text {
+    font-size: 13px;
+    color: #333;
+    margin-left: 10vh;
+    margin-top: 2vh;
+}
+
+/* 타이틀 옆 별 */
+.greeting-text-star {
+    font-size: 15px;
+    color: red;
+}
+
+.owner-container {
+    margin-left: 10vh;
+}
+
+/* 이메일 입력창 */
+.ownerInfo {
+    width: 200px;
+}
+
+.ownerInfo input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+select {
+    width: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* 대표자 본인인증 */
+.owner-button {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10vh;
+}
+
+/* 심사 서류 */
+.paper-box-container {
+    margin-left: 10vh;
+}
+
+.paper-box {
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.paper-box p {
+    margin: 30px;
+    font-size: 15px;
+    color: #b9b9b9;
+}
+
+.fa-solid,
+.fas {
+    font-size: 60px;
+    color: #b9b9b9;
+    margin-top: 35px;
+}
+
+/* 팝업 모달 스타일 */
+#fileAttachmentPopup,
+#registrationCompletePopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#fileAttachmentPopup p,
+#registrationCompletePopup p {
+    margin-bottom: 20px;
+}
+
+#attachedFileName {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #333;
+    max-width: 150px;
+    white-space: nowrap;
+}
+
+.attachedFileNAmeContainer {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #333;
+    max-width: 150px;
+    white-space: nowrap;
+}
+
+/* 등록 완료 팝업 스타일 */
+#registrationCompletePopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.priceBox {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    width: 200px;
+    margin-left: 10vh;
+    border-radius: 5px;
+}
+
+/* 목표금액 입력창 */
+.priceBox input {
+    width: 200px;
+    height: 30px;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+}
+
+/* 목표 금액을 입력해 주세요. */
+input:focus::placeholder {
+    color: transparent;
+    /* 포커스되면 투명하게 */
+}
+
+/* 목표금액 입력창 - 원 */
+#currencyText {
+    margin-right: 10px;
+    color: #b9b9b9;
+    font-size: 15px;
+}
+
+/* 저장하기 */
+.saveButton {
+    background-color: #F37D1D;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0 10px;
+    width: 250px;
+    border-radius: 5px;
+    margin-left: 10vh;
+}

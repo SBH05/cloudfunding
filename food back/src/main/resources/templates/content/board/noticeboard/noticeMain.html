@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<th:block layout:fragment="content">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link rel="stylesheet" href="/css/manager/board/noticeMain.css">
+    <div class="container">
+
+        <th:block th:replace="/fragments/managersidebar.html"></th:block>
+
+        <div class="back-board">
+
+            <div>
+                <a href="#"><img class="logo1" src="/images/01_logoimg/textLogoNone.png" alt=""></a>
+            </div>
+
+            <br><br>
+
+            <div class="first">
+                <span><a class="black-link" th:href="@{/board/noticeMain}">공지사항</a></span>
+            </div>
+
+            <br><br><br><br><br>
+
+            <form th:action="@{/board/noticeMain}" id="search" method="get">
+                <div class="searchcontainer">
+                    <!--                왼쪽 select 박스-->
+
+
+                    <div class="searchleft1">
+                        <input type="hidden" name="currentPage" value="1">
+                        <select name="nation1" id="nation1">
+                            <th:block th:if="${selectCriteria.getNation1()} == 'code'">
+                                <option value="code">코드</option>
+                            </th:block>
+                            <th:block th:if="${selectCriteria.getNation1()} == 'title'">
+                                <option value="title">제목</option>
+                            </th:block>
+                            <th:block th:if="${selectCriteria.getNation1()} == 'date'">
+                                <option value="date">작성일자</option>
+                            </th:block>
+                            <option value="code">코드</option>
+                            <option value="title">제목</option>
+                            <option value="date">작성일자</option>
+                        </select>
+                    </div>
+
+                    <div class="searchleft2">
+                        <select name="nation2" id="nation2">
+                            <th:block th:if="${selectCriteria.getNation2()} == 'asc'">
+                                <option value="asc">오름차순</option>
+                            </th:block>
+                            <th:block th:if="${selectCriteria.getNation2()} == 'desc'">
+                                <option value="desc">내림차순</option>
+                            </th:block>
+                            <option value="desc">내림차순</option>
+                            <option value="asc">오름차순</option>
+                        </select>
+                    </div>
+
+                <div class=" submit" >
+                    <button type="submit">설정</button>
+                </div>
+
+                    <!-- 오른쪽 박스 -->
+                    <div class="searchright">
+
+
+
+
+
+                            <th:block sec:authorize="hasRole('ADMIN')">
+                        <button type="button"
+                        th:onclick="'location.href=\'/board/noticeWriting\''"
+
+                        >글쓰기</button>
+                            </th:block>
+                        <input type="text" name="searchValue" id="searchValue" th:value="${selectCriteria.searchValue}">
+                        <!--                        검색어 입력 칸 input-->
+                        <!--                        <button class="iconlogo" type="submit">입력하기</button>-->
+                        <!--                        검색어 제출 button-->
+                        <select name="nation3" id="nation3">
+                            <option selected>검색 조건</option>
+                            <option value="code">글 번호</option>
+                            <option value="title">제목</option>
+                            <option value="date">작성일자</option>
+                            <!-- <option value="etc">기타</option> -->
+                        </select>
+                    </div> <!-- searchright -->
+                </div>
+            </form>
+
+
+            <div>
+                <table>
+
+                    <tr>
+
+                        <th id="newcolumn">새 글</th>
+                        <th>코드</th>
+                        <th>제목</th>
+                        <th id="right">작성일자</th>
+                    </tr>
+                    <tr id="link"
+                            th:each=" noticelist : ${notice}"
+                            th:onclick="'location.href=\'/board/noticeWrited?no='+ @{${noticelist.creationNumber}} + '\''"
+                    >
+                        <td id="new">new</td>
+                        <td th:text="${noticelist.creationNumber}"></td>
+                        <td th:text="${noticelist.title}"></td>
+                        <td th:text="${noticelist.creationDate}"></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 페이지 처리 -->
+            <div class="pagination" align="center">
+                <div class="pagination-box">
+                    <!--                     맨 앞으로 이동 버튼 -->
+                    <!--                    <button class="prev"-->
+                    <!--                            th:onclick="'location.href=\'/manager/search/userMain?currentPage='+ @{${selectCriteria.startPage}} + '\''"-->
+                    <!--                            th:disabled="${selectCriteria.pageNo == 1}"-->
+                    <!--                    >-->
+                    <!--                        <<-->
+                    <!--                    </button>-->
+
+                    <!-- 이전 페이지 버튼 -->
+                    <button class="prev"
+                            th:onclick="'location.href=\'/board/noticeMain?currentPage='
+                            + @{${selectCriteria.pageNo + 1}}
+                            +'&nation1='+ @{${selectCriteria.nation1}}
+                            +'&nation2='+ @{${selectCriteria.nation2}}
+                            +'&searchValue='+ @{${selectCriteria.searchValue}}
+                            +'&nation3='+ @{${selectCriteria.nation3}} + '\''"
+                            th:disabled="${selectCriteria.pageNo == selectCriteria.maxPage}">
+                        <
+                    </button>
+
+                    <!-- 숫자 버튼 -->
+                    <th:block th:each="page : ${#numbers.sequence(selectCriteria.startPage, selectCriteria.endPage)}">
+                        <button class="page-link"
+                                th:text="${ page }"
+                                th:onclick="'location.href=\'/board/noticeMain?currentPage='
+                            + @{${page}}
+                            +'&nation1='+ @{${selectCriteria.nation1}}
+                            +'&nation2='+ @{${selectCriteria.nation2}}
+                            +'&searchValue='+ @{${selectCriteria.searchValue}}
+                            +'&nation3='+ @{${selectCriteria.nation3}} + '\''"
+                                th:disabled="${ selectCriteria.pageNo eq page }">
+                        </button>
+
+                        <!--                        url 쓰려다가 실패한거-->
+                        <!--                        ,'nation1='-->
+                        <!--                        + @{${selectCriteria.getNation1()}}-->
+                        <!--                        , 'nation2='-->
+                        <!--                        + @{${selectCriteria.getNation2()}}-->
+                    </th:block>
+
+                    <!-- 다음 페이지 버튼 -->
+                    <button class="prev"
+                            th:onclick="'location.href=\'/board/noticeMain?currentPage='
+                            + @{${selectCriteria.pageNo - 1}}
+                            +'&nation1='+ @{${selectCriteria.nation1}}
+                            +'&nation2='+ @{${selectCriteria.nation2}}
+                            +'&searchValue='+ @{${selectCriteria.searchValue}}
+                            +'&nation3='+ @{${selectCriteria.nation3}} + '\''"
+                            th:disabled="${selectCriteria.pageNo == selectCriteria.maxPage}"
+                    >
+                        >
+                    </button>
+                    <!--                     마지막 페이지로 이동 버튼 -->
+                    <!--                    <button class="prev"-->
+                    <!--                            th:onclick="'location.href=\'/manager/search/userMain?currentPage='+ @{${selectCriteria.maxPage}} + '\''"-->
+                    <!--                            th:disabled="${selectCriteria.pageNo == selectCriteria.maxPage}"-->
+                    <!--                    >-->
+                    <!--                        >>-->
+                    <!--                    </button>-->
+                </div>
+            </div>
+        </div>
+
+
+    <!-- 하단 버튼 스크립트 -->
+    <script th:inline="javascript">
+        /* Thymeleaf에서 변수를 JavaScript로 전달 */
+        var currentPage = /*[[${selectCriteria.pageNo}]]*/ 1;
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var pageLinks = document.querySelectorAll('.page-link, .prev, .next');
+            pageLinks.forEach(function (link) {
+                // 각 페이지 버튼에 클릭 이벤트 리스너 추가
+                link.addEventListener('click', function () {
+                    // 현재 선택된 요소의 클래스를 모두 제거
+                    pageLinks.forEach(function (el) {
+                        el.classList.remove('selected');
+                    });
+                    // 현재 클릭된 요소에 selected 클래스 추가
+                    this.classList.add('selected');
+                });
+
+                // 현재 페이지에 해당하는 버튼에 selected 클래스 추가
+                if (parseInt(link.innerText) === currentPage) {
+                    link.classList.add('selected');
+                }
+            });
+        });
+    </script>
+
+    </div>
+</th:block>
+</html>

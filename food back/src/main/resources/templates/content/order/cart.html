@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block  layout:fragment="content">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/cart/cart.css}">
+
+
+
+
+
+<!-- 헤더끝 -->
+<div class="bodyking">
+
+
+
+        <!-- 사이드바 배경 -->
+    <th:block th:replace="/fragments/usersidebar.html"></th:block>
+
+
+<!--    사이드바 끝-->
+
+    <div class="mid-con">
+        <h3>장바구니</h3>
+        <div class="mid">
+            <div class="midmenu" >
+
+                        <div class="logo">
+                        <a href=""><img src="/images/minicon/로고2.png" width="150px" alt=""></a>
+                    </div>
+                    <div class="mypage">
+                        <span><a th:href="@{/이전페이지}"><img src="/images/minicon/backicon.jpg" width="25px" alt=""></a> 마이페이지</span>
+                    </div>
+                    <div class="criteria">
+                        <span class="criteria1">상품명</span>
+                        <span class="criteria2">주문수량</span>
+                        <span class="criteria3">가격</span>
+                    </div>
+
+                    <div class="menucheck" id="cartList" name="cartList" th:each=" cart: ${ cart }">
+                        <div class="checkbox-con">
+                            <input type="checkbox" class="checkbox" name="cartCode" th:value="${cart.cartCode}" >
+                        </div>
+                        <div class="foodimg">
+                            <img th:src="@{|/thumbPath/${cart.getChangeName()}|}" >
+                        </div>
+                        <div class="nameAndCount">
+                            <div class="projectTitle" name="name1" th:text="${cart.projectTitle}" id="projectTitleCheck"></div>
+                            <input type="hidden" name="hdProject" id="hdProject" th:value="${cart.projectTitle}"></input>
+                            <div class="name2" th:text="${cart.optionType}"></div>
+                            <input type="hidden" name="hdOptionType" id="hdOptionType" th:value="${cart.optionType}"></input>
+
+                            <button class="count remain" style="height: 30px" th:onclick="remain" id="remain"></button>
+                            <input type="hidden" class="count end" th:value="${#dates.format(cart.end, 'yyyy-MM-dd HH:mm:ss')}"></input>
+                        </div>
+                        <div class="btn-con">
+                            <button class="btn decrease" >-</button>
+                            <span id="counter-value" >1</span>
+                            <button class="btn increase" >+</button>
+                            <input type="hidden" name="hdCounterValue" id="hdCounterValue" value="counter-value[0]">
+                        </div>
+                        <div class="price-con" >
+                            <div class="total product"  id="total" th:text="${cart.price}"> </div>
+                            <input type="hidden" class="price" id="price" th:value="${cart.price}"></input>
+                        </div>
+                        <div class="trash-con">
+                            <button class="trash-btn" onclick="removeRow(this)" >
+                                <img src="/images/minicon/trashicon.png" alt="" width="20px">
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="bilge-con">
+                    <div class="bilge">
+                            <div class="coupon-action" >
+                                <div>
+                                </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="coupon-btn">
+                                    <input type="hidden" class="coupon" th:value="${cart[0].coupon}"></input>
+                                </div>
+
+                            </div>
+
+
+
+                        <div class="total-product-amount">
+                            <span class="total-amount">상품 전체금액</span>
+                            <span class="total-price" id="total-price">0won</span>
+                            <input type="hidden" name="hdTotalPrice" id="hdTotalPrice" value="total-price">
+                        </div>
+                        <div class="apply-coupon">
+                            <span class="total-amount"></span>
+                            <input type="hidden" class="coupon-price" id="coupon-price "></input>
+                            <input type="hidden" name="hdCouponPrice" id="hdCouponPrice" value="coupon-price">
+                        </div>
+                        <div class="delivery-fee">
+                            <span class="shipping-cost">배송비</span>
+                            <span class="cost" id="deliveryCost">0won</span>
+                            <input type="hidden" name="hdDeliveryCost" id="hdDeliveryCost" value="deliveryCost">
+                        </div>
+                        <div class="final-amount">
+                            <span class="gun-cost">총금액</span>
+                            <span class="gun-won" id="gun-won">0won</span>
+                            <input type="hidden" name="hdGunWon" id="hdGunWon" value="gun-won">
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                <div class="paybtn-con">
+
+                    <button type="button" class="paybtn" onclick="submitSelectedItems()">결제하기</button>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+    <script src="/js/cart.js"></script>
+
+    <!--Content-Type: application/json은 데이터가 JSON이라는 것을 명시 -->
+    <script>
+
+        function submitSelectedItems() {
+            // 선택된 체크박스 값과 해당하는 카운터 값들을 객체에 추가합니다.
+            let data = {
+                cartCode: [],
+                counter: []
+            };
+
+            // 선택된 체크박스들을 처리합니다.
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(checkbox) {
+                // 선택된 체크박스의 값(cartCode)을 data 객체에 추가합니다.
+                data.cartCode.push(checkbox.value);
+
+                // 해당하는 카운터 값을 찾아서 data 객체에 추가합니다.
+                let counterValue = checkbox.closest('.menucheck').querySelector('.btn-con #counter-value').textContent;
+                data.counter.push(counterValue);
+            });
+
+            // JSON 형태의 데이터를 서버로 전송합니다.
+            fetch('/order/buypage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+            // JSON 형태의 데이터를 서버로 전송합니다.
+            fetch('/order/buypage', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+
+    </script>
+
+
+</th:block>
+</html>
