@@ -25,15 +25,23 @@
 
             <div class="menu-item">
                 <div class="payment-area">
+                    <h4>결제상품</h4>
                     <div class="payment-product" th:each="cartItem: ${buyPageList}">
-                        <h4>결제상품</h4>
+
+                        <div style="float: left;">
+                            <img th:src="@{|/thumbPath/${cartItem.getProjectFileDTO().getChangeName()}|}" width="60px" height="60px" alt="Product Thumbnail">
+                        </div>
                         <div class="menu-item">
                             <div class="projectTitle" th:text="${cartItem.projectCode.title}">상품명</div>
                         </div>
                         <div id="counter-container">
                             <div id="counter-controls">
-                                <div class="cartCount" th:text="${cartItem.count}">수량</div>
-
+                                &nbsp;<span>수량 :</span>
+                                <div class="cartCount" th:text="${cartItem.count}"></div> &nbsp;&nbsp;
+                                <span>옵션 : </span>
+                                <div class="cartOption" th:text="${cartItem.projectOptionCode.type}"></div> &nbsp;&nbsp;
+                                <span>가격 : </span>
+                                <div class="cartPrice" th:text="${cartItem.projectOptionCode.price}"></div>
                             </div>
                         </div>
                     </div>

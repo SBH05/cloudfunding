@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/order/")
@@ -29,23 +30,37 @@ public class OrderController {
   }
 
 
+
   @PostMapping("buypage")
-  public String buyPage(@RequestBody Map<String, Object> requestData,
+  public String buyPage(@RequestParam("hdCounterValue") String[] hdCounterValues,
+                        @RequestParam("cartCode") String[] selectedCartCodes,
                         Model model) {
-    System.out.println("====== buypage controller =====");
 
-    // 받은 데이터 확인
-    System.out.println("Received data: " + requestData);
 
-    // cartCode와 counter를 추출합니다.
-    List<String> cartCodes = (List<String>) requestData.get("cartCode");
-    List<String> counters = (List<String>) requestData.get("counter");
+    System.out.println("=====  buypage ======");
+
+    System.out.println("hdCounterValues = " + Arrays.toString(hdCounterValues));
+    System.out.println("selectedCartCodes = " + Arrays.toString(selectedCartCodes));
+
+    List<String> cartCodes = Arrays.asList(selectedCartCodes);
+    List<String> counters = Arrays.asList(hdCounterValues);
+
+    // 변환된 리스트 출력
+    System.out.println("cartCodes = " + cartCodes);
+    System.out.println("counters = " + counters);
+
+
+    // hdCounterValues 배열에서 값이 비어있지 않은 요소들을 필터링하여 새로운 리스트를 생성합니다.
+    List<String> nonEmptyCounters = Arrays.stream(hdCounterValues)
+            .filter(counter -> !counter.isEmpty())
+            .collect(Collectors.toList());
+
 
     // 각각의 cartCode에 대한 buyPage를 불러와 모델에 추가합니다.
     List<CartDTO> buyPageList = new ArrayList<>();
     for (int i = 0; i < cartCodes.size(); i++) {
       String cartCode = cartCodes.get(i);
-      String counter = counters.get(i);
+      String counter = nonEmptyCounters.get(i);
       System.out.println("CartCode: " + cartCode + ", Counter: " + counter);
 
       // 수량 업데이트
@@ -79,4 +94,5 @@ public class OrderController {
     public String watchlist(){
         return "/content/order/watchlist";
     }
+
 }

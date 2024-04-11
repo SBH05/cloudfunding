@@ -11,6 +11,7 @@
         <association property="memberCode" resultMap="MemberResultMap"/>
         <association property="projectCode" resultMap="ProjectResultMap"/>
         <association property="projectOptionCode" resultMap="ProjectOptionResultMap"/>
+        <association property="projectFileDTO" resultMap="cartFileResultMap"/>
     </resultMap>
 
 

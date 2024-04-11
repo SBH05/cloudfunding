@@ -1,4 +1,3 @@
-
 // 감소 버튼 클릭 이벤트 핸들러 등록
 const decreaseButtons = document.querySelectorAll('.decrease');
 decreaseButtons.forEach(function (button) {
@@ -6,35 +5,6 @@ decreaseButtons.forEach(function (button) {
         handleDecreaseClick(event);
     });
 });
-
-// 상품 수량 감소 처리 함수
-function handleDecreaseClick(event) {
-    decrease(event);
-    onePrice(event);
-}
-
-// 상품 수량 감소 함수
-function decrease(event) {
-    // 현재 수량을 가져오고 1 감소시킵니다
-    const quantityElement = event.currentTarget.nextElementSibling;
-    const currentQuantity = parseInt(quantityElement.innerText);
-    const newQuantity = Math.max(currentQuantity - 1, 1);
-    quantityElement.innerText = newQuantity;
-
-    event.preventDefault();
-    // hidden input에 최종 수량을 설정합니다
-
-    document.getElementById('hdCounterValue').value = newQuantity;
-
-
-    // 감소할 때 각 상품의 가격을 업데이트합니다
-    onePrice(event);
-    updateTotalPrice(event);
-    finalTotalPrice();
-}
-
-
-
 
 // 증가 버튼 클릭 이벤트 핸들러 등록
 const increaseButtons = document.querySelectorAll('.increase');
@@ -44,23 +14,45 @@ increaseButtons.forEach(function (button) {
     });
 });
 
+// 상품 수량 감소 처리 함수
+function handleDecreaseClick(event) {
+    decrease(event);
+}
+
+// 상품 수량 감소 함수
+function decrease(event) {
+    const quantityElement = event.currentTarget.nextElementSibling;
+    let currentQuantity = parseInt(quantityElement.innerText);
+    currentQuantity = Math.max(currentQuantity - 1, 1);
+    quantityElement.innerText = currentQuantity;
+
+    // hidden input에 최종 수량을 설정합니다
+    const hdCounterValue = event.currentTarget.closest('.menucheck').querySelector('.hdCounterValue');
+    hdCounterValue.value = currentQuantity;
+
+    event.preventDefault();
+
+    // 추가로 수량이 감소할 때 각 상품의 가격을 업데이트합니다
+    onePrice(event);
+    updateTotalPrice(event);
+    finalTotalPrice();
+}
+
 // 상품 수량 증가 처리 함수
 function handleIncreaseClick(event) {
     increase(event);
-    onePrice(event);
 }
 
 // 상품 수량 증가 함수
 function increase(event) {
-    // 현재 수량을 가져오고 1 증가시킵니다
     const quantityElement = event.currentTarget.previousElementSibling;
-    const currentQuantity = parseInt(quantityElement.innerText);
-    const newQuantity = currentQuantity + 1;
-    quantityElement.innerText = newQuantity;
+    let currentQuantity = parseInt(quantityElement.innerText);
+    currentQuantity++;
+    quantityElement.innerText = currentQuantity;
 
     // hidden input에 최종 수량을 설정합니다
-
-    document.getElementById('hdCounterValue').value = newQuantity;
+    const hdCounterValue = event.currentTarget.closest('.menucheck').querySelector('.hdCounterValue');
+    hdCounterValue.value = currentQuantity;
 
     event.preventDefault();
 
@@ -380,7 +372,6 @@ const paymentButton = document.querySelector('.paybtn-con') ;
     });
 
 
-//결제 버튼 기능
 function checkAndProceed() {
     const gunWonElement = document.getElementById('gun-won');
     const gunWonValue = parseInt(gunWonElement.innerText.replace(/[^\d]/g, ''), 10);
@@ -391,6 +382,8 @@ function checkAndProceed() {
     } else {
         // If gun-won is 0, show an alert
         alert('상품을 선택해주세요.');
+        // 상품을 선택하는 페이지로 다시 로드합니다.
+        window.location.reload();
     }
 }
 
@@ -444,4 +437,19 @@ function projectOneName() {
 
 
 
+// 중복된 cartCode를 추적하는 Set 생성
+let cartCodesSet = new Set();
 
+// 모든 cart 요소에 대해 반복
+document.querySelectorAll('.menucheck').forEach(function(menucheck) {
+    // 각 요소에서 cartCode 값을 가져옴
+    let cartCode = menucheck.querySelector('.checkbox').value;
+
+    // 이미 cartCodesSet에 있는 경우 중복된 값이므로 checkbox를 숨김
+    if (cartCodesSet.has(cartCode)) {
+        menucheck.style.display = 'none'; // 해당 요소를 숨김
+    } else {
+        // cartCodesSet에 cartCode 추가
+        cartCodesSet.add(cartCode);
+    }
+});

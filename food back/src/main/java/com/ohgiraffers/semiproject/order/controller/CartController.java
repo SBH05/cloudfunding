@@ -50,7 +50,7 @@ public class CartController {
         List<CartInsertDTO> cartPage = cartService.cart(userId);
         model.addAttribute("cart", cartPage);
 
-        System.out.println("cartPage ======================= " + cartPage);
+        System.out.println("cartPage =====2222================== " + cartPage);
 
         return "/content/order/cart";
 

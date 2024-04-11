@@ -22,6 +22,7 @@ public class CartDTO {
 
     private int count;
 
+   private ProjectFileDTO projectFileDTO;
 }
 
 
