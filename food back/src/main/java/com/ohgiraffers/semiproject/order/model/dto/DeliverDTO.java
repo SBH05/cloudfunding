@@ -12,7 +12,7 @@ import java.sql.Date;
 
 public class DeliverDTO {
 
-    private int code;
+    private int deliverCode;
 
     private Date day;
 
@@ -20,6 +20,8 @@ public class DeliverDTO {
 
     private MemberDTO memberCode;
     private String request;
+    private String  purchase;
+    private Date confirmDate;
 
 
 }

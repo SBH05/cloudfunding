@@ -2,15 +2,14 @@ package com.ohgiraffers.semiproject.board.model.service;
 
 
 import com.ohgiraffers.semiproject.board.model.dao.QnAMapper;
-import com.ohgiraffers.semiproject.board.model.dto.QnAhistoryDTO;
-import com.ohgiraffers.semiproject.common.notice.QnARegistException;
+import com.ohgiraffers.semiproject.board.model.dto.QnASelectCriteria;
 import com.ohgiraffers.semiproject.order.model.dto.ProjectDTO;
-import com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageProjectDTO;
 import com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageQnADTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -18,41 +17,43 @@ public class QnAService implements QnAServiceInter {
 
     private final QnAMapper mapper;
 
+
+
     public QnAService(QnAMapper mappper) {
         this.mapper = mappper;
     }
 
-    public List<SellerManageQnADTO> QnAMainPage(String userId) {
+    public List<SellerManageQnADTO> QnAMainPage(QnASelectCriteria selectCriteria) {
 
-        List<SellerManageQnADTO>QnAMainDTO = mapper.QnAMain(userId);
+        List<SellerManageQnADTO>QnAMainDTO = mapper.QnAMain(selectCriteria);
 
         return QnAMainDTO;
     }
 
-    public SellerManageQnADTO QnAClosePage(Long creationNo) {
-        SellerManageQnADTO QnAClose = mapper.QnAClose(creationNo);
-        return QnAClose;
+
+    public SellerManageQnADTO QnAAnswer(Long creationNo) {
+        SellerManageQnADTO answer = mapper.answerQ(creationNo);
+        return answer;
     }
 
 
-    public void registQnA(QnAhistoryDTO qnAhistory) throws QnARegistException{
 
-        int result = mapper.QnARegist(qnAhistory);
+    public List<ProjectDTO> projectTitle() {
 
-        if(!(result > 0)){
-            throw new QnARegistException("등록에 실패했습니다");
-        }
+        List<ProjectDTO> projects = mapper.projectList();
+        return projects;
     }
 
-    public  List<SellerManageProjectDTO> projectinformation() {
 
-        List<SellerManageProjectDTO> projectinformation = mapper.QnAprojectInfo();
-
-        return projectinformation;
+    public void insertQnA(int user, String title, String content, int hiddenProjectCode) {
+        mapper.insertQnA(user,title,content,hiddenProjectCode);
     }
 
-    public ProjectDTO projectSellerInfo() {
-        ProjectDTO projectSellerInfo = mapper.projectSellerInfo();
-        return projectSellerInfo;
+
+    public int selectTotalProjectCount(Map<String, String> searchMap) {
+        int result = mapper.selectTotalProjectCount(searchMap);
+        return result;
     }
+
+
 }

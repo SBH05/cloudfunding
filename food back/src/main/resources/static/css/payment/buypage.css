@@ -109,7 +109,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    /* border-bottom: 1px solid #ddd; 구분선을 추가하려면 사용하세요 */
+
 }
 
 .menu-name {
@@ -157,11 +157,14 @@
     /* background-color: gray; */
     
 }
-#right{
-    background-color: rgb(245, 245, 245);
+#right {
     width: 920px;
-    height: 730px;
+    height: 650px;
+    position: absolute;
+        left: 850px;
+        top: 150px;
 }
+
 .right{
     width: 920px;
     height: 100%;
@@ -172,6 +175,7 @@
 
 #left{
     height: 730px;
+    width: 750px;
 }
 .uncheck{
     width: 30px;
@@ -182,7 +186,6 @@
 .bilge{
     /* border: 1px solid gray; */
     width: 763px;
-   
     margin-left: 155px;
 }
 
@@ -258,9 +261,8 @@
     cursor: pointer;
     width: 100px;
     height: 40px;
-    margin-left: 800px;
-    /* margin-bottom: ; */
-    /* padding: ; */
+    position: absolute;
+    left: 100px;
 }
 form {
     display: flex;
@@ -412,3 +414,20 @@ button[type="submit"] {
     color:orange;
 }
 
+
+    .changeInfo {
+        background-color: orange; /* 버튼 배경색 */
+        color: white; /* 버튼 텍스트 색상 */
+        width: 180px; /* 버튼 가로 크기 */
+        height: 50px; /* 버튼 세로 크기 */
+        border: none; /* 테두리 없애기 */
+        border-radius: 5px; /* 버튼 모서리를 둥글게 만들기 */
+        cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    }
+
+
+.bilgeInfo {
+
+    position:absolute;
+    top: 500px;
+}

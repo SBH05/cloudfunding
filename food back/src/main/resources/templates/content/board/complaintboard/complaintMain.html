@@ -182,13 +182,7 @@
             <!-- 페이지 처리 -->
             <div class="pagination" align="center">
                 <div class="pagination-box">
-                    <!--                     맨 앞으로 이동 버튼 -->
-                    <!--                    <button class="prev"-->
-                    <!--                            th:onclick="'location.href=\'/manager/search/userMain?currentPage='+ @{${selectCriteria.startPage}} + '\''"-->
-                    <!--                            th:disabled="${selectCriteria.pageNo == 1}"-->
-                    <!--                    >-->
-                    <!--                        <<-->
-                    <!--                    </button>-->
+
                     <!-- 이전 페이지 버튼 -->
                     <button class="prev"
                             th:onclick="'location.href=\'/board/complaintMain?currentPage='
@@ -238,13 +232,7 @@
                     >
                         >
                     </button>
-                    <!--                     마지막 페이지로 이동 버튼 -->
-                    <!--                    <button class="prev"-->
-                    <!--                            th:onclick="'location.href=\'/manager/search/userMain?currentPage='+ @{${selectCriteria.maxPage}} + '\''"-->
-                    <!--                            th:disabled="${selectCriteria.pageNo == selectCriteria.maxPage}"-->
-                    <!--                    >-->
-                    <!--                        >>-->
-                    <!--                    </button>-->
+
                 </div>
             </div>
         </div>

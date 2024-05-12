@@ -31,6 +31,9 @@ public class SellerManageQnADTO {
 
     private Date answerDay;
 
+    private int projectCode;
+
+    private String projectTitle;
 
 
 }

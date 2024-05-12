@@ -30,17 +30,28 @@
 
             <div class="searchQnA"></div>
             <div class="searchright">
-                <form action="search" method="post">
-                    <button class="iconlogo" type="submit" style="width: 20px; height: 20px; border: none; background: url('/images/04_etc/magnifying glass.png') center center / cover no-repeat; padding: 0;"></button>
-                    <input type="text" name="search" required>
 
-                    <select name="nation2"  >
-                        <option value="search"selected>검색설정</option>
-                        <option value="ch">제목</option>
-                        <option value="jp" >작성자</option>
-                        <option value="jp" >작성일</option>
-                        <option value="etc">답변상태</option>
-                    </select>
+
+                <form th:action="@{/QnA/usermain}" id="search" method="get">
+                    <div class="searchcontainer">
+
+                        <!--                오른쪽 박스-->
+                        <div class="searchright">
+                            <input type="text" name="searchValue" id="searchValue">
+                            <input type="hidden" name="currentPage" value="1">
+                            <select name="nation3" id="nation3">
+
+                                <option selected>검색컬럼</option>
+                                <option value="number">작성번호</option>
+                                <option value="title">제목</option>
+                                <option value="reporter">작성자</option>
+                                <option value="date">작성일</option>
+                            </select>
+                        </div>
+
+                        <button type="submit">설정</button>
+
+                    </div>
                 </form>
             </div>
 
@@ -70,21 +81,51 @@
                     </tr>
 
                 </table>
-
-                <div class="pagination">
+                <div class="pagination" align="center">
                     <div class="pagination-box">
-                        <a th:href="@{#}" class="prev">＜</a>
-                        <div class="page-links">
-                            <a th:href="@{#}" class="page-link">1</a>
-                            <a th:href="@{#}" class="page-link">2</a>
-                            <a th:href="@{#}" class="page-link">3</a>
 
-                        </div>
-                        <a th:href="@{#}" class="next">＞</a>
+                        <!-- 이전 페이지 버튼 -->
+                        <button class="prev"
+                                th:onclick="'location.href=\'/QnA/usermain?currentPage='
+                            + @{${selectCriteria.pageNo - 1}}
+                            +'&searchValue='+ @{${selectCriteria.searchValue}}
+                            +'&nation3='+ @{${selectCriteria.nation3}} + '\''"
+                                th:disabled="${selectCriteria.pageNo == 1}">
+
+
+
+                            <
+                        </button>
+
+                        <!-- 숫자 버튼 -->
+                        <th:block th:each="page : ${#numbers.sequence(selectCriteria.startPage, selectCriteria.endPage)}">
+                            <button class="page-link"
+                                    th:text="${ page }"
+                                    th:onclick="'location.href=\'/QnA/usermain?currentPage='
+                            + @{${page}}
+                            +'&searchValue='+ @{${selectCriteria.searchValue}}
+                            +'&nation3='+ @{${selectCriteria.nation3}} + '\''"
+                                    th:disabled="${ selectCriteria.pageNo eq page }">
+                            </button>
+                        </th:block>
+
+                        <!-- 다음 페이지 버튼 -->
+                        <button class="prev"
+                                th:onclick="'location.href=\'/QnA/usermain?currentPage='
+                            + @{${selectCriteria.pageNo + 1}}
+                            +'&searchValue='+ @{${selectCriteria.searchValue}}
+                            +'&nation3='+ @{${selectCriteria.nation3}} + '\''"
+                                th:disabled="${selectCriteria.pageNo == selectCriteria.maxPage}"
+                        >
+                            >
+                        </button>
+
                     </div>
                 </div>
+
             </div>
         </div>
+
 
     </div>
 
@@ -101,7 +142,7 @@
                     statusElement.textContent = '답변완료';
                     statusElement.classList.add('close');
                 }else {
-                    statusElement.textContent = '답변하기';
+                    statusElement.textContent = '답변중';
                     statusElement.classList.add('ing');
                 }
             });

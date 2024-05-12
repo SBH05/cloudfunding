@@ -83,6 +83,17 @@
     </resultMap>
 
 
+    <resultMap id="deliveryResultMap" type="com.ohgiraffers.semiproject.order.model.dto.DeliverDTO" >
+        <id property="deliverCode" column="DELIVERY_CODE"/>
+        <result property="day" column="DELIVERY_DATE"/>
+        <result property="status" column="DELIVERY_STATUS"/>
+        <result property="request" column="DELIVERY_REQUEST"/>
+        <result property="purchase" column="PURCHASE_CONFIRM"/>
+        <result property="confirmDate" column="PURCHASE_CONFIRM_DATE"/>
+        <association property="memberCode" resultMap="MemberResultMap"/>
+    </resultMap>
+
+
     <update id="selectCount" parameterType="hashmap">
         update tbl_cart
         set CART_COUNT = #{counter}
@@ -113,6 +124,67 @@
             tbl_project_file D ON D.PROJECT_CODE = A.PROJECT_CODE
         where
             A.CART_CODE = #{cartCode}
+    </select>
+
+
+    <insert id="insertDeliver">
+
+        INSERT INTO tbl_delivery (
+        DELIVERY_DATE,
+        DELIVERY_REQUEST,
+        DELIVERY_STATUS,
+        PURCHASE_CONFIRM,
+        PURCHASE_CONFIRM_DATE,
+        USER_CODE
+        )
+        VALUES (
+        NOW(),
+        null,
+        'N',
+        null,
+        null,
+        #{member}
+        )
+    </insert>
+
+    <insert id="insertPay" >
+        insert
+        into tbl_payment (
+        PAYMENT_CODE,
+        DELIVERY_CODE,
+        PAYMENT_DATE_TIME,
+        PAYMENT_METHOD,
+        PAYMENT_STATUS,
+        TOTAL_AMOUNT
+        )
+        values (
+
+        null,
+        #{deliveryCode},
+        NOW(),
+        "카카오결제",
+        'Y',
+        #{price}
+
+        )
+    </insert>
+
+
+    <select id="findDeliverCode" resultMap="deliveryResultMap">
+        SELECT
+            A.DELIVERY_CODE,
+            A.USER_CODE,
+            A.DELIVERY_DATE,
+            A.DELIVERY_STATUS,
+            A.DELIVERY_REQUEST
+        FROM
+            tbl_delivery A
+        left join
+            tbl_user B ON A.USER_CODE = B.USER_CODE
+        WHERE
+            A.USER_CODE = #{member}
+        ORDER BY
+            A.DELIVERY_CODE DESC
     </select>
 
 

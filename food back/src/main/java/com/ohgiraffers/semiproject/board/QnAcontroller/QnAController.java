@@ -1,20 +1,22 @@
 package com.ohgiraffers.semiproject.board.QnAcontroller;
 
-
-import com.ohgiraffers.semiproject.board.model.dto.QnAhistoryDTO;
+import com.ohgiraffers.semiproject.board.model.dto.QnAPagenation;
+import com.ohgiraffers.semiproject.board.model.dto.QnASelectCriteria;
 import com.ohgiraffers.semiproject.board.model.service.QnAService;
-import com.ohgiraffers.semiproject.common.notice.QnARegistException;
+import com.ohgiraffers.semiproject.common.paging.SelectCriteria;
 import com.ohgiraffers.semiproject.member.model.dto.MemberAndAuthorityDTO;
 import com.ohgiraffers.semiproject.order.model.dto.ProjectDTO;
-import com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageProjectDTO;
 import com.ohgiraffers.semiproject.sellerManage.model.dto.SellerManageQnADTO;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/QnA/*")
@@ -29,71 +31,56 @@ public class QnAController {
 
 
     @GetMapping("userwrite")
-    public String userWrite(){
+    public String userWrite(
+            @ModelAttribute ProjectDTO projectDTO,
+            Model model) {
+
+        List<ProjectDTO> projectDTOList = qnAService.projectTitle();
+
+        System.out.println("projectDTOList = " + projectDTOList);
+        model.addAttribute("project",projectDTOList);
 
         return "content/board/userQnA/userWritePage/userQnAwrite";
     }
 
+
     @PostMapping("userwrite")
-    public String userRegist(
-            @ModelAttribute QnAhistoryDTO qnAhistory,
-            @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO,
-            Model model,
-            RedirectAttributes rttr) throws QnARegistException {
+    public String userWrite(@RequestParam("title") String title,
+                            @RequestParam("hiddenProjectCode") int hiddenProjectCode,
+                            @RequestParam("content") String content,
+                            @ModelAttribute ProjectDTO projectDTO,
+                            @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO) {
+        // 받은 데이터를 사용하여 원하는 작업 수행
 
-        System.out.println("==============================================start");
-        System.out.println("qnAhistory =================================== " + qnAhistory);
-        System.out.println("memberAndAuthorityDTO ============================= " + memberAndAuthorityDTO);
+        System.out.println("========== QnA controller ======= ");
+        // 받은 데이터 로그에 출력
+        System.out.println("Title: " + title);
+        System.out.println("Hidden Project Code: " + hiddenProjectCode);
+        System.out.println("Content: " + content);
 
-        qnAService.registQnA(qnAhistory);
+        int user = memberAndAuthorityDTO.getMemberDTO().getUserCode();
 
-        int seller = qnAhistory.getSellerCode();
-        System.out.println("seller =========================== " + seller);
+        qnAService.insertQnA(user,title,content,hiddenProjectCode);
 
-
-        List<SellerManageProjectDTO> projectInfo = qnAService.projectinformation();
-        model.addAttribute("projectInfo",projectInfo);
-
-
-
-        rttr.addFlashAttribute("message", "QnA 등록에 성공하셨습니다!");
-        System.out.println("[BoardController] qnARegist ========================================================= end");
-
-        return "redirect:content/board/userQnA/userWritePage/userQnAwrite";
+        // 필요한 작업 수행 후 사용자에게 보여줄 페이지 리턴
+        return "content/board/userQnA/userWritePage/userQnAwrite";
     }
+
+
 
 
 
     @GetMapping("userclose")
     public String userClose(
             @RequestParam(name = "creationNo") Long creationNo,
-            Model model,
-            @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO){
+            Model model){
 
-        System.out.println("============================================QnAcontroller userclose start");
-        System.out.println("============================================" +memberAndAuthorityDTO );
-        System.out.println("============================================" + creationNo );
-
-        String userId = memberAndAuthorityDTO.getUsername();
-        System.out.println("userId = =============================================" + userId);
-
-        SellerManageQnADTO QnAClose = qnAService.QnAClosePage(creationNo);
-        model.addAttribute("Close",QnAClose);
+        SellerManageQnADTO QnAAnswer = qnAService.QnAAnswer(creationNo);
+        System.out.println("QnAAnswer = " + QnAAnswer);
+        model.addAttribute("answer",QnAAnswer);
 
 
-        int sellerCode = QnAClose.getSeller();
-        int uerCode = QnAClose.getUserCode();
-
-        if(sellerCode == uerCode) {
-            String sellerId =QnAClose.getUserId();
-            System.out.println("sellerId = " + sellerId);
-        }
-
-
-
-        System.out.println("QnAClose = " + QnAClose);
         return "content/board/userQnA/userQnAanswer/userQnAAnswerComp";
-
 
     }
 
@@ -110,18 +97,41 @@ public class QnAController {
     @GetMapping("usermain")  
     public String userMain(
             Model model,
+            @RequestParam(required = false) String searchValue,
+            @RequestParam(value = "currentPage", defaultValue = "1") int pageNo,
+            @RequestParam(required = false) String nation3,
             @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO){
 
-        System.out.println("============================================QnAcontroller usermain start");
-        System.out.println("============================================QnAcontroller usermain start" +memberAndAuthorityDTO );
+        System.out.println("====== usermain start");
 
-        String userId = memberAndAuthorityDTO.getUsername();
-        System.out.println("userId = =============================================" + userId);
-        List<SellerManageQnADTO>QnAMain = qnAService.QnAMainPage(userId);
+        System.out.println("검색어searchValue ================" + searchValue);
+
+
+        Map<String, String> searchMap = new HashMap<>();
+        searchMap.put("searchValue", searchValue);
+
+        int totalCount = qnAService.selectTotalProjectCount(searchMap);
+        System.out.println("totalCount = " + totalCount);
+
+        int limit = 3;
+        int buttonAmount = 5;
+        QnASelectCriteria selectCriteria = null;
+
+        if (searchValue != null && !"".equals(searchValue)) {
+            selectCriteria = QnAPagenation.QnAGetSelectCriteria
+                    (pageNo, totalCount, limit, buttonAmount, nation3 ,searchValue);
+        } else {
+            selectCriteria = QnAPagenation.QnAGetSelectCriteria
+                    (pageNo, totalCount, limit, buttonAmount);
+        }
+
+        System.out.println("selectCriteria = " + selectCriteria);
+
+        List<SellerManageQnADTO>QnAMain = qnAService.QnAMainPage(selectCriteria);
         System.out.println("QnAMain = " + QnAMain);
 
+        model.addAttribute("selectCriteria", selectCriteria);
         model.addAttribute("QnAMainPage",QnAMain);
-
 
         return "content/board/userQnA/userMainPage/userQnAmainpage";
     }

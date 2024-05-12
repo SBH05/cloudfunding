@@ -562,20 +562,7 @@
                     A.CREATION_DATE LIKE CONCAT('%', #{ searchValue }, '%')
                 </if>
             </if>
-            <if test="authority == 'finish'">
-                <if test="searchValue != null and !searchValue.equals('')">
-                    AND
-                </if>
-                not isnull(A.ACTION_DETAIL)
 
-            </if>
-            <if test="authority == 'yet'">
-                <if test="searchValue != null and !searchValue.equals('')">
-                    AND
-                </if>
-                isnull(A.ACTION_DETAIL)
-
-            </if>
         </where>
     </select>
 

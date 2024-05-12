@@ -17,29 +17,30 @@
             <!-- 가운데 컨텐츠 -->
             <div class="first"><span>프로젝트 QnA</span></div>
 
-            <input type="hidden" id="creationNo" th:value="${no}">
+            <input type="hidden" id="creationNo" name="creationNo" th:value="${no}">
             <div class="box">
-                <span class="box1" th:text="|작성번호 : ${Close.creationNo}|"></span>
-                <span class="box1" th:text="|작성자 : ${Close.userId}|"></span>
-                <span class="box2" th:text="|작성일자 : ${Close.creation}|"></span>
+                <span class="box1" th:text="|작성번호 : ${answer.creationNo}|"></span>
+                <span class="box1" th:text="|작성자 : ${answer.userId}|"></span>
+                <span class="box2" th:text="|작성일자 : ${answer.creation}|"></span>
             </div>
 
             <div>
                 <div class="wirte_title">제목 </div>
-                <div class="project_title"></div>
-                <div class="seller_name">판매자</div>
-                <div class="title_detail" th:text="${Close.title}"></div>
-                <div class="project_detail"></div>
-                <div class="seller_detail" th:text="${Close.seller}"></div>
+                <div class="project_title">프로젝트명</div>
+                <div class="title_detail" th:text="${answer.title}"></div>
+                <div class="project_detail" th:text="${answer.projectTitle}"></div>
+                <div class="seller_detail" ></div>
                 <div class="bar"></div>
 
                 <div class="quest1">
-                    <div class="detail" th:text="${Close.content}">
+                    <div class="detail" th:text="${answer.content}">
                     </div>
                 </div>
 
                 <div class="quest2">
-                    <div class="detail" th:text="${Close.answerContent}"></div>
+                    <div class="detail" th:if="${answer.answerContent == null}" th:text="'답변중입니다'"></div>
+                    <div class="detail" th:unless="${answer.answerContent == null}" th:text="${answer.answerContent}"></div>
+                </div>
                 </div>
             </div>
         </div>

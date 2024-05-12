@@ -23,7 +23,7 @@ public class ProjectDTO {
 
     private PlanDTO plan;
 
-    private SellerInfoDTO seller;
+    private int seller;
 
     private int amount;
 

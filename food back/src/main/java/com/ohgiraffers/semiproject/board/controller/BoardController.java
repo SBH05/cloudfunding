@@ -147,7 +147,6 @@ public class BoardController {
         return mv;
 
 
-//        "/content/manager/search/userMain";
     }
 
     @GetMapping("/complaintProjectDetail")

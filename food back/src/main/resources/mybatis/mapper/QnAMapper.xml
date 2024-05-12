@@ -60,8 +60,8 @@
         <result property="status" column="ACHIEVEMENT_STATUS"/>
         <result property="start" column="PROJECT_START_DATE"/>
         <result property="progress" column="PROGRESS_STATUS"/>
+        <result property="seller" column="SELLER_INFO"/>
         <association property="plan" resultMap="PlanResultMap"/>
-        <association property="seller" resultMap="MemberMap"/>
         <association property="category" resultMap="ProjectCategoryResultMap"/>
     </resultMap>
 
@@ -143,81 +143,161 @@
         <result property="answerNO" column="ANSWER_CODE"/>
         <result property="answerContent" column="ANSWER_CONTENT"/>
         <result property="answerDay" column="ANSWER_DATE"/>
+        <result property="projectCode" column="PROJECT_CODE"/>
+        <result property="projectTitle" column="PROJECT_TITLE"/>
     </resultMap>
 
 
+    <resultMap id="QnAHistoryResultMap" type="com.ohgiraffers.semiproject.board.model.dto.QnAhistoryDTO">
+        <id property="number" column="CREATION_NUMBER"/>
+        <result property="title" column="TITLE"/>
+        <result property="creation" column="CREATION_DATE"/>
+        <result property="content" column="CONTENT"/>
+        <association property="projectCode" resultMap="ProjectResultMap"/>
+        <association property="memberDTO" resultMap="MemberMap"/>
+    </resultMap>
+
+    <resultMap id="QnAAnswerResultMap" type="com.ohgiraffers.semiproject.board.model.dto.QnAAnswerDTO">
+        <id property="answerCode" column="ANSWER_CODE"/>
+        <result property="answer" column="ANSWER_CONTENT"/>
+        <result property="answerDay" column="ANSWER_DATE"/>
+        <association property="creationNumber" resultMap="QnAHistoryResultMap"/>
+    </resultMap>
 
 
+<!--    <select id="QnAMain" resultMap="sellerQnAmanageResultMap">-->
+<!--        SELECT-->
+<!--            A.CREATION_NUMBER,-->
+<!--            A.CREATION_DATE,-->
+<!--            A.TITLE,-->
+<!--            A.CONTENT,-->
+<!--            B.USER_CODE,-->
+<!--            B.USER_ID,-->
+<!--            C.ANSWER_CONTENT,-->
+<!--            C.ANSWER_DATE-->
+<!--        FROM tbl_qna_history A-->
+<!--                 JOIN tbl_user B ON A.USER_CODE = B.USER_CODE-->
+<!--                 LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER;-->
+
+
+<!--    </select>-->
 
 
     <select id="QnAMain" resultMap="sellerQnAmanageResultMap">
         SELECT
-            A.CREATION_NUMBER,
-            A.CREATION_DATE,
-            A.TITLE,
-            A.CONTENT,
-            B.USER_CODE,
-            B.USER_ID,
-            C.ANSWER_CONTENT,
-            C.ANSWER_DATE
+        A.CREATION_NUMBER,
+        A.CREATION_DATE,
+        A.TITLE,
+        A.CONTENT,
+        B.USER_CODE,
+        B.USER_ID,
+        C.ANSWER_CONTENT,
+        C.ANSWER_DATE
         FROM tbl_qna_history A
-                 JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
-                 LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER;
+        JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
+        LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER
+        <where>
+            <if test="searchValue != null and !searchValue.equals('') and nation3 != null">
+                <choose>
+                    <when test="nation3 == 'number'">
+                        AND A.CREATION_NUMBER LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="nation3 == 'title'">
+                        AND A.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="nation3 == 'reporter'">
+                        AND B.USER_ID LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="nation3 == 'date'">
+                        AND A.CREATION_DATE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
 
-
+    LIMIT #{ startRow }, #{limit}
     </select>
 
 
-    <select id="QnAClose" resultMap="sellerQnAmanageResultMap">
+
+
+    <select id="answerQ" resultMap="sellerQnAmanageResultMap">
         SELECT
             A.CREATION_NUMBER,
             A.CREATION_DATE,
             A.TITLE,
-            A.SELLER_CODE,
             A.CONTENT,
             B.USER_CODE,
             B.USER_ID,
             C.ANSWER_CONTENT,
-            C.ANSWER_DATE
+            C.ANSWER_DATE,
+            D.PROJECT_TITLE
         FROM tbl_qna_history A
-                 JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
-                 LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER
+                JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
+                LEFT JOIN tbl_qna_answer C ON A.CREATION_NUMBER = C.CREATION_NUMBER
+                LEFT JOIN tbl_project D ON A.PROJECT_CODE = D.PROJECT_CODE
         WHERE A.CREATION_NUMBER = #{creationNo}
 
     </select>
 
-    <insert id="QnARegist" parameterType="com.ohgiraffers.semiproject.board.model.dto.QnAhistoryDTO">
-        insert into tbl_qna_history
-        (CREATION_NUMBER,
-         USER_CODE,
-         TITLE,
-         CONTENT,
-         SELLER_CODE,
-         CREATION_DATE )
-        values (null,
-                #{code},
-                #{title},
-                #{content},
-                #{seller},
-                now())
+
+
+<select id="projectList" resultMap="ProjectResultMap" >
+
+    SELECT
+        *
+    FROM tbl_project
+</select>
+
+
+    <insert id="insertQnA" >
+
+        INSERT INTO tbl_qna_history
+        (
+            USER_CODE,
+            TITLE,
+            CONTENT,
+            PROJECT_CODE,
+            CREATION_DATE
+        )
+        VALUES
+            (
+             #{user},
+             #{title},
+             #{content},
+             #{hiddenProjectCode},
+             NOW()
+            )
 
     </insert>
 
 
-    <select id="QnAprojectInfo" resultMap="sellerProjectManage">
 
-        SELECT
-            A.PROJECT_CODE,
-            A.PROJECT_TITLE,
-            A.SELLER_INFO
-
-        FROM tbl_project A
-                 JOIN tbl_user B ON (A.SELLER_INFO = B.USER_CODE)
-        WHERE B.USER_ID = #{userId}
-
-
+    <select id="selectTotalProjectCount" resultType="_int" parameterType="hashmap">
+        select
+        count(*)
+        from
+        tbl_qna_history A
+        JOIN tbl_user B ON A.USER_CODE = B.USER_CODE
+        <where>
+            <if test="searchValue != null and !searchValue.equals('') and nation3 != null">
+                <choose>
+                    <when test="nation3 == 'number'">
+                        AND A.CREATION_NUMBER LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="nation3 == 'title'">
+                        AND A.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="nation3 == 'reporter'">
+                        AND B.USER_ID LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="nation3 == 'date'">
+                        AND A.CREATION_DATE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
     </select>
-
 
 
 

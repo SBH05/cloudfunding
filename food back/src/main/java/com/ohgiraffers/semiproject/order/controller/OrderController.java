@@ -1,10 +1,14 @@
 package com.ohgiraffers.semiproject.order.controller;
 
 
+import com.ohgiraffers.semiproject.member.model.dto.MemberAndAuthorityDTO;
+import com.ohgiraffers.semiproject.member.model.dto.MemberDTO;
 import com.ohgiraffers.semiproject.order.model.dto.*;
 import com.ohgiraffers.semiproject.order.model.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -58,6 +62,7 @@ public class OrderController {
 
     // 각각의 cartCode에 대한 buyPage를 불러와 모델에 추가합니다.
     List<CartDTO> buyPageList = new ArrayList<>();
+
     for (int i = 0; i < cartCodes.size(); i++) {
       String cartCode = cartCodes.get(i);
       String counter = nonEmptyCounters.get(i);
@@ -76,6 +81,7 @@ public class OrderController {
     model.addAttribute("buyPageList", buyPageList);
     System.out.println("buyPageList = " + buyPageList);
 
+
     // 이동할 페이지의 경로를 반환합니다.
     return "/content/order/buypage";
   }
@@ -84,6 +90,44 @@ public class OrderController {
 
   @GetMapping("buyok")
   public String buyok(){
+    return "/content/order/buyok";
+  }
+
+
+  @Transactional
+  @PostMapping("buyok")
+  public String buyok(@RequestParam("hdCartCode") String[] hdCartCode,
+                      @RequestParam("hGun") String price,
+                      @AuthenticationPrincipal MemberAndAuthorityDTO memberAndAuthorityDTO){
+
+    System.out.println("=====  buyok ======");
+
+    System.out.println("hdCartCode = " + Arrays.toString(hdCartCode));
+    System.out.println("price = " + price);
+    List<String> cartCodes = Arrays.asList(hdCartCode);
+
+    int member = memberAndAuthorityDTO.getMemberDTO().getUserCode();
+
+    List<DeliverDTO> deliver = new ArrayList<>();
+
+    for (int i = 0; i < cartCodes.size(); i++) {
+
+      paymentService.insertDeliver(member);
+
+      //paymentService.insertPay(price);
+
+      String cartCode = cartCodes.get(i);
+      System.out.println("cartCode = " + cartCode);
+
+      List<DeliverDTO> deliverList = paymentService.findDeliveryCode(member);
+
+      System.out.println("deliverList = " + deliverList);
+
+    }
+
+
+
+
     return "/content/order/buyok";
   }
 

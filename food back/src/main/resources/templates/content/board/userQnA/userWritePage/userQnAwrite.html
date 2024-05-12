@@ -12,28 +12,96 @@
 
 
     <div class="middle_box">
-        <form th:action="@{/QnA/userwrite}" method="post">
             <div class="middle"><!-- 가운데 컨텐츠 -->
                 <div class="first"><span>프로젝트 QnA 작성</span></div>
                 <div class="box">
                     <span class="box2" th:text="${#dates.format(#dates.createNow(), 'yyyy / MM / dd')}">작성일자: </span>
                 </div>
                 <div class="wirte_title">제목 </div>
-                <div class="project_title"></div>
-                <div class="seller_name">판매자</div>
+                <div class="project_title">프로젝트명</div>
                 <div class="title_detail"><input placeholder="제목을 입력해주세요" name="title" id="title"></div>
-                <div class="project_detail" th:text="${ProjectTitle}"></div>
-                <div class="seller_detail"><input placeholder="판매자를 입력해주세요" name="seller" id="seller"></div>
-                <div class="bar"></div>
-                <div class="quest">
-                    <div class="detail" ><textarea style = "background-color:transparent" placeholder="내용을 입력해 주세요." name="content" id="content"></textarea></div>
-                    <div class="submitbtn"><button type="submit">등록하기</button></div>
+                <div class="project_detail" >
+                    <select id="projectTitleSelect" onchange="updateProjectTitle()">
+                        <option value="" disabled selected>선택해주세요</option>
+                        <option th:each="project : ${project}" th:value="${project.code}" th:text="${project.title}"></option>
+                    </select>
+                    <input type="hidden" id="hiddenProjectCode" name="hiddenProjectCode" />
+                </div>
+                <div class="seller_detail">
+                    <div class="bar"></div>
+                    <div class="quest">
+                        <div class="detail" ><textarea style = "background-color:transparent" placeholder="내용을 입력해 주세요." name="content" id="content"></textarea></div>
+                        <div class="submitbtn"><button class="submitBtn" type="button">등록하기</button></div>                    </div>
                 </div>
             </div>
-        </form>
     </div>
 
 
+    <!-- jQuery CDN을 이용하여 jQuery 라이브러리 로드 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- 폼 제출을 비동기적으로 처리하는 JavaScript 코드 -->
+    <script>
+        function updateProjectTitle() {
+            // 드롭다운 메뉴에서 선택한 값과 텍스트 가져오기
+            var selectedCode = $('#projectTitleSelect').val();
+
+            // 선택한 값으로  hiddenProjectCode 설정
+            $('#hiddenProjectCode').val(selectedCode);
+        }
+
+
+        $(document).ready(function() {
+            // 버튼 클릭 이벤트 핸들러
+            $('.submitBtn').click(function() {
+
+                var projectCode = $('#hiddenProjectCode').val();
+
+                // 프로젝트 코드가 비어 있는지 확인
+                if (projectCode.trim() === '') {
+                    // 프로젝트 코드가 없는 경우 알람 표시
+                    alert('프로젝트를 선택해주세요.');
+                    return; // 함수 중지
+                }
+
+                // 제목, 프로젝트명, 내용 가져오기
+                var title = $('#title').val();
+                var projectCode = $('#hiddenProjectCode').val();
+                var content = $('#content').val();
+
+                // 입력 값이 비어 있는지 확인
+                if (title.trim() === '' || content.trim() === '') {
+                    // 입력 필드에 내용이 없는 경우 알람 표시
+                    alert('입력해주세요.');
+                    return; // 함수 중지
+                }
+
+                // Ajax 요청 보내기
+                $.ajax({
+                    type: 'POST',
+                    url: '/QnA/userwrite',
+                    data: {
+                        title: title,
+                        hiddenProjectCode: projectCode,
+                        content: content
+                    },
+                    success: function(response) {
+                        // 성공 시 작업
+                        console.log(response);
+                        // 페이지 이동
+                        window.location.href = '/QnA/usermain';
+                        // 예를 들어, 성공 메시지를 사용자에게 보여줄 수 있습니다.
+                    },
+                    error: function(xhr, status, error) {
+                        // 에러 처리
+                        console.error(xhr.responseText);
+                        // 예를 들어, 오류 메시지를 사용자에게 보여줄 수 있습니다.
+                    }
+                });
+
+            });
+        });
+    </script>
 
 </th:block>
 </html>

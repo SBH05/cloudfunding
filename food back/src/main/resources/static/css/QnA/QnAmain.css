@@ -163,8 +163,8 @@
 			/* 답변중 버튼 */
 			.ing{
 				/* 버튼의 높이와 너비를 조정하여 크게 만듭니다. */
-				width: 65px;
-				padding: 7px 10px ;
+				width: 75px;
+				padding: 9px;
 			
 				/* 배경색을 주황색으로 설정합니다. */
 				background-color: lightgray;

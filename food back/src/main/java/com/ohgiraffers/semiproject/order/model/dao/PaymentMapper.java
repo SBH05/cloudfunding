@@ -11,11 +11,17 @@ public interface PaymentMapper {
    List<UserDTO> user1(String userId, int cartCode);
 
 
-    int deliverUserInfo(MemberDTO member);
+  int deliverUserInfo(MemberDTO member);
 
-    void selectCount(String cartCode, String counter);
+  void selectCount(String cartCode, String counter);
 
-    List<CartDTO> buyHistory(String cartCode);
+  List<CartDTO> buyHistory(String cartCode);
+
+  void insertDeliver(int member);
+
+  void insertPay(String price);
+
+  List<DeliverDTO> findDeliverCode(int member);
 }
 
 

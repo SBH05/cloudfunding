@@ -12,19 +12,14 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class QnAhistoryDTO {
+public class QnAAnswerDTO {
 
-    private int number;
+    private int answerCode;
 
-     private MemberDTO memberDTO;
+     private String answer;
 
-     private String title;
+     private QnAhistoryDTO creationNumber;
 
-     private String content;
-
-     private ProjectDTO projectCode;
-
-     private Date creation;
-
+     private Date answerDay;
 
 }

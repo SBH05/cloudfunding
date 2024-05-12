@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/payment/buypage.css}">
+    <link rel="stylesheet" th:href="@{/css/payment/buypage.css}" />
 
 
         <div id="left">
@@ -22,60 +22,59 @@
                     <h2>결제정보</h2>
                 </div>
             </div>
-
+            <form th:action="@{/order/buyok}" method="post" id="paymentInfo" >
             <div class="menu-item">
-                <div class="payment-area">
-                    <h4>결제상품</h4>
-                    <div class="payment-product" th:each="cartItem: ${buyPageList}">
+                    <div class="payment-area">
+                        <h4>결제상품</h4>
+                        <div class="payment-product" th:each="cartItem: ${buyPageList}">
 
-                        <div style="float: left;">
-                            <img th:src="@{|/thumbPath/${cartItem.getProjectFileDTO().getChangeName()}|}" width="60px" height="60px" alt="Product Thumbnail">
-                        </div>
-                        <div class="menu-item">
-                            <div class="projectTitle" th:text="${cartItem.projectCode.title}">상품명</div>
-                        </div>
-                        <div id="counter-container">
-                            <div id="counter-controls">
-                                &nbsp;<span>수량 :</span>
-                                <div class="cartCount" th:text="${cartItem.count}"></div> &nbsp;&nbsp;
-                                <span>옵션 : </span>
-                                <div class="cartOption" th:text="${cartItem.projectOptionCode.type}"></div> &nbsp;&nbsp;
-                                <span>가격 : </span>
-                                <div class="cartPrice" th:text="${cartItem.projectOptionCode.price}"></div>
+                            <div style="float: left;">
+                                <img th:src="@{|/thumbPath/${cartItem.getProjectFileDTO().getChangeName()}|}" width="60px" height="60px" alt="Product Thumbnail">
+                            </div>
+                            <div class="menu-item">
+                                <div class="projectTitle" th:text="${cartItem.projectCode.title}">상품명</div>
+                                <input type="hidden" class="hdProjectCodeCode" name="hdProjectCodeCode" th:value="${cartItem.projectCode.code}" />
+                                <input type="hidden" class="hdCartCode" name="hdCartCode" th:value="${cartItem.cartCode}" />
+                            </div>
+                            <div id="counter-container">
+                                <div id="counter-controls">
+                                    &nbsp;<span>수량 :</span>
+                                    <div class="cartCount" th:text="${cartItem.count}"></div> &nbsp;&nbsp;
+                                    <span>옵션 : </span>
+                                    <div class="cartOption" th:text="${cartItem.projectOptionCode.type}"></div> &nbsp;&nbsp;
+                                    <span>가격 : </span>
+                                    <div class="cartPrice" th:text="${cartItem.projectOptionCode.price}"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="bilge">
-
-                    <div class="coupon-action"><div> </div></div>
-                <div class="total-product-amount">
-                    <span class="total-amount">상품 전체금액</span>
+                <div class="bilgeInfo" >
+                    <div class="bilge">
+                        <div class="coupon-action"><div> </div></div>
+                        <div class="total-product-amount">
+                            <span class="total-amount">상품 전체금액</span>
+                        </div>
+                        <div class="delivery-fee">
+                            <span class="shipping-cost">배송비  </span>
+                        </div>
+                        <div class="final-amount">
+                            <span class="gunCost" id="gunCost" >총금액  </span>
+                            <input type="hidden" id="hGun" value="hGun" name="hGun">
+                        </div>
+                    </div>
+                    <button class="payment" type="button" onclick="togglePopup()">결제</button><div id="popup" style="display: none; position: fixed; top: 50%; left: 25%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc;">
+                    <p>결제합니다</p>
+                    <button class="qr" onclick="submitForm()">결제 완료</button>
+                    <img src="/images/food/1hxaX.jpg" alt="Food Image">
+                    <button onclick="closePopup()">닫기</button>
+                    <input type="hidden" name="status" id="status" >
                 </div>
-                <div class="apply-coupon">
-                    <span class="total-amount"></span>
-                </div>
-                <div class="delivery-fee">
-                    <span class="shipping-cost">배송비</span>
-                </div>
-                <div class="final-amount">
-                    <span class="gun-cost">총금액</span>
-                </div>
-            </div>
 
-            <button class="payment" type="button" onclick="togglePopup()">결제</button>
-            <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc;">
-                <!-- Popup content -->
-                <p>결제합니다</p>
+                </div>
 
-                <button class="qr"> KakaoPay 결제 완료 </button>
-                <img src="/images/food/1hxaX.jpg" alt="Food Image">
-                <button onclick="closePopup()">닫기</button>
-                <input type="hidden" name="status" id="status" >
-            </div>
-
+            </form>
         </div>
 
 
@@ -86,91 +85,124 @@
         <div class="right">
 
             <div id="right">
-                <div id="progress">
-                    <span><div class="pay">주문/결제</div></span>&mdash;<span><img src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>배송중</span>&mdash;<span><img src="/images/minicon/uncheckbtn.PNG" class="uncheck"></span>&mdash;<span>배송완료</span>
-                </div>
-                <div class="void"></div>
 
                 <div class="order-details-con">
 
                      <div class="order-details" >
-                        <h4>주문 상세정보</h4>
-
-                         <div class="secondname">
-                             <div>이름</div>
-                             <input type="text" name="userName" id="userName" required></input>&nbsp;
-                         </div>
-
-                         <div class="phone">
-                             <div class="number">핸드폰 번호</div>
-                             <input type="text" name="phone" id="phone" required>&nbsp;</input>
-                         </div>
-
-                            <div class="searchZipCode1" >
-                                <input type="button" value="검색" class="searchZipCode" id="address">
-                                <div class="box1">우편주소</div>
-                                <input type="text" name="searchZipCode" id="searchZipCode" required >
-                             </div>
-
-                            <div class="detailed-address">
-                                <div class="req">주소</div>
-                                <input type="text" name="adrs" id="adrs" required >
-                             </div>
-
-                            <div class="detailed-address">
-                                <div class="req">상세주소</div>
-                                <input type="text" name="detailedAdrs" id="detailedAdrs" required >&nbsp;
-                            </div>
-
-                            <div class="requested">
-                                <div class="req">요청사항</div>
-                                <input type="text" name="request" id="request" >&nbsp;
-                            </div>
-
-                            <input type="checkbox" id="confirmationCheckbox">
-                            <label for="confirmationCheckbox">주문정보를 모두 확인했습니다</label>
+                        <button class="changeInfo" onclick="redirectToChangeInfoPage()">주소 변경하기</button>
                     </div>
                 </div>
-        </div>
-
+            </div>
         </div>
 
 
 
 
 <!--    주소 창 찾기-->
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script th:inline="javascript">
 
-        const $address = document.getElementById("address");
-        $address.onclick = function() {
-
-            /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
-            new daum.Postcode({
-                oncomplete: function(data){
-                    /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
-                    document.getElementById("searchZipCode").value = data.zonecode;
-                    document.getElementById("adrs").value = data.address;
-                    document.getElementById("detailedAdrs").focus();
-                }
-            }).open();
-        }
-
+    <script>
 
         function togglePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+            document.getElementById("popup").style.display = "block";
         }
 
         function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
+            document.getElementById("popup").style.display = "none";
+        }
+
+    function submitForm() {
+        // 폼 서브밋
+        document.getElementById('paymentInfo').submit();
+    }
+
+
+        function redirectToChangeInfoPage() {
+        // 변경 페이지로 이동
+        window.location.href = "/member/changeInfo";
         }
 
 
-//<img th:src="@{|/thumbPath/${cart.getChangeName()}|}" width="60px" height="60px" alt="Product Thumbnail">
+    </script>
+
+
+    <script>
+        // 배송비를 계산하고 총금액을 업데이트하는 함수
+function calculateShippingCost() {
+    // 숨겨진 입력 필드에서 프로젝트 코드 가져오기
+    var projectCodes = document.querySelectorAll('.menu-item .hdProjectCodeCode');
+    var uniqueProjectCodes = []; // 중복되지 않는 프로젝트 코드를 저장할 배열
+    var shippingCost = 0;
+
+    // 각 상품 항목의 프로젝트 코드를 확인하여 중복 확인
+    projectCodes.forEach(function(codeElement) {
+        var projectCode = codeElement.value;
+        if (!uniqueProjectCodes.includes(projectCode)) {
+            uniqueProjectCodes.push(projectCode); // 중복되지 않는 프로젝트 코드 추가
+        }
+    });
+
+    // 중복되지 않는 프로젝트 코드가 있는 경우 배송비 추가
+    if (uniqueProjectCodes.length > 0) {
+        shippingCost += 3000 * uniqueProjectCodes.length;
+    }
+
+    // 배송비 업데이트
+    document.querySelector('.shipping-cost').textContent = '배송비 ' + shippingCost;
+
+    // 계산된 배송비 반환
+    return shippingCost;
+}
+
+        window.onload = function() {
+            calculateShippingCostAndTotalAmount();
+        };
+
+
+// 배송비 및 총금액 계산 함수
+function calculateShippingCostAndTotalAmount() {
+    // 배송비 가져오기
+    var shippingCost = calculateShippingCost();
+
+    // 상품 가격 및 수량 가져오기
+    var productPrices = document.querySelectorAll('.cartPrice');
+    var cartCounts = document.querySelectorAll('.cartCount');
+
+    var totalAmount = 0;
+
+    var gunCostElement = document.querySelector('.gunCost');
+
+    // 각 상품 항목의 가격과 수량을 가져와서 총금액 계산
+    for (var i = 0; i < cartCounts.length; i++) {
+        var productPrice = parseInt(productPrices[i].textContent);
+        var cartCount = parseInt(cartCounts[i].textContent);
+        totalAmount += productPrice * cartCount;
+    }
+
+    // 총금액에 배송비를 추가하여 총금액 계산
+    var totalAmountWithShipping = totalAmount + shippingCost;
+
+// 한국식 통화 형식으로 총금액 서식화
+    var formattedTotalAmount = formatCurrency(totalAmountWithShipping);
+
+    // 총금액을 숨겨진 입력 필드와 gunCost에 설정
+    document.getElementById('hGun').value = totalAmountWithShipping;
+    gunCostElement.textContent = '총금액 ' + formattedTotalAmount;
+
+}
+
+        // 통화 형식으로 변환하는 함수
+function formatCurrency(amount) {
+    // 숫자를 한국식 통화 형식으로 변환
+    var formatter = new Intl.NumberFormat('ko-KR', {
+        style: 'currency',
+        currency: 'KRW'
+    });
+    return formatter.format(amount);
+}
 
     </script>
+
+
 
 </th:block>
 </html>
